@@ -290,11 +290,10 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      // Use @ts-ignore to suppress argument count error for AudioContext constructor
-      // @ts-ignore
-      const inputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
-      // @ts-ignore
-      const outputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
+      // Explicitly cast AudioContext constructor to 'any' to bypass TS2554 error
+      const AudioContextConstructor = (window.AudioContext || (window as any).webkitAudioContext) as any;
+      const inputCtx = new AudioContextConstructor({ sampleRate: 16000 }) as AudioContext;
+      const outputCtx = new AudioContextConstructor({ sampleRate: 24000 }) as AudioContext;
       
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;

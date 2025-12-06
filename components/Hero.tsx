@@ -290,10 +290,11 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      // Fix for TS2554: Explicitly cast the constructor to any to accept options argument
-      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as any;
-      const inputCtx = new AudioContextClass({ sampleRate: 16000 });
-      const outputCtx = new AudioContextClass({ sampleRate: 24000 });
+      // Use @ts-ignore to suppress argument count error for AudioContext constructor
+      // @ts-ignore
+      const inputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
+      // @ts-ignore
+      const outputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
       
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;

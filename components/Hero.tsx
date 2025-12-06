@@ -389,6 +389,10 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       const inputCtx = new AudioContextClass({ sampleRate: 16000 });
       const outputCtx = new AudioContextClass({ sampleRate: 24000 });
       
+      // CRITICAL FIX: Resume immediately to prevent suspension in deployed environments
+      await inputCtx.resume();
+      await outputCtx.resume();
+      
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;
 
@@ -497,7 +501,11 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
              }
           },
           onclose: () => { stopSession(); },
-          onerror: () => { setErrorMsg("Connection Failed."); stopSession(); }
+          onerror: (err) => { 
+              console.error("Live API Error:", err);
+              setErrorMsg("Connection Failed."); 
+              stopSession(); 
+          }
         }
       });
       sessionRef.current = await sessionPromise;

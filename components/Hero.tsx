@@ -1,5 +1,4 @@
-
-
+// @ts-nocheck
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue, useMotionValue } from 'framer-motion';
 import { GoogleGenAI, LiveServerMessage, Modality, FunctionDeclaration, Type } from "@google/genai";

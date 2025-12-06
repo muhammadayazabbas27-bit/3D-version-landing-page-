@@ -243,7 +243,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
 
   const stopSession = () => {
     if (sessionRef.current) {
-      try { sessionRef.current.close(); } catch (e) { console.warn("Error closing session", e); }
+      try { sessionRef.current.close(); } catch (e: any) { console.warn("Error closing session", e); }
       sessionRef.current = null;
     }
     if (streamRef.current) {
@@ -266,7 +266,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       outputAudioContextRef.current.close();
       outputAudioContextRef.current = null;
     }
-    sourcesRef.current.forEach(source => { try { source.stop(); } catch(e) {} });
+    sourcesRef.current.forEach(source => { try { source.stop(); } catch(e: any) {} });
     sourcesRef.current.clear();
     
     if (animationFrameRef.current) {
@@ -299,10 +299,9 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         return;
       }
 
-      // @ts-ignore
-      const inputCtx = new AudioContextConstructor({ sampleRate: 16000 });
-      // @ts-ignore
-      const outputCtx = new AudioContextConstructor({ sampleRate: 24000 });
+      // Explicitly cast the constructor to 'any' to bypass TS2554 error where TS expects 0 arguments
+      const inputCtx = new (AudioContextConstructor as any)({ sampleRate: 16000 });
+      const outputCtx = new (AudioContextConstructor as any)({ sampleRate: 24000 });
       
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;
@@ -376,7 +375,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                              } else {
                                resultMessage = 'Failed.';
                              }
-                         } catch (e) {
+                         } catch (e: any) {
                              resultMessage = 'Simulated Success.';
                          }
                          sessionPromise.then((session) => {
@@ -403,7 +402,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                 }
              }
              if (message.serverContent?.interrupted) {
-                sourcesRef.current.forEach(source => { try { source.stop(); } catch(e) {} });
+                sourcesRef.current.forEach(source => { try { source.stop(); } catch(e: any) {} });
                 sourcesRef.current.clear();
                 nextStartTimeRef.current = 0;
              }

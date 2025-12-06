@@ -84,7 +84,7 @@ const Demo: React.FC = () => {
       // Checking SDK docs via system prompt, session.close() is mentioned in rules.
       try {
         sessionRef.current.close();
-      } catch (e) {
+      } catch (e: any) {
         console.warn("Error closing session", e);
       }
       sessionRef.current = null;
@@ -117,7 +117,7 @@ const Demo: React.FC = () => {
     
     // Stop any playing audio
     sourcesRef.current.forEach(source => {
-      try { source.stop(); } catch(e) {}
+      try { source.stop(); } catch(e: any) {}
     });
     sourcesRef.current.clear();
 
@@ -215,7 +215,7 @@ const Demo: React.FC = () => {
             if (interrupted) {
                // Stop all currently playing sources if interrupted
                sourcesRef.current.forEach(source => {
-                 try { source.stop(); } catch(e) {}
+                 try { source.stop(); } catch(e: any) {}
                });
                sourcesRef.current.clear();
                nextStartTimeRef.current = 0;

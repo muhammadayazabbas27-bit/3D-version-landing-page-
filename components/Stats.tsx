@@ -45,9 +45,9 @@ const Stats: React.FC = () => {
 
          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
            {[
-             { val: "50", label: "Missed Calls", desc: "Average monthly missed opportunities", color: "from-blue-500 to-cyan-400", barHeight: "60%" },
-             { val: "30", suffix: "%", label: "No-Show Rate", desc: "Industry average without automation", color: "from-purple-500 to-pink-400", barHeight: "40%" },
-             { val: "24/7", label: "Availability", desc: "Instant response time with AI", color: "from-emerald-500 to-teal-400", barHeight: "100%" }
+             { val: "20-30", suffix: "%", label: "Missed Calls", desc: "Average dental clinic have a month", color: "from-blue-500 to-cyan-400", barHeight: "60%" },
+             { val: "30", suffix: "%", label: "No-Show Rate", desc: "Average dental clinic see in a single month", color: "from-purple-500 to-pink-400", barHeight: "40%" },
+             { val: "$100K", label: "Lost Revenue Annually ", desc: "Due to Admin Inefficiencies", color: "from-emerald-500 to-teal-400", barHeight: "100%" }
            ].map((stat, i) => (
              <motion.div
                key={i}

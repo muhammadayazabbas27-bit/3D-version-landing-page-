@@ -1,159 +1,154 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PhoneIncoming, CalendarCheck, MessageCircle, Globe, Share2, Voicemail, RotateCcw, Bell } from 'lucide-react';
+import { PhoneIncoming, CalendarCheck, MessageCircle, Globe, Share2, Voicemail, RotateCcw, Bell, Cpu, Zap } from 'lucide-react';
 
 const features = [
   { 
-    title: "24/7 Call Answering", 
+    title: "24/7 Answering", 
     icon: PhoneIncoming, 
-    color: "bg-blue-100 text-blue-600 border-blue-200" 
+    color: "from-blue-400 to-blue-600",
+    bg: "bg-blue-500/10 border-blue-500/20"
   },
   { 
-    title: "Appointment Booking", 
+    title: "Auto Booking", 
     icon: CalendarCheck, 
-    color: "bg-purple-100 text-purple-600 border-purple-200" 
+    color: "from-purple-400 to-purple-600",
+    bg: "bg-purple-500/10 border-purple-500/20" 
   },
   { 
-    title: "WhatsApp Automation", 
+    title: "WhatsApp AI", 
     icon: MessageCircle, 
-    color: "bg-teal-100 text-teal-600 border-teal-200" 
+    color: "from-teal-400 to-teal-600",
+    bg: "bg-teal-500/10 border-teal-500/20" 
   },
   { 
-    title: "Multilingual Support", 
+    title: "Multilingual", 
     icon: Globe, 
-    color: "bg-indigo-100 text-indigo-600 border-indigo-200" 
+    color: "from-indigo-400 to-indigo-600",
+    bg: "bg-indigo-500/10 border-indigo-500/20" 
   },
   { 
-    title: "Social Media Bot", 
+    title: "Social Bot", 
     icon: Share2, 
-    color: "bg-pink-100 text-pink-600 border-pink-200" 
+    color: "from-pink-400 to-pink-600",
+    bg: "bg-pink-500/10 border-pink-500/20" 
   },
   { 
-    title: "Missed Call Capture", 
+    title: "Missed Calls", 
     icon: Voicemail, 
-    color: "bg-red-100 text-red-600 border-red-200" 
+    color: "from-red-400 to-red-600",
+    bg: "bg-red-500/10 border-red-500/20" 
   },
   { 
-    title: "Recall & Reactivation", 
+    title: "Reactivation", 
     icon: RotateCcw, 
-    color: "bg-yellow-100 text-yellow-600 border-yellow-200" 
+    color: "from-yellow-400 to-yellow-600",
+    bg: "bg-yellow-500/10 border-yellow-500/20" 
   },
   { 
-    title: "Reminders", 
+    title: "Smart Reminders", 
     icon: Bell, 
-    color: "bg-violet-100 text-violet-600 border-violet-200" 
+    color: "from-violet-400 to-violet-600",
+    bg: "bg-violet-500/10 border-violet-500/20" 
   },
 ];
 
-const RobotCenter = () => {
-  const colorSequence = ["#FFFFFF", "#22D3EE", "#FACC15", "#FFFFFF"];
-  const glowSequence = [
-    "0 0 15px rgba(255,255,255,0.8)",
-    "0 0 15px rgba(34,211,238,0.8)",
-    "0 0 15px rgba(250,204,21,0.8)",
-    "0 0 15px rgba(255,255,255,0.8)"
-  ];
-
+// The Central "Neural Processor" - High Tech 3D Core
+const AICore = () => {
   return (
     <motion.div
-      className="absolute z-20 preserve-3d"
-      animate={{ y: [-15, 15, -15], rotateY: [0, 10, -10, 0] }}
+      className="absolute z-20 preserve-3d flex items-center justify-center"
+      animate={{ 
+        y: [-10, 10, -10],
+      }}
       transition={{ 
-        y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-        rotateY: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+        duration: 4, 
+        repeat: Infinity, 
+        ease: "easeInOut" 
       }}
     >
-      <div className="relative w-36 h-36 bg-gradient-to-br from-[#8b5cf6] via-[#7c3aed] to-[#6d28d9] rounded-[2.5rem] shadow-[0_20px_50px_rgba(139,92,246,0.6)] flex items-center justify-center border border-white/20 ring-1 ring-purple-500/30 transform-style-3d">
-         {/* 3D Reflection */}
-         <div className="absolute top-0 left-0 w-full h-full rounded-[2.5rem] overflow-hidden opacity-30 pointer-events-none">
-            <div className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-gradient-to-br from-white via-transparent to-transparent rotate-45" />
-         </div>
-         {/* Face Container */}
-         <div className="flex flex-col items-center justify-center gap-3 relative z-10 mt-2 preserve-3d" style={{ transform: "translateZ(20px)" }}>
-            <div className="flex gap-5">
-                <motion.div 
-                  animate={{ 
-                    scaleY: [1, 0.1, 1, 1, 1], 
-                    backgroundColor: colorSequence,
-                    boxShadow: glowSequence
-                  }}
-                  transition={{ 
-                    scaleY: { duration: 4, repeat: Infinity, times: [0, 0.05, 0.1, 0.9, 1] },
-                    backgroundColor: { duration: 6, repeat: Infinity, ease: "linear" },
-                    boxShadow: { duration: 6, repeat: Infinity, ease: "linear" }
-                  }}
-                  className="w-7 h-5 rounded-full" 
-                />
-                <motion.div 
-                  animate={{ 
-                    scaleY: [1, 0.1, 1, 1, 1], 
-                    backgroundColor: colorSequence,
-                    boxShadow: glowSequence
-                  }}
-                  transition={{ 
-                    scaleY: { duration: 4, repeat: Infinity, times: [0, 0.05, 0.1, 0.9, 1] },
-                    backgroundColor: { duration: 6, repeat: Infinity, ease: "linear" },
-                    boxShadow: { duration: 6, repeat: Infinity, ease: "linear" }
-                  }}
-                  className="w-7 h-5 rounded-full" 
-                />
-            </div>
-            <motion.div
-                className="w-10 h-4 border-b-[3px] rounded-b-full"
-                animate={{ 
-                    borderColor: colorSequence,
-                    filter: ["drop-shadow(0 0 5px rgba(255,255,255,0.5))", "drop-shadow(0 0 5px rgba(34,211,238,0.5))", "drop-shadow(0 0 5px rgba(250,204,21,0.5))", "drop-shadow(0 0 5px rgba(255,255,255,0.5))"]
-                }}
-                transition={{ 
-                    borderColor: { duration: 6, repeat: Infinity, ease: "linear" },
-                    filter: { duration: 6, repeat: Infinity, ease: "linear" }
-                }}
-            />
-         </div>
-         <div className="absolute -left-1 w-2 h-8 bg-[#6d28d9] rounded-l-full shadow-inner" style={{ transform: "translateZ(-10px)" }} />
-         <div className="absolute -right-1 w-2 h-8 bg-[#6d28d9] rounded-r-full shadow-inner" style={{ transform: "translateZ(-10px)" }} />
-         <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-20 h-4 bg-brand-purple/20 blur-xl rounded-full" />
-      </div>
+      {/* Core Glow */}
+      <div className="absolute w-[300px] h-[300px] bg-brand-purple/20 blur-[60px] rounded-full pointer-events-none" />
+
+      {/* Outer Gyroscopic Ring 1 */}
+      <motion.div 
+        className="absolute w-48 h-48 rounded-full border border-cyan-400/30 border-t-cyan-400/80 shadow-[0_0_15px_rgba(34,211,238,0.3)] preserve-3d"
+        style={{ transformStyle: 'preserve-3d' }}
+        animate={{ rotateX: 360, rotateY: 180 }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Outer Gyroscopic Ring 2 */}
+      <motion.div 
+        className="absolute w-40 h-40 rounded-full border border-purple-500/30 border-b-purple-500/80 shadow-[0_0_15px_rgba(168,85,247,0.3)] preserve-3d"
+        style={{ transformStyle: 'preserve-3d' }}
+        animate={{ rotateX: 180, rotateY: 360 }}
+        transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Inner Rotating Cube/Processor */}
+      <motion.div
+         className="relative w-20 h-20 bg-brand-dark/80 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center shadow-2xl preserve-3d"
+         animate={{ 
+           rotateX: [0, 360], 
+           rotateY: [0, 360],
+           rotateZ: [0, 90]
+         }}
+         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+          {/* Cube Faces/Details */}
+          <div className="absolute inset-0 border border-brand-purple/50 rounded-xl opacity-50" style={{ transform: "translateZ(10px)" }} />
+          <div className="absolute inset-0 border border-accent-cyan/50 rounded-xl opacity-50" style={{ transform: "translateZ(-10px)" }} />
+          
+          {/* Central Logo */}
+          <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-brand-purple to-violet-600 rounded-lg flex items-center justify-center text-white shadow-inner animate-pulse">
+              <Cpu size={24} />
+          </div>
+      </motion.div>
     </motion.div>
   )
 }
 
 const Features: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden perspective-container">
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden perspective-container">
+      {/* Background Gradients */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-50 via-white to-white pointer-events-none" />
+      <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-10 md:mb-0 relative z-20"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-0 md:mb-10 relative z-20"
         >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider mb-6">
+             <Zap size={12} className="fill-current" /> Powerful Capabilities
+          </div>
           <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
             Everything your clinic needs <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500">to operate on autopilot</span>
           </h2>
         </motion.div>
         
-        {/* Mobile View: Horizontal Infinite Marquee */}
+        {/* Mobile View: Enhanced Marquee */}
         <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="block md:hidden relative w-full overflow-hidden mt-8"
+            viewport={{ once: true }}
+            className="block md:hidden relative w-full overflow-hidden mt-12"
         >
-             <div className="flex gap-4 animate-marquee whitespace-nowrap">
+             <div className="flex gap-4 animate-marquee whitespace-nowrap py-4">
                 {[...features, ...features].map((feature, index) => (
-                    <div key={index} className="inline-block w-[200px] shrink-0">
-                        <div className="bg-white p-6 rounded-3xl flex flex-col items-center justify-center text-center shadow-md border border-gray-100">
-                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-3 shadow-sm ${feature.color.split(' ')[0]} ${feature.color.split(' ')[1]}`}>
-                                <feature.icon size={20} />
+                    <div key={index} className="inline-block w-[220px] shrink-0">
+                        <div className={`p-6 rounded-3xl flex flex-col items-center justify-center text-center shadow-lg border border-gray-100 bg-white`}>
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-sm bg-gradient-to-br ${feature.color} text-white`}>
+                                <feature.icon size={24} />
                             </div>
-                            <h3 className="text-sm font-bold text-brand-dark whitespace-normal">
+                            <h3 className="text-base font-bold text-brand-dark whitespace-normal">
                                 {feature.title}
                             </h3>
                         </div>
@@ -162,29 +157,35 @@ const Features: React.FC = () => {
              </div>
         </motion.div>
 
-        {/* Desktop View: 3D Gyroscopic Orbit Animation */}
+        {/* Desktop View: 3D Animated Orbit System */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8, rotateX: 20 }}
-          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:flex relative w-full h-[700px] items-center justify-center -mt-20 preserve-3d"
+          transition={{ duration: 1 }}
+          className="hidden md:flex relative w-full h-[800px] items-center justify-center -mt-20 preserve-3d"
         >
-           <RobotCenter />
+           {/* The Core */}
+           <AICore />
            
-           {/* 3D Ring Container - Tilted */}
+           {/* Orbiting Container */}
            <div 
-             className="relative w-[600px] h-[600px] rounded-full border border-gray-100/50 preserve-3d will-change-transform"
-             style={{ transform: "rotateX(70deg) rotateZ(0deg)" }}
+             className="relative w-[650px] h-[650px] preserve-3d will-change-transform"
+             style={{ transform: "rotateX(65deg) rotateZ(-10deg)" }}
            >
+              {/* Orbital Ring Visual */}
+              <div className="absolute inset-0 rounded-full border border-gray-200/50" />
+              <div className="absolute inset-4 rounded-full border border-dashed border-gray-200/30 animate-spin-slow" style={{ animationDuration: '40s' }} />
+
               <motion.div 
                  className="w-full h-full preserve-3d"
                  animate={{ rotateZ: 360 }}
-                 transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                 transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
               >
                   {features.map((feature, index) => {
                     const angle = (360 / features.length) * index;
-                    const radius = 280;
+                    const radius = 325; // Distance from center
+                    
                     return (
                       <div 
                         key={index}
@@ -193,23 +194,35 @@ const Features: React.FC = () => {
                           transform: `rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg)` 
                         }}
                       >
-                        {/* Counter-rotate items to keep them upright in 3D */}
+                        {/* Counter-rotate and Billboarding */}
                         <motion.div 
                            animate={{ rotateZ: -360 }}
-                           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
                            className="preserve-3d"
                         >
-                            <div 
-                                style={{ transform: "rotateX(-70deg)" }} // Counter tilt to face user
-                                className="w-[180px] bg-white p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-2xl border hover:scale-125 transition-transform duration-300 border-gray-100 group backface-hidden"
+                            <motion.div 
+                                style={{ transform: "rotateX(-65deg) rotateY(10deg)" }} // Counter tilt
+                                whileHover={{ scale: 1.15, z: 40 }}
+                                className="group cursor-pointer relative w-48 bg-white/90 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-4 shadow-xl border border-white/50 hover:border-brand-purple/30 transition-all duration-300 backface-hidden"
                             >
-                              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 shadow-md border transition-all ${feature.color} card-icon-pop`}>
-                                <feature.icon size={22} />
-                              </div>
-                              <h3 className="text-xs font-bold text-brand-dark">
-                                {feature.title}
-                              </h3>
-                            </div>
+                                {/* Floating 3D Icon */}
+                                <div 
+                                  className={`w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-purple/40`}
+                                  style={{ transform: "translateZ(20px)" }}
+                                >
+                                  <feature.icon size={20} />
+                                </div>
+                                
+                                <div className="text-left">
+                                  <h3 className="text-sm font-bold text-brand-dark group-hover:text-brand-purple transition-colors">
+                                    {feature.title}
+                                  </h3>
+                                  <div className="h-1 w-8 bg-gray-100 rounded-full mt-2 group-hover:w-full group-hover:bg-gradient-to-r group-hover:from-brand-purple group-hover:to-cyan-400 transition-all duration-500" />
+                                </div>
+
+                                {/* Connecting Line to Center (Visual only) */}
+                                <div className="absolute top-1/2 -left-10 w-10 h-[1px] bg-gradient-to-r from-transparent to-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </motion.div>
                         </motion.div>
                       </div>
                     );

@@ -115,7 +115,7 @@ const App: React.FC = () => {
             onClick={openBookingLink}
             className="pointer-events-auto flex items-center gap-2 px-6 py-3 rounded-full bg-brand-dark text-white text-sm font-semibold hover:bg-black transition-all shadow-xl shadow-brand-dark/20"
           >
-            Request a Demo
+            Get a Free Trial
           </motion.button>
         </motion.div>
       </header>

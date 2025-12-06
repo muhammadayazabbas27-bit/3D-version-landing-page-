@@ -26,7 +26,7 @@ const personas = [
   },
 ];
 
-const TiltCard = ({ children, className = "", baseHeight = "20px" }: { children: React.ReactNode, className?: string, baseHeight?: string }) => {
+const TiltCard = ({ children, className = "", baseHeight = "20px" }: { children?: React.ReactNode, className?: string, baseHeight?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
 

@@ -1,6 +1,7 @@
 
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+// @ts-nocheck
+import React, { useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Phone, Calendar, MessageCircle, ArrowRight, Activity, CheckCircle } from 'lucide-react';
 
 const FinalCTA: React.FC = () => {
@@ -8,8 +9,25 @@ const FinalCTA: React.FC = () => {
   const y = useTransform(scrollYProgress, [0.8, 1], [100, 0]);
   const rotateX = useTransform(scrollYProgress, [0.8, 1], [20, 0]);
 
+  const [ripples, setRipples] = useState<{x: number, y: number, id: number}[]>([]);
+
   const openBookingLink = () => {
-    window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
+    // Delay slightly to show ripple
+    setTimeout(() => {
+        window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
+    }, 200);
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const id = Date.now();
+    
+    setRipples([...ripples, { x, y, id }]);
+    setTimeout(() => setRipples(prev => prev.filter(r => r.id !== id)), 1000);
+    
+    openBookingLink();
   };
 
   return (
@@ -82,13 +100,53 @@ const FinalCTA: React.FC = () => {
                 </motion.p>
 
                 <div className="flex flex-col md:flex-row gap-6 w-full max-w-lg justify-center relative z-20">
+                   {/* Enhanced Interaction Button */}
                    <motion.button
-                     onClick={openBookingLink}
-                     whileHover={{ scale: 1.05 }}
+                     onClick={handleButtonClick}
+                     whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255,255,255,0.4)" }}
                      whileTap={{ scale: 0.95 }}
-                     className="cursor-pointer pointer-events-auto relative z-50 px-8 py-4 bg-white text-brand-dark font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2"
+                     className="relative cursor-pointer pointer-events-auto z-50 px-10 py-5 bg-white text-brand-dark font-bold text-xl rounded-full shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3 overflow-hidden group"
                    >
-                     Get Started Now <ArrowRight size={20} />
+                     {/* Continuous Holographic Shine */}
+                     <motion.div 
+                        className="absolute inset-0 w-[50%] bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-12 opacity-50"
+                        initial={{ x: "-150%" }}
+                        animate={{ x: "250%" }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+                     />
+
+                     {/* Liquid Ripples */}
+                     <AnimatePresence>
+                       {ripples.map((ripple) => (
+                         <motion.span
+                           key={ripple.id}
+                           initial={{ scale: 0, opacity: 0.5 }}
+                           animate={{ scale: 4, opacity: 0 }}
+                           exit={{ opacity: 0 }}
+                           transition={{ duration: 0.8 }}
+                           className="absolute rounded-full bg-brand-purple/20 pointer-events-none"
+                           style={{ 
+                             left: ripple.x, 
+                             top: ripple.y, 
+                             width: 50, 
+                             height: 50, 
+                             marginLeft: -25, 
+                             marginTop: -25 
+                           }}
+                         />
+                       ))}
+                     </AnimatePresence>
+
+                     <span className="relative z-10">Start Trial Now</span>
+                     
+                     {/* Elastic Arrow Animation */}
+                     <motion.div
+                       className="relative z-10"
+                       animate={{ x: [0, 5, 0] }}
+                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                     >
+                        <ArrowRight size={24} className="group-hover:text-brand-purple transition-colors" />
+                     </motion.div>
                    </motion.button>
                 </div>
 
@@ -100,7 +158,7 @@ const FinalCTA: React.FC = () => {
                   className="mt-10 flex items-center gap-6 text-sm text-gray-400 font-medium"
                 >
                    <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> No credit card required</span>
-                   <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> 14-day free trial</span>
+                   <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> Free trial</span>
                 </motion.div>
             </div>
          </motion.div>

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PhoneCall, Cpu, PlugZap, Activity, ArrowRight, Rocket } from 'lucide-react';
+import { PhoneCall, Cpu, PlugZap, Activity, Rocket } from 'lucide-react';
 
 const steps = [
   { 
@@ -95,18 +95,43 @@ const Process: React.FC = () => {
         </div>
 
         <div className="relative max-w-7xl mx-auto mb-20">
-          {/* Connecting Arrows 3D */}
-          <div className="hidden lg:flex absolute top-1/2 left-0 w-full justify-between px-32 -translate-y-1/2 pointer-events-none z-0" style={{ transform: "translateZ(-20px)" }}>
-             {[1, 2, 3].map((i) => (
-                 <motion.div 
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 0.2, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + i * 0.2 }}
-                 >
-                    <ArrowRight size={48} className="text-brand-purple" />
-                 </motion.div>
+          
+          {/* Animated 3D Connecting Line System (Desktop Only) */}
+          <div className="hidden lg:block absolute top-1/2 left-0 w-full -translate-y-1/2 -z-10 preserve-3d pointer-events-none">
+             {/* 1. The Track (Base Line) */}
+             <div className="absolute left-[10%] right-[10%] h-[3px] bg-gray-100 rounded-full" style={{ transform: "translateZ(-20px)" }} />
+             
+             {/* 2. The Animated Progress Fill */}
+             <motion.div 
+               className="absolute left-[10%] h-[3px] bg-gradient-to-r from-brand-purple to-accent-cyan shadow-[0_0_20px_rgba(139,92,246,0.6)] rounded-full"
+               style={{ transform: "translateZ(-20px)" }}
+               initial={{ width: 0 }}
+               whileInView={{ width: "80%" }}
+               viewport={{ once: true }}
+               transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
+             />
+
+             {/* 3. Moving Pulse Particle */}
+             <motion.div 
+                className="absolute left-[10%] top-1/2 -translate-y-1/2 w-32 h-32 bg-brand-purple/10 rounded-full blur-2xl"
+                style={{ transform: "translateZ(-30px)" }}
+                initial={{ left: "10%" }}
+                whileInView={{ left: "90%" }}
+                viewport={{ once: true }}
+                transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
+             />
+             
+             {/* 4. Glowing Nodes at Step Centers */}
+             {[12.5, 37.5, 62.5, 87.5].map((pos, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-4 border-brand-purple rounded-full shadow-[0_0_15px_rgba(139,92,246,0.8)] z-0"
+                  style={{ left: `${pos}%`, transform: "translateZ(-15px) translateY(-50%)" }}
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + (i * 0.6), duration: 0.4, type: "spring" }}
+                />
              ))}
           </div>
 

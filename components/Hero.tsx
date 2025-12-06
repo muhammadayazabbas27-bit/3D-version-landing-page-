@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, MotionValue, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, MotionValue, useMotionValue, useSpring } from 'framer-motion';
 import { GoogleGenAI, LiveServerMessage, Modality, FunctionDeclaration, Type } from "@google/genai";
 import { Play, Mic, MicOff, Calendar, MessageCircle, CheckCircle, Smartphone, Wifi, Activity, Sparkles, Radio } from 'lucide-react';
 import Orb from './Orb';
@@ -177,6 +177,9 @@ interface HeroProps {
     mouseY?: MotionValue<number>;
 }
 
+// Define specific type for AudioContext constructor to satisfy TS2554
+type AudioContextCtor = { new (options?: AudioContextOptions): AudioContext };
+
 const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
   // --- Live API State ---
   const [isActive, setIsActive] = useState(false);
@@ -188,6 +191,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
 
   const [isButtonAnimating, setIsButtonAnimating] = useState(false);
 
+  // Refs
   const inputAudioContextRef = useRef<AudioContext | null>(null);
   const outputAudioContextRef = useRef<AudioContext | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -201,17 +205,105 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
   const outputAnalyserRef = useRef<AnalyserNode | null>(null);
   const animationFrameRef = useRef<number | null>(null);
 
+  // Ambient Audio Ref
+  const ambientAudioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeIntervalRef = useRef<number | null>(null);
+
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -100]);
   
-  // Parallax + Mouse Tilt (Smoother and slightly less extreme for the larger interface)
-  const tiltX = useTransform(mouseY || new MotionValue(0), [-1, 1], [3, -3]);
-  const tiltY = useTransform(mouseX || new MotionValue(0), [-1, 1], [-3, 3]);
+  // 3D Mouse Interaction Setup
+  const springConfig = { stiffness: 150, damping: 20, mass: 0.5 };
+  const mouseXSpring = useSpring(mouseX || new MotionValue(0), springConfig);
+  const mouseYSpring = useSpring(mouseY || new MotionValue(0), springConfig);
+
+  // Card Tilt - Increased range for better 3D feel
+  const tiltX = useTransform(mouseYSpring, [-1, 1], [10, -10]);
+  const tiltY = useTransform(mouseXSpring, [-1, 1], [-10, 10]);
+
+  // Parallax for floating elements
+  const parallaxX = useTransform(mouseXSpring, [-1, 1], [-15, 15]);
+  const parallaxY = useTransform(mouseYSpring, [-1, 1], [-15, 15]);
+  const parallaxXReverse = useTransform(mouseXSpring, [-1, 1], [15, -15]);
 
   const openBookingLink = () => {
     window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
   };
+
+  // --- Ambient Audio Logic ---
+  useEffect(() => {
+    const audioUrl = "https://cdn.pixabay.com/audio/2021/08/09/audio_a4631e27df.mp3"; // "Space Atmosphere"
+    const audio = new Audio(audioUrl);
+    audio.loop = true;
+    audio.volume = 0; // Start silent, fade in later
+    ambientAudioRef.current = audio;
+
+    const handleFirstInteraction = () => {
+      if (ambientAudioRef.current && ambientAudioRef.current.paused && !isActive) {
+        ambientAudioRef.current.play().then(() => {
+            // Fade in to 10%
+            const fadeIn = setInterval(() => {
+                if (ambientAudioRef.current && ambientAudioRef.current.volume < 0.1) {
+                    ambientAudioRef.current.volume = Math.min(0.1, ambientAudioRef.current.volume + 0.005);
+                } else {
+                    clearInterval(fadeIn);
+                }
+            }, 50);
+        }).catch(() => {
+            // Autoplay blocked still, wait for next click
+        });
+      }
+    };
+
+    window.addEventListener('click', handleFirstInteraction, { once: true });
+
+    return () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      if (ambientAudioRef.current) {
+        ambientAudioRef.current.pause();
+        ambientAudioRef.current = null;
+      }
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+    };
+  }, []);
+
+  // Handle Ambient Audio Fade In/Out based on isActive
+  useEffect(() => {
+    const audio = ambientAudioRef.current;
+    if (!audio) return;
+
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+
+    if (isActive) {
+        // Fade Out & Pause
+        fadeIntervalRef.current = window.setInterval(() => {
+            if (audio.volume > 0.005) {
+                audio.volume -= 0.005;
+            } else {
+                audio.volume = 0;
+                audio.pause();
+                if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+            }
+        }, 30);
+    } else {
+        // Play & Fade In
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                fadeIntervalRef.current = window.setInterval(() => {
+                    if (audio.volume < 0.1) {
+                        audio.volume += 0.005;
+                    } else {
+                        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+                    }
+                }, 50);
+            }).catch(() => {
+                // Ignore errors if interaction hasn't happened yet
+            });
+        }
+    }
+  }, [isActive]);
 
   const updateVolume = () => {
     let inputVol = 0;
@@ -287,14 +379,10 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
     setErrorMsg('');
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
+      // 1. Initialize AudioContexts synchronously
       const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as any;
-
       if (!AudioContextClass) {
-        setErrorMsg('AudioContext is not available in this environment.');
-        setStatus('idle');
-        return;
+        throw new Error('AudioContext not supported');
       }
 
       // Explicitly cast to 'any' class to bypass TS2554 error where TS expects 0 arguments
@@ -303,7 +391,8 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;
-      
+
+      // 2. Setup Output Chain
       const outputAnalyser = outputCtx.createAnalyser();
       outputAnalyser.fftSize = 256;
       outputAnalyserRef.current = outputAnalyser;
@@ -311,9 +400,11 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       outputNode.connect(outputAnalyser);
       outputAnalyser.connect(outputCtx.destination);
 
+      // 3. Get Microphone Stream
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
 
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const currentDate = new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 
       const sessionPromise = ai.live.connect({
@@ -411,6 +502,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       });
       sessionRef.current = await sessionPromise;
     } catch (error) {
+      console.error("Start Session Error:", error);
       setErrorMsg("Failed to start.");
       setStatus('idle');
     }
@@ -568,15 +660,19 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                  </AnimatePresence>
               </div>
 
-              {/* Floating Decorative Elements orbiting the glass card */}
+              {/* Floating Decorative Elements orbiting the glass card - Now with Parallax */}
               <motion.div 
                 animate={{ 
                     y: [0, -15, 0], 
                     rotateZ: [12, 15, 12],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-20 -right-12 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-purple border border-gray-100"
-                style={{ transform: "translateZ(60px)" }}
+                className="absolute top-20 -right-12 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-purple border border-gray-100 will-change-transform"
+                style={{ 
+                    transform: "translateZ(60px)",
+                    x: parallaxX, // Parallax movement
+                    y: parallaxY
+                }}
               >
                  <Calendar size={28} />
               </motion.div>
@@ -587,8 +683,12 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                     rotateZ: [-6, -3, -6],
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-40 -left-10 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-accent-cyan border border-gray-100"
-                style={{ transform: "translateZ(50px)" }}
+                className="absolute bottom-40 -left-10 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-accent-cyan border border-gray-100 will-change-transform"
+                style={{ 
+                    transform: "translateZ(50px)",
+                    x: parallaxXReverse, // Move in opposite direction
+                    y: parallaxY
+                }}
               >
                  <MessageCircle size={24} />
               </motion.div>
@@ -600,7 +700,10 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
                 className="absolute top-10 -left-5 w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-md opacity-60"
-                style={{ transform: "translateZ(-20px)" }}
+                style={{ 
+                    transform: "translateZ(-20px)",
+                    x: parallaxX
+                }}
               />
 
            </div>
@@ -654,7 +757,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             onClick={openBookingLink}
             className="px-8 py-4 bg-white border border-gray-300 text-brand-dark font-bold text-lg rounded-full shadow-lg hover:bg-gray-50 transition-all hover:shadow-xl transform hover:-translate-y-1 active:scale-95 cursor-pointer relative z-50"
           >
-            Request a Demo
+            Start Trial Now
           </button>
         </motion.div>
 

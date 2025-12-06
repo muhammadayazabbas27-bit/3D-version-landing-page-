@@ -279,8 +279,6 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
     volume.set(0);
   };
 
-  type AudioContextCtor = { new (options?: AudioContextOptions): AudioContext };
-
   const startSession = async () => {
     if (!process.env.API_KEY) {
       setErrorMsg("API Key missing.");
@@ -293,8 +291,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      const AudioContextConstructor = ((window as any).AudioContext || (window as any).webkitAudioContext) as
-        AudioContextCtor | undefined;
+      const AudioContextConstructor = window.AudioContext || (window as any).webkitAudioContext;
 
       if (!AudioContextConstructor) {
         setErrorMsg('AudioContext is not available in this environment.');
@@ -302,7 +299,9 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         return;
       }
 
+      // @ts-ignore
       const inputCtx = new AudioContextConstructor({ sampleRate: 16000 });
+      // @ts-ignore
       const outputCtx = new AudioContextConstructor({ sampleRate: 24000 });
       
       inputAudioContextRef.current = inputCtx;

@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion';
 import { GoogleGenAI, LiveServerMessage, Modality } from "@google/genai";
@@ -132,11 +133,10 @@ const Demo: React.FC = () => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      // Use a custom type for the constructor to allow arguments
-      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as unknown as { new(options?: any): AudioContext };
-      
-      const inputCtx = new AudioContextClass({ sampleRate: 16000 });
-      const outputCtx = new AudioContextClass({ sampleRate: 24000 });
+      // Explicitly cast the constructor to 'any' to bypass TS2554 error where TS expects 0 arguments
+      const AudioContextConstructor = window.AudioContext || (window as any).webkitAudioContext;
+      const inputCtx = new (AudioContextConstructor as any)({ sampleRate: 16000 });
+      const outputCtx = new (AudioContextConstructor as any)({ sampleRate: 24000 });
       
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;

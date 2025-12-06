@@ -132,9 +132,10 @@ const Demo: React.FC = () => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      // Initialize Audio Contexts
-      const inputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
-      const outputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
+      // Fix for TS2554: Explicitly cast the constructor to any to accept options argument
+      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as any;
+      const inputCtx = new AudioContextClass({ sampleRate: 16000 });
+      const outputCtx = new AudioContextClass({ sampleRate: 24000 });
       
       inputAudioContextRef.current = inputCtx;
       outputAudioContextRef.current = outputCtx;

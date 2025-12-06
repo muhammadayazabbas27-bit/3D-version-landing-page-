@@ -88,7 +88,7 @@ const Orb: React.FC<OrbProps> = ({ className = '', size = 'lg', active = false, 
             but for performance we apply borderRadius to this container.
         */}
         <motion.div
-            className="absolute inset-0 backdrop-blur-3xl overflow-hidden shadow-2xl"
+            className="absolute inset-0 overflow-hidden shadow-2xl"
             style={{ 
                 boxShadow: 'inset -10px -10px 30px rgba(0,0,0,0.1), inset 10px 10px 30px rgba(255,255,255,0.4)'
             }}

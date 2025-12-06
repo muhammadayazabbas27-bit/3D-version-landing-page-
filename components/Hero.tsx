@@ -92,18 +92,19 @@ const SoundWave = ({ active, volume }: { active: boolean; volume: MotionValue<nu
 const BackgroundParticles = () => {
   // Generate stable particles
   const particles = useMemo(() => {
-    return Array.from({ length: 60 }).map((_, i) => {
+    // Reduced particle count from 60 to 18 for performance
+    return Array.from({ length: 18 }).map((_, i) => {
       const isPurple = Math.random() > 0.5;
       return {
         id: i,
         top: Math.random() * 100, // %
         left: Math.random() * 100, // %
-        size: Math.random() * 5 + 2, // 2px to 7px (larger range)
-        depth: Math.random() * 400 - 200, // translateZ value for depth (-200 to 200)
-        duration: Math.random() * 20 + 15, // 15s to 35s (Much slower)
+        size: Math.random() * 5 + 2, // 2px to 7px
+        depth: Math.random() * 400 - 200, // translateZ value for depth
+        duration: Math.random() * 20 + 15, // 15s to 35s
         delay: Math.random() * 5,
         color: isPurple ? 'bg-brand-purple' : 'bg-accent-cyan',
-        glowColor: isPurple ? 'rgba(139, 92, 246, 0.6)' : 'rgba(34, 211, 238, 0.6)'
+        // Removed dynamic glow color for CSS simplification
       };
     });
   }, []);
@@ -119,14 +120,12 @@ const BackgroundParticles = () => {
             left: `${p.left}%`,
             width: p.size,
             height: p.size,
-            transform: `translateZ(${p.depth}px)`, // Apply 3D depth
-            boxShadow: `0 0 ${p.size * 3}px ${p.glowColor}`, // Ethereal Glow
-            filter: 'blur(0.5px)'
+            transform: `translateZ(${p.depth}px)`, 
+            opacity: 0.4
           }}
           animate={{
-            opacity: [0.1, 0.7, 0.1], // Breathing opacity
-            y: [0, -80, 0], // Gentle float up and down
-            scale: [1, 1.2, 1]
+            y: [0, -40, 0],
+            opacity: [0.3, 0.6, 0.3]
           }}
           transition={{
             duration: p.duration,
@@ -433,9 +432,9 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
   return (
     <section className="relative w-full min-h-screen bg-white pt-24 md:pt-32 pb-20 overflow-hidden flex flex-col items-center justify-center perspective-container">
       
-      {/* 3D Background Elements - Parallax & Particles */}
-      <motion.div style={{ y: y1 }} className="absolute top-[20%] right-[10%] w-80 h-80 bg-purple-200/30 rounded-full blur-[100px] pointer-events-none -z-10 mix-blend-multiply" />
-      <motion.div style={{ y: y2 }} className="absolute bottom-[10%] left-[10%] w-96 h-96 bg-blue-200/30 rounded-full blur-[100px] pointer-events-none -z-10 mix-blend-multiply" />
+      {/* 3D Background Elements - Parallax & Particles - Simplified for Performance */}
+      <motion.div style={{ y: y1 }} className="absolute top-[20%] right-[10%] w-80 h-80 bg-purple-200/30 rounded-full blur-[60px] pointer-events-none -z-10 mix-blend-multiply" />
+      <motion.div style={{ y: y2 }} className="absolute bottom-[10%] left-[10%] w-96 h-96 bg-blue-200/30 rounded-full blur-[60px] pointer-events-none -z-10 mix-blend-multiply" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),rgba(255,255,255,0))]" />
       <BackgroundParticles />
 
@@ -487,7 +486,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             Replaces the "Phone Frame". Content is moved out for clickability.
         */}
         <motion.div
-           className="relative w-[300px] md:w-[360px] h-[450px] mx-auto perspective-container mb-12"
+           className="relative w-[300px] md:w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform"
            initial={{ rotateX: 10, opacity: 0 }}
            animate={{ 
                opacity: 1,

@@ -48,7 +48,7 @@
     <style>
       body {
         perspective: 1200px;
-        transform-style: preserve-3d;
+        /* transform-style: preserve-3d; Removed for performance */
         overflow-x: hidden;
         background-color: #F8FAFC;
       }
@@ -95,6 +95,11 @@
       
       .rotate-y-180 {
         transform: rotateY(180deg);
+      }
+
+      /* Performance Optimizations */
+      .will-change-transform {
+        will-change: transform;
       }
     </style>
   <script type="importmap">

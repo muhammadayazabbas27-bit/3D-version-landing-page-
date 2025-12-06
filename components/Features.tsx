@@ -174,7 +174,7 @@ const Features: React.FC = () => {
            
            {/* 3D Ring Container - Tilted */}
            <div 
-             className="relative w-[600px] h-[600px] rounded-full border border-gray-100/50 preserve-3d"
+             className="relative w-[600px] h-[600px] rounded-full border border-gray-100/50 preserve-3d will-change-transform"
              style={{ transform: "rotateX(70deg) rotateZ(0deg)" }}
            >
               <motion.div 

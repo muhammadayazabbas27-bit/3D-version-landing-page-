@@ -34,7 +34,7 @@ const FinalCTA: React.FC = () => {
                    scale: [1, 1.1, 1]
                  }}
                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                 className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-brand-purple/30 rounded-full blur-[100px]" 
+                 className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-brand-purple/30 rounded-full blur-[60px]" 
                />
                <motion.div 
                  animate={{ 
@@ -43,7 +43,7 @@ const FinalCTA: React.FC = () => {
                    scale: [1, 1.2, 1]
                  }}
                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                 className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-accent-cyan/20 rounded-full blur-[100px]" 
+                 className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-accent-cyan/20 rounded-full blur-[60px]" 
                />
             </div>
 

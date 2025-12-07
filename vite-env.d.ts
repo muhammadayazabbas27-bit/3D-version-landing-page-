@@ -1,6 +1,2 @@
-declare namespace NodeJS {
-  interface ProcessEnv {
-    API_KEY: string;
-    [key: string]: any;
-  }
-}
+// Reference to vite/client removed to resolve type definition error
+// process.env.API_KEY is used instead of import.meta.env.VITE_GEMINI_API_KEY

@@ -14,7 +14,7 @@ const FinalCTA: React.FC = () => {
   const openBookingLink = () => {
     // Delay slightly to show ripple
     setTimeout(() => {
-        window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
+        window.open('https://cal.com/denticall-ai/15min', '_blank');
     }, 200);
   };
 

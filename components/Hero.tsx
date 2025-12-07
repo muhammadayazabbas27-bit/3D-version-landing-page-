@@ -1,3 +1,4 @@
+
 // @ts-nocheck
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue, useMotionValue, useSpring } from 'framer-motion';
@@ -228,7 +229,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
   const parallaxXReverse = useTransform(mouseXSpring, [-1, 1], [15, -15]);
 
   const openBookingLink = () => {
-    window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
+    window.open('https://cal.com/denticall-ai/15min', '_blank');
   };
 
   // --- Ambient Audio Logic ---
@@ -535,6 +536,24 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       {/* 3D Background Elements - Parallax & Particles - Simplified for Performance */}
       <motion.div style={{ y: y1 }} className="absolute top-[20%] right-[10%] w-80 h-80 bg-purple-200/30 rounded-full blur-[60px] pointer-events-none -z-10 mix-blend-multiply" />
       <motion.div style={{ y: y2 }} className="absolute bottom-[10%] left-[10%] w-96 h-96 bg-blue-200/30 rounded-full blur-[60px] pointer-events-none -z-10 mix-blend-multiply" />
+      
+      {/* --- FLOATING PURPLE HEARTBEAT LIGHT --- */}
+      <motion.div 
+         className="absolute w-[300px] h-[300px] bg-[#8b5cf6] rounded-full blur-[90px] pointer-events-none -z-10 opacity-40 mix-blend-screen"
+         animate={{ 
+           scale: [1, 1.3, 1],
+           opacity: [0.3, 0.6, 0.3],
+           x: [-100, 100, -100],
+           y: [-50, 50, -50]
+         }}
+         transition={{ 
+           scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }, // Heartbeat
+           opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+           x: { duration: 20, repeat: Infinity, ease: "easeInOut" }, // Float
+           y: { duration: 15, repeat: Infinity, ease: "easeInOut" }
+         }}
+      />
+
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),rgba(255,255,255,0))]" />
       <BackgroundParticles />
 

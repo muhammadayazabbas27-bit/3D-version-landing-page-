@@ -1,8 +1,10 @@
 
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useMotionValue, useTransform } from 'framer-motion';
 import { Activity } from 'lucide-react';
 import Hero from './components/Hero';
+import ChristmasSpecial from './components/ChristmasSpecial';
 import USP from './components/USP';
 import Stats from './components/Stats';
 import Process from './components/Process';
@@ -54,7 +56,7 @@ const App: React.FC = () => {
   };
 
   const openBookingLink = () => {
-    window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
+    window.open('https://cal.com/denticall-ai/15min', '_blank');
   };
 
   return (
@@ -124,6 +126,11 @@ const App: React.FC = () => {
         {/* 1. Hero Section */}
         <div id="hero">
           <Hero mouseX={mouseX} mouseY={mouseY} />
+        </div>
+
+        {/* 1.5. Christmas Special Section */}
+        <div id="christmas-special">
+          <ChristmasSpecial />
         </div>
         
         {/* 2. Core Problems Solved */}

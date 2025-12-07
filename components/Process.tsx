@@ -68,7 +68,7 @@ const Cube3D = ({ step, index }: { step: typeof steps[0], index: number }) => {
 
 const Process: React.FC = () => {
   const openBookingLink = () => {
-    window.open('https://cal.com/ayaz-abbas-hitit.agency/out-bound-warm-leads-appointments', '_blank');
+    window.open('https://cal.com/denticall-ai/15min', '_blank');
   };
 
   return (

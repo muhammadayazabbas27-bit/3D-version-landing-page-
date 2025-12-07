@@ -85,7 +85,7 @@ const App: React.FC = () => {
               <Activity size={18} />
             </div>
             <div className="font-heading font-bold text-lg tracking-tight text-brand-dark">
-              DentiCall
+              Denti<span className="text-[#8b5cf6]">Call</span>
             </div>
           </div>
 

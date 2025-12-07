@@ -78,7 +78,7 @@ const TiltCard = ({ children, className = "", baseHeight = "20px" }: { children?
 
       <div 
         style={{ transform: "translateZ(20px)" }}
-        className="h-full w-full bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-2xl group-hover:border-brand-purple/30 transition-all relative z-10 flex flex-col items-start"
+        className="h-full w-full bg-white rounded-[2.5rem] p-6 md:p-10 border border-gray-100 shadow-2xl group-hover:border-brand-purple/30 transition-all relative z-10 flex flex-col items-start"
       >
         {children}
       </div>
@@ -110,7 +110,7 @@ const Personas: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto px-4 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto px-0 md:px-4 items-end">
           {personas.map((p, i) => (
              <motion.div
                key={i}
@@ -126,7 +126,7 @@ const Personas: React.FC = () => {
                className="perspective-container group"
              >
                {/* Apply different top padding to simulate tiered layout visually on grid */}
-               <div style={{ paddingBottom: `${(i) * 40}px` }}>
+               <div style={{ paddingBottom: `${(i) * 40}px` }} className="pb-8 md:pb-[calc(var(--padding-bottom))]">
                    <TiltCard baseHeight={p.height} className="h-full">
                      <div style={{ transform: "translateZ(40px)" }} className={`w-16 h-16 rounded-2xl bg-brand-purple/5 text-brand-purple flex items-center justify-center mb-8 group-hover:bg-brand-purple group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm`}>
                        <p.icon size={32} />

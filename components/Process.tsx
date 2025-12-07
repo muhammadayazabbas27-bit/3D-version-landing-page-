@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PhoneCall, Cpu, PlugZap, Activity, Rocket } from 'lucide-react';
 
@@ -31,11 +30,18 @@ const steps = [
 ];
 
 const Cube3D = ({ step, index }: { step: typeof steps[0], index: number }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
-    <div className="relative w-full h-72 perspective-container group cursor-pointer">
+    <div 
+      className="relative w-full h-72 perspective-container group cursor-pointer"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
       <motion.div
-        className="relative w-full h-full preserve-3d transition-transform duration-700 ease-out group-hover:rotate-y-180 shadow-2xl rounded-3xl"
+        className="relative w-full h-full preserve-3d transition-transform duration-700 ease-out shadow-2xl rounded-3xl"
         initial={{ rotateY: 0 }}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        whileHover={{ rotateY: 180 }} // Keeps desktop hover
       >
         {/* Front Face */}
         <div className="absolute inset-0 backface-hidden bg-white border border-gray-100 rounded-3xl shadow-lg flex flex-col items-center justify-center p-8 z-20">
@@ -44,6 +50,7 @@ const Cube3D = ({ step, index }: { step: typeof steps[0], index: number }) => {
            </div>
            <h3 className="text-2xl font-bold text-brand-dark mb-2">{step.title}</h3>
            <div className="w-12 h-1.5 bg-brand-purple/20 rounded-full mt-4" />
+           <p className="mt-4 text-xs text-gray-400 md:hidden">Tap to reveal</p>
         </div>
 
         {/* Back Face (Reveal) */}
@@ -72,7 +79,7 @@ const Process: React.FC = () => {
   };
 
   return (
-    <section className="py-32 bg-white relative perspective-container overflow-hidden">
+    <section className="py-24 md:py-32 bg-white relative perspective-container overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-24">
           <motion.h2 
@@ -161,7 +168,7 @@ const Process: React.FC = () => {
         >
           <button 
             onClick={openBookingLink}
-            className="group px-8 py-4 bg-brand-dark text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:bg-black transition-all flex items-center gap-3 transform hover:-translate-y-1"
+            className="group px-8 py-4 bg-brand-dark text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:bg-black transition-all flex items-center gap-3 transform hover:-translate-y-1 w-full md:w-auto justify-center"
           >
             <span>Start Your Transformation</span>
             <div className="bg-white/10 p-1.5 rounded-full group-hover:bg-brand-purple transition-colors">

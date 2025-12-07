@@ -1,4 +1,3 @@
-
 // @ts-nocheck
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -196,7 +195,7 @@ const ChristmasSpecial: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 md:mb-20">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -220,7 +219,7 @@ const ChristmasSpecial: React.FC = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
           >
             Get a taste of how our AI can boost your dental clinic’s appointments this festive season.
           </motion.p>
@@ -230,7 +229,7 @@ const ChristmasSpecial: React.FC = () => {
         <div className="relative max-w-6xl mx-auto mb-16">
           
           {/* Connecting Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gradient-to-r from-red-200 via-green-200 to-amber-200 rounded-full -z-10" />
+          <div className="hidden md:block absolute top-[72px] left-0 w-full h-1 bg-gradient-to-r from-red-200 via-green-200 to-amber-200 rounded-full -z-10" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {steps.map((step, index) => (
@@ -241,10 +240,10 @@ const ChristmasSpecial: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ y: -10 }}
-                className="relative bg-white p-8 rounded-3xl shadow-xl border border-gray-100 group hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-300"
+                className="relative bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100 group hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col items-center h-full"
               >
                 {/* Step Number Badge */}
-                <div className="absolute -top-4 -right-4 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold shadow-lg border-4 border-white">
+                <div className="absolute -top-4 -right-4 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold shadow-lg border-4 border-white text-lg">
                   {step.id}
                 </div>
 
@@ -271,7 +270,7 @@ const ChristmasSpecial: React.FC = () => {
             onClick={openBookingLink}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(239, 68, 68, 0.4)" }}
             whileTap={{ scale: 0.95 }}
-            className="group relative px-10 py-5 rounded-full font-bold text-white text-lg shadow-xl overflow-hidden"
+            className="group relative px-10 py-5 rounded-full font-bold text-white text-lg shadow-xl overflow-hidden flex items-center justify-center"
           >
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-emerald-600 transition-transform duration-500 group-hover:scale-110" />
@@ -279,7 +278,7 @@ const ChristmasSpecial: React.FC = () => {
             {/* Sparkle Overlay */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                <Sparkles className="absolute top-2 left-4 text-yellow-300 animate-spin-slow" size={12} />
-               <Sparkles className="absolute bottom-2 right-4 text-yellow-300 animate-pulse" size={16} />
+               <Sparkles className="absolute bottom-2 right-4 text-yellow-300 animate-pulse text-yellow-300 fill-yellow-300" size={16} />
             </div>
 
             <span className="relative z-10 flex items-center gap-2">

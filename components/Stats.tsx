@@ -60,7 +60,7 @@ const Stats: React.FC = () => {
                  rotateX: 5,
                  boxShadow: "0 30px 60px -10px rgba(0, 0, 0, 0.2)"
                }}
-               className="relative p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-2xl preserve-3d group min-h-[300px] flex flex-col justify-between overflow-hidden"
+               className="relative p-6 md:p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-2xl preserve-3d group min-h-[300px] flex flex-col justify-between overflow-hidden"
              >
                 {/* 3D Background Light */}
                 <div 
@@ -69,7 +69,7 @@ const Stats: React.FC = () => {
                 />
 
                 <div className="relative z-10 preserve-3d">
-                  <div className={`text-6xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br ${stat.color} drop-shadow-sm`} style={{ transform: "translateZ(30px)" }}>
+                  <div className={`text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br ${stat.color} drop-shadow-sm`} style={{ transform: "translateZ(30px)" }}>
                     <Counter value={stat.val} suffix={stat.suffix} />
                   </div>
                   <h3 className="text-2xl font-bold text-brand-dark mb-3" style={{ transform: "translateZ(20px)" }}>

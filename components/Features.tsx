@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PhoneIncoming, CalendarCheck, MessageCircle, Globe, Share2, Voicemail, RotateCcw, Bell, Cpu, Zap } from 'lucide-react';
@@ -135,16 +134,12 @@ const Features: React.FC = () => {
         </motion.div>
         
         {/* Mobile View: Enhanced Marquee */}
-        <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="block md:hidden relative w-full overflow-hidden mt-12"
-        >
-             <div className="flex gap-4 animate-marquee whitespace-nowrap py-4">
+        <div className="block md:hidden relative w-full overflow-hidden mt-12 py-4">
+             {/* Using animate-marquee from updated Tailwind config */}
+             <div className="flex gap-4 animate-marquee whitespace-nowrap w-max">
                 {[...features, ...features].map((feature, index) => (
                     <div key={index} className="inline-block w-[220px] shrink-0">
-                        <div className={`p-6 rounded-3xl flex flex-col items-center justify-center text-center shadow-lg border border-gray-100 bg-white`}>
+                        <div className={`p-6 rounded-3xl flex flex-col items-center justify-center text-center shadow-lg border border-gray-100 bg-white h-[180px]`}>
                             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-sm bg-gradient-to-br ${feature.color} text-white`}>
                                 <feature.icon size={24} />
                             </div>
@@ -155,7 +150,7 @@ const Features: React.FC = () => {
                     </div>
                 ))}
              </div>
-        </motion.div>
+        </div>
 
         {/* Desktop View: 3D Animated Orbit System */}
         <motion.div 

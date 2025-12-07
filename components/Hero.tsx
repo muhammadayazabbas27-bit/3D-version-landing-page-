@@ -1,4 +1,3 @@
-
 // @ts-nocheck
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue, useMotionValue, useSpring } from 'framer-motion';
@@ -575,7 +574,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         {/* Headline with 3D Reveal */}
         <div className="relative preserve-3d mb-8">
           <motion.h1 
-            className="text-5xl sm:text-6xl md:text-8xl font-bold text-brand-dark leading-tight tracking-tight mb-8 drop-shadow-lg preserve-3d"
+            className="text-4xl sm:text-6xl md:text-8xl font-bold text-brand-dark leading-tight tracking-tight mb-8 drop-shadow-lg preserve-3d"
             initial={{ opacity: 0, rotateX: -20 }}
             animate={{ opacity: 1, rotateX: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -591,7 +590,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         </div>
 
         <motion.p 
-          className="text-xl md:text-2xl text-gray-500 max-w-2xl mx-auto mb-16 leading-relaxed font-medium"
+          className="text-lg md:text-2xl text-gray-500 max-w-2xl mx-auto mb-16 leading-relaxed font-medium px-4 md:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
@@ -605,7 +604,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             Replaces the "Phone Frame". Content is moved out for clickability.
         */}
         <motion.div
-           className="relative w-[300px] md:w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform"
+           className="relative w-full max-w-[340px] md:w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform"
            initial={{ rotateX: 10, opacity: 0 }}
            animate={{ 
                opacity: 1,
@@ -694,7 +693,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                     rotateZ: [12, 15, 12],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-20 -right-12 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-purple border border-gray-100 will-change-transform"
+                className="absolute top-20 -right-4 md:-right-12 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-purple border border-gray-100 will-change-transform hidden md:flex"
                 style={{ 
                     transform: "translateZ(60px)",
                     x: parallaxX, // Parallax movement
@@ -710,7 +709,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                     rotateZ: [-6, -3, -6],
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-40 -left-10 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-accent-cyan border border-gray-100 will-change-transform"
+                className="absolute bottom-40 -left-4 md:-left-10 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-accent-cyan border border-gray-100 will-change-transform hidden md:flex"
                 style={{ 
                     transform: "translateZ(50px)",
                     x: parallaxXReverse, // Move in opposite direction
@@ -738,7 +737,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
 
         {/* BUTTONS CONTAINER - Moved outside 3D card for reliable clickability */}
         <motion.div 
-          className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8 relative z-50"
+          className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8 relative z-50 w-full px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
@@ -749,7 +748,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
              whileHover={{ scale: 1.05 }}
              whileTap={{ scale: 0.95 }}
              className={`
-               group relative px-8 py-4 rounded-full font-bold text-white text-lg shadow-xl transition-all flex items-center justify-center gap-3 cursor-pointer overflow-hidden border border-white/20
+               group relative w-full md:w-auto px-8 py-4 rounded-full font-bold text-white text-lg shadow-xl transition-all flex items-center justify-center gap-3 cursor-pointer overflow-hidden border border-white/20
                ${isActive ? 'bg-gradient-to-r from-red-500 to-red-600 shadow-red-500/40' : 'bg-gradient-to-r from-brand-purple to-violet-600 shadow-brand-purple/40'}
              `}
           >
@@ -768,7 +767,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                    )}
                </AnimatePresence>
 
-               <span className="relative z-10 flex items-center gap-2">
+               <span className="relative z-10 flex items-center gap-2 text-base md:text-lg whitespace-nowrap">
                    {status === 'connecting' ? (
                        <><Activity className="animate-spin" size={20} /> Connecting...</>
                    ) : isActive ? (
@@ -782,7 +781,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
           {/* Request Demo Button */}
           <button
             onClick={openBookingLink}
-            className="px-8 py-4 bg-white border border-gray-300 text-brand-dark font-bold text-lg rounded-full shadow-lg hover:bg-gray-50 transition-all hover:shadow-xl transform hover:-translate-y-1 active:scale-95 cursor-pointer relative z-50"
+            className="w-full md:w-auto px-8 py-4 bg-white border border-gray-300 text-brand-dark font-bold text-lg rounded-full shadow-lg hover:bg-gray-50 transition-all hover:shadow-xl transform hover:-translate-y-1 active:scale-95 cursor-pointer relative z-50 whitespace-nowrap"
           >
             Start Trial Now
           </button>

@@ -59,7 +59,7 @@ const USP: React.FC = () => {
          {/* 3D Comparison Visualization */}
          <div className="flex justify-center mb-24 preserve-3d">
             <motion.div 
-               className="relative w-full max-w-4xl h-40 flex items-center justify-between px-12 bg-white rounded-[2rem] shadow-2xl border border-gray-100"
+               className="relative w-full max-w-4xl min-h-[160px] md:h-40 flex flex-col md:flex-row items-center justify-between px-8 py-8 md:py-0 md:px-12 bg-white rounded-[2rem] shadow-2xl border border-gray-100 gap-8 md:gap-0"
                initial={{ rotateX: 20, opacity: 0 }}
                whileInView={{ rotateX: 0, opacity: 1 }}
                viewport={{ once: true }}
@@ -67,11 +67,11 @@ const USP: React.FC = () => {
             >
                 <div className="flex flex-col items-center opacity-40 grayscale" style={{ transform: "translateZ(20px)" }}>
                     <Bot size={48} className="mb-2" />
-                    <span className="font-bold text-gray-400">Basic Chatbot</span>
+                    <span className="font-bold text-gray-400 text-center">Basic Chatbot</span>
                 </div>
                 
                 {/* 3D Connecting Line */}
-                <div className="flex-1 h-1 bg-gray-100 mx-12 rounded-full relative overflow-hidden">
+                <div className="w-full h-1 md:w-auto md:flex-1 md:h-1 bg-gray-100 md:mx-12 rounded-full relative overflow-hidden">
                     <motion.div 
                        className="absolute inset-y-0 left-0 bg-brand-purple" 
                        initial={{ width: "0%" }}
@@ -85,7 +85,7 @@ const USP: React.FC = () => {
                         <div className="absolute inset-0 bg-brand-purple blur-xl opacity-20 rounded-full" />
                         <BrainCircuit size={56} className="mb-2 text-brand-purple relative z-10" />
                     </div>
-                    <span className="font-bold text-brand-dark">DentiCall AI System</span>
+                    <span className="font-bold text-brand-dark text-center">DentiCall AI System</span>
                 </div>
             </motion.div>
          </div>

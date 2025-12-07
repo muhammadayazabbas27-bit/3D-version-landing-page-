@@ -11,16 +11,18 @@ const pains = [
 
 const FlipCard = ({ item, index }: { item: typeof pains[0], index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <div 
       className="relative w-full h-[300px] perspective-container cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
         className="relative w-full h-full transition-all duration-700 transform-style-3d"
-        animate={{ rotateY: isHovered ? 180 : 0 }}
+        animate={{ rotateY: isHovered || isFlipped ? 180 : 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 12 }}
       >
         {/* Front Face */}
@@ -31,7 +33,7 @@ const FlipCard = ({ item, index }: { item: typeof pains[0], index: number }) => 
              <item.icon size={36} className="text-brand-purple" />
            </div>
            <h3 className="text-2xl font-bold text-brand-dark mb-2">{item.title}</h3>
-           <p className="text-gray-400 text-sm mt-2 font-medium">Hover for details</p>
+           <p className="text-gray-400 text-sm mt-2 font-medium">Hover or tap for details</p>
         </div>
 
         {/* Back Face */}

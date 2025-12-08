@@ -62,7 +62,7 @@ const TiltCard = ({ children, className = "", baseHeight = "20px" }: { children?
         rotateX: useTransform(mouseY, [-200, 200], [15, -15]),
         transformStyle: "preserve-3d",
       }}
-      className={`relative transition-all duration-200 ease-out ${className}`}
+      className={`relative transition-all duration-200 ease-out w-full ${className}`}
     >
       {/* 3D Base/Platform Effect */}
       <div 
@@ -88,14 +88,14 @@ const TiltCard = ({ children, className = "", baseHeight = "20px" }: { children?
 
 const Personas: React.FC = () => {
   return (
-    <section className="py-24 bg-brand-gray/30 perspective-container overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
+    <section className="py-16 md:py-24 bg-brand-gray/30 perspective-container overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-16 md:mb-20">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 tracking-tight"
+            className="text-3xl md:text-5xl font-bold text-brand-dark mb-4 tracking-tight"
           >
             Built for <span className="text-brand-purple">everyone</span>
           </motion.h2>
@@ -110,7 +110,7 @@ const Personas: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto px-0 md:px-4 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto px-0 md:px-4 items-end">
           {personas.map((p, i) => (
              <motion.div
                key={i}
@@ -123,7 +123,7 @@ const Personas: React.FC = () => {
                  type: "spring",
                  bounce: 0.4
                }}
-               className="perspective-container group"
+               className="perspective-container group w-full"
              >
                {/* Apply different top padding to simulate tiered layout visually on grid */}
                <div style={{ paddingBottom: `${(i) * 40}px` }} className="pb-8 md:pb-[calc(var(--padding-bottom))]">

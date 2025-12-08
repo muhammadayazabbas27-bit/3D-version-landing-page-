@@ -64,7 +64,7 @@ const FinalCTA: React.FC = () => {
                />
             </div>
 
-            <div className="relative z-10 px-6 py-16 md:px-8 md:py-24 md:p-24 flex flex-col items-center text-center">
+            <div className="relative z-10 px-6 py-12 md:px-8 md:py-24 md:p-24 flex flex-col items-center text-center">
                 
                 {/* Floating Icon Orb */}
                 <motion.div 

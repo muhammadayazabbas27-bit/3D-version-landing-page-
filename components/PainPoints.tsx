@@ -15,13 +15,13 @@ const FlipCard = ({ item, index }: { item: typeof pains[0], index: number }) => 
 
   return (
     <div 
-      className="relative w-full h-[300px] perspective-container cursor-pointer"
+      className="relative w-full h-auto min-h-[300px] perspective-container cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
-        className="relative w-full h-full transition-all duration-700 transform-style-3d"
+        className="relative w-full h-full min-h-[300px] transition-all duration-700 transform-style-3d"
         animate={{ rotateY: isHovered || isFlipped ? 180 : 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 12 }}
       >
@@ -58,27 +58,27 @@ const FlipCard = ({ item, index }: { item: typeof pains[0], index: number }) => 
 
 const PainPoints: React.FC = () => {
   return (
-    <section className="py-24 bg-brand-gray relative overflow-hidden perspective-container">
+    <section className="py-16 md:py-24 bg-brand-gray relative overflow-hidden perspective-container">
         {/* Background blobs */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-purple-200/20 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-200/20 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-purple-200/20 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-blue-200/20 rounded-full blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-             <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6 tracking-tight">
+             <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4 md:mb-6 tracking-tight">
                 Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan">Problems</span> Solved
              </h2>
              <p className="text-gray-500 max-w-2xl mx-auto text-lg">Identifying the silent revenue killers in your practice.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {pains.map((p, i) => (
                <motion.div
                  key={i}

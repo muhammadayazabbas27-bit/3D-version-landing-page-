@@ -92,26 +92,26 @@ const HologramFeatures = () => {
   ];
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Ambient Background Light */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-50/50 via-white to-white pointer-events-none" />
       
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#06b6d4 1px, transparent 1px), linear-gradient(90deg, #06b6d4 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-16 md:mb-20">
            <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4">
              Powered by <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Holographic AI</span>
            </h2>
            <p className="text-gray-500">Next-generation capabilities for the modern clinic.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-container">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 perspective-container">
           {features.map((feature, i) => (
             <motion.div
               key={i}
-              className="relative group h-[400px] perspective-container"
+              className="relative group min-h-[350px] md:h-[400px] perspective-container"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -238,7 +238,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       </header>
 
       {/* --- 1. HERO SECTION (REDESIGNED) --- */}
-      <section className="pt-28 pb-16 md:pt-40 md:pb-24 relative overflow-hidden bg-gradient-to-b from-red-50/10 via-white to-white perspective-container">
+      <section className="pt-24 pb-12 md:pt-40 md:pb-24 relative overflow-hidden bg-gradient-to-b from-red-50/10 via-white to-white perspective-container">
         
         {/* Subtle Premium Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -257,8 +257,8 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             ))}
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
             
             {/* --- LEFT COLUMN: CONTENT (50-60%) --- */}
             <div className="w-full lg:w-3/5 text-center lg:text-left">
@@ -271,11 +271,11 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                    <Gift size={14} /> Christmas Special
                 </div>
 
-                <h1 className="text-4xl md:text-6xl font-bold text-brand-dark leading-tight mb-6 tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-brand-dark leading-tight mb-4 md:mb-6 tracking-tight">
                   Never Miss a <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-600">Patient Again.</span>
                 </h1>
                 
-                <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed font-medium max-w-2xl mx-auto lg:mx-0">
+                <p className="text-base md:text-xl text-gray-500 mb-8 md:mb-10 leading-relaxed font-medium max-w-2xl mx-auto lg:mx-0">
                   AI Communication System: Voice, Chat, WhatsApp & Phone — <span className="text-brand-dark font-semibold">All in One Platform.</span>
                 </p>
                 
@@ -377,7 +377,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
 
       {/* --- 2. CHRISTMAS TRIAL DETAILS (PREMIUM 3D MIDNIGHT THEME) --- */}
       <section 
-        className="relative py-24 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#2a0a18] to-slate-950 perspective-container"
+        className="relative py-16 md:py-24 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#2a0a18] to-slate-950 perspective-container"
         onMouseMove={handleMouseMove}
       >
         
@@ -386,7 +386,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             
             {/* 1. Large Abstract 3D Ornaments (Parallax) */}
             <motion.div 
-               className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-red-600/20 to-purple-900/40 blur-[80px] mix-blend-screen"
+               className="absolute top-[-10%] right-[-5%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] rounded-full bg-gradient-to-br from-red-600/20 to-purple-900/40 blur-[80px] mix-blend-screen"
                animate={{ 
                    x: mouseX * -40, 
                    y: mouseY * -40,
@@ -395,7 +395,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                transition={{ scale: { duration: 10, repeat: Infinity, ease: "easeInOut" } }}
             />
             <motion.div 
-               className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-emerald-600/10 to-teal-900/30 blur-[80px] mix-blend-screen"
+               className="absolute bottom-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-gradient-to-tr from-emerald-600/10 to-teal-900/30 blur-[80px] mix-blend-screen"
                animate={{ 
                    x: mouseX * -60, 
                    y: mouseY * -60,
@@ -433,7 +433,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay" />
         </div>
 
-        <div className="container mx-auto px-6 text-center relative z-10 preserve-3d">
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10 preserve-3d">
            <motion.div 
              initial={{ y: 20, opacity: 0 }}
              whileInView={{ y: 0, opacity: 1 }}
@@ -448,12 +448,12 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
              initial={{ scale: 0.9, opacity: 0 }}
              whileInView={{ scale: 1, opacity: 1 }}
              viewport={{ once: true }}
-             className="text-4xl md:text-6xl font-bold mb-16 text-white drop-shadow-xl"
+             className="text-3xl md:text-6xl font-bold mb-16 text-white drop-shadow-xl"
            >
              Why Test DentiCall <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">This Christmas?</span>
            </motion.h2>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16 perspective-container relative">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 max-w-6xl mx-auto mb-16 perspective-container relative">
               {/* --- 3D CONNECTING LINE --- */}
               <div className="hidden md:block absolute top-[6rem] left-[15%] right-[15%] h-[2px] bg-white/10 rounded-full -z-10 preserve-3d pointer-events-none" style={{ transform: "translateZ(-20px)" }}>
                   <motion.div 
@@ -512,19 +512,19 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       </section>
 
       {/* --- 3. ROI CALCULATOR & PAIN POINTS --- */}
-      <section className="py-24 bg-gray-50 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#8b5cf6 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
              
              {/* Stats / Pain Points */}
              <div className="flex-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
+                <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
                   You could be losing <br/><span className="text-red-500">revenue every day.</span>
                 </h2>
-                <p className="text-xl text-gray-500 mb-10">
+                <p className="text-lg md:text-xl text-gray-500 mb-10">
                   Here is how AI plugs the leaks in your dental practice.
                 </p>
 
@@ -535,7 +535,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                      { label: "No-Show Rate", val: "20%", color: "bg-yellow-500", w: "20%" },
                    ].map((stat, i) => (
                      <div key={i}>
-                        <div className="flex justify-between mb-3 font-bold text-gray-700 text-lg">
+                        <div className="flex justify-between mb-3 font-bold text-gray-700 text-base md:text-lg">
                           <span>{stat.label}</span>
                           <span className="text-brand-dark">{stat.val}</span>
                         </div>
@@ -558,7 +558,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
              {/* Interactive Calculator - Glassmorphism */}
              <div className="flex-1 w-full max-w-md perspective-container">
                 <TiltCard depth={10}>
-                  <div className="bg-white p-8 rounded-[2rem] shadow-2xl border border-gray-100 relative overflow-hidden">
+                  <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-gray-100 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-brand-purple/10 rounded-bl-[100px]" />
                     
                     <div className="flex items-center gap-4 mb-8 relative z-10">
@@ -595,7 +595,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                       
                       <div className="pt-8 border-t border-gray-100 text-center">
                           <p className="text-sm text-gray-400 font-bold uppercase tracking-wider mb-2">Potential Monthly Loss</p>
-                          <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600">
+                          <div className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600">
                             ${lostRevenue.toLocaleString()}
                           </div>
                       </div>
@@ -619,10 +619,10 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       <HologramFeatures />
 
       {/* --- 5. PERSONAS (Who is this for?) --- */}
-      <section className="py-24 bg-brand-purple/5">
-        <div className="container mx-auto px-6">
+      <section className="py-16 md:py-24 bg-brand-purple/5">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-brand-dark">Built for Every Practice Size</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">Built for Every Practice Size</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto perspective-container">
              {[
@@ -647,13 +647,13 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       <ComparisonSection />
 
       {/* --- 6. PROCESS (3D ENHANCED) --- */}
-      <section className="py-32 bg-white relative overflow-hidden perspective-container">
-         <div className="container mx-auto px-6 relative z-10">
+      <section className="py-16 md:py-32 bg-white relative overflow-hidden perspective-container">
+         <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.h2 
                initial={{ opacity: 0, y: 30 }}
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
-               className="text-4xl md:text-5xl font-bold text-center mb-24 text-brand-dark"
+               className="text-3xl md:text-5xl font-bold text-center mb-16 md:mb-24 text-brand-dark"
             >
                Get Started in <span className="text-brand-purple">3 Steps</span>
             </motion.h2>
@@ -673,7 +673,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                  />
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 preserve-3d">
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 preserve-3d">
                   {[
                     { num: "1", title: "Sign Up for Trial", desc: "Claim your 100 free minutes.", icon: Gift, color: "from-red-500 to-red-600" },
                     { num: "2", title: "Quick Integration", desc: "Connect phone & WhatsApp.", icon: PlugZap, color: "from-green-500 to-emerald-600" },
@@ -713,7 +713,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       </section>
 
       {/* --- 7. FINAL CTA --- */}
-      <section className="py-32 bg-gradient-to-br from-brand-purple to-violet-700 text-white text-center relative overflow-hidden perspective-container">
+      <section className="py-16 md:py-32 bg-gradient-to-br from-brand-purple to-violet-700 text-white text-center relative overflow-hidden perspective-container">
          
          {/* 3D Floating Particles */}
          <div className="absolute inset-0 preserve-3d">
@@ -734,12 +734,12 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             ))}
          </div>
 
-         <div className="container mx-auto px-6 relative z-10 preserve-3d">
+         <div className="container mx-auto px-4 md:px-6 relative z-10 preserve-3d">
             <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-bold mb-8 tracking-tight"
+                className="text-3xl md:text-6xl font-bold mb-8 tracking-tight"
                 style={{ transform: "translateZ(30px)" }}
             >
                 Start Your Trial — <span className="text-yellow-300">Only 100 Minutes Available</span>
@@ -749,7 +749,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-xl md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto leading-relaxed"
                 style={{ transform: "translateZ(20px)" }}
             >
               Join other clinics already testing AI and see results in days. No credit card required, no commitment.
@@ -764,15 +764,15 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             >
                 <button 
                     onClick={openBookingLink}
-                    className="px-12 py-6 bg-white text-brand-purple font-bold text-xl rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-gray-50 hover:scale-105 transition-all flex items-center justify-center gap-3 mx-auto"
+                    className="px-12 py-6 bg-white text-brand-purple font-bold text-xl rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-gray-50 hover:scale-105 transition-all flex items-center justify-center gap-3 mx-auto w-full md:w-auto"
                 >
                     Start Trial Now <ArrowRight />
                 </button>
             </motion.div>
 
-            <div className="mt-12 flex justify-center gap-8 text-base text-purple-200 font-medium" style={{ transform: "translateZ(10px)" }}>
-               <span className="flex items-center gap-2"><CheckCircle size={20} className="text-green-400" /> Instant Setup</span>
-               <span className="flex items-center gap-2"><CheckCircle size={20} className="text-green-400" /> Cancel Anytime</span>
+            <div className="mt-12 flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-base text-purple-200 font-medium" style={{ transform: "translateZ(10px)" }}>
+               <span className="flex items-center justify-center gap-2"><CheckCircle size={20} className="text-green-400" /> Instant Setup</span>
+               <span className="flex items-center justify-center gap-2"><CheckCircle size={20} className="text-green-400" /> Cancel Anytime</span>
             </div>
          </div>
       </section>

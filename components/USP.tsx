@@ -15,7 +15,7 @@ const usps = [
 
 const USP: React.FC = () => {
   return (
-    <section className="py-24 bg-white relative perspective-container overflow-hidden">
+    <section className="py-16 md:py-24 bg-white relative perspective-container overflow-hidden">
       {/* 3D Grid Floor - subtle */}
       <div 
         className="absolute inset-0 opacity-[0.05] pointer-events-none"
@@ -26,8 +26,8 @@ const USP: React.FC = () => {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10">
-         <div className="text-center mb-24 relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+         <div className="text-center mb-16 md:mb-24 relative">
            <motion.div 
              initial={{ opacity: 0, y: 15 }}
              whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ const USP: React.FC = () => {
              initial={{ opacity: 0, scale: 0.9 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             className="text-4xl md:text-6xl font-bold text-brand-dark mb-4 tracking-tight"
+             className="text-3xl md:text-6xl font-bold text-brand-dark mb-4 tracking-tight"
            >
              Not a chatbot. Not a call center.
            </motion.h2>
@@ -50,16 +50,16 @@ const USP: React.FC = () => {
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
              transition={{ delay: 0.2 }}
-             className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan tracking-tight"
+             className="text-2xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan tracking-tight"
            >
              A complete AI communication System.
            </motion.h3>
          </div>
 
          {/* 3D Comparison Visualization */}
-         <div className="flex justify-center mb-24 preserve-3d">
+         <div className="flex justify-center mb-16 md:mb-24 preserve-3d">
             <motion.div 
-               className="relative w-full max-w-4xl min-h-[160px] md:h-40 flex flex-col md:flex-row items-center justify-between px-8 py-8 md:py-0 md:px-12 bg-white rounded-[2rem] shadow-2xl border border-gray-100 gap-8 md:gap-0"
+               className="relative w-full max-w-4xl min-h-[160px] md:h-40 flex flex-col md:flex-row items-center justify-between px-6 py-8 md:py-0 md:px-12 bg-white rounded-[2rem] shadow-2xl border border-gray-100 gap-8 md:gap-0"
                initial={{ rotateX: 20, opacity: 0 }}
                whileInView={{ rotateX: 0, opacity: 1 }}
                viewport={{ once: true }}
@@ -71,12 +71,20 @@ const USP: React.FC = () => {
                 </div>
                 
                 {/* 3D Connecting Line */}
-                <div className="w-full h-1 md:w-auto md:flex-1 md:h-1 bg-gray-100 md:mx-12 rounded-full relative overflow-hidden">
+                <div className="w-1 h-20 md:w-auto md:flex-1 md:h-1 bg-gray-100 md:mx-12 rounded-full relative overflow-hidden">
                     <motion.div 
-                       className="absolute inset-y-0 left-0 bg-brand-purple" 
-                       initial={{ width: "0%" }}
-                       whileInView={{ width: "100%" }}
+                       className="absolute inset-x-0 bottom-0 md:inset-y-0 md:left-0 bg-brand-purple" 
+                       initial={{ height: "0%", width: "100%" }}
+                       whileInView={{ height: "100%", width: "100%" }} // Adjusted logic: simply fill on view
                        transition={{ duration: 1.5, delay: 0.5 }}
+                       // Responsive style overrides via standard CSS classes or inline logic
+                       style={{ 
+                           // On mobile (default), animate height. On desktop, animate width.
+                           // Framer Motion constraints make this tricky inline, so we simplify:
+                           // Just fill the bar.
+                           width: "100%",
+                           height: "100%"
+                       }}
                     />
                 </div>
 
@@ -90,7 +98,7 @@ const USP: React.FC = () => {
             </motion.div>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto perspective-container">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto perspective-container">
            {usps.map((item, i) => (
              <motion.div
                key={i}
@@ -105,7 +113,7 @@ const USP: React.FC = () => {
                    rotateY: 5,
                    boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)"
                }}
-               className="group flex flex-col items-center p-8 rounded-3xl bg-white border border-gray-100 shadow-lg cursor-default preserve-3d hover:border-brand-purple/30 transition-colors"
+               className="group flex flex-col items-center p-6 md:p-8 rounded-3xl bg-white border border-gray-100 shadow-lg cursor-default preserve-3d hover:border-brand-purple/30 transition-colors"
              >
                <div 
                  className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center mb-6 group-hover:from-brand-purple group-hover:to-violet-600 transition-all duration-300 shadow-inner"

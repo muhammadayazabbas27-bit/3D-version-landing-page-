@@ -34,7 +34,7 @@ const Cube3D = ({ step, index }: { step: typeof steps[0], index: number }) => {
 
   return (
     <div 
-      className="relative w-full h-72 perspective-container group cursor-pointer"
+      className="relative w-full h-64 md:h-72 perspective-container group cursor-pointer"
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
@@ -44,28 +44,28 @@ const Cube3D = ({ step, index }: { step: typeof steps[0], index: number }) => {
         whileHover={{ rotateY: 180 }} // Keeps desktop hover
       >
         {/* Front Face */}
-        <div className="absolute inset-0 backface-hidden bg-white border border-gray-100 rounded-3xl shadow-lg flex flex-col items-center justify-center p-8 z-20">
-           <div className="w-24 h-24 rounded-full bg-brand-purple/5 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
-             <step.icon className="text-brand-purple" size={40} />
+        <div className="absolute inset-0 backface-hidden bg-white border border-gray-100 rounded-3xl shadow-lg flex flex-col items-center justify-center p-6 md:p-8 z-20">
+           <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-brand-purple/5 flex items-center justify-center mb-4 md:mb-6 shadow-sm group-hover:scale-110 transition-transform">
+             <step.icon className="text-brand-purple" size={36} />
            </div>
-           <h3 className="text-2xl font-bold text-brand-dark mb-2">{step.title}</h3>
+           <h3 className="text-xl md:text-2xl font-bold text-brand-dark mb-2">{step.title}</h3>
            <div className="w-12 h-1.5 bg-brand-purple/20 rounded-full mt-4" />
            <p className="mt-4 text-xs text-gray-400 md:hidden">Tap to reveal</p>
         </div>
 
         {/* Back Face (Reveal) */}
         <div 
-          className="absolute inset-0 backface-hidden bg-brand-purple rounded-3xl shadow-lg flex flex-col items-center justify-center p-8 z-10"
+          className="absolute inset-0 backface-hidden bg-brand-purple rounded-3xl shadow-lg flex flex-col items-center justify-center p-6 md:p-8 z-10"
           style={{ transform: "rotateY(180deg)" }}
         >
-           <h3 className="text-2xl font-bold text-white mb-6">{step.title}</h3>
-           <p className="text-white/90 text-center leading-relaxed text-lg">{step.description}</p>
+           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">{step.title}</h3>
+           <p className="text-white/90 text-center leading-relaxed text-base md:text-lg">{step.description}</p>
         </div>
       </motion.div>
       
       {/* Step Number Badge Floating */}
       <div 
-        className="absolute -top-6 -left-6 w-14 h-14 rounded-full bg-brand-dark text-white font-bold text-xl flex items-center justify-center shadow-lg border-4 border-white z-30 transform group-hover:-translate-y-4 transition-transform duration-300"
+        className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-12 h-12 md:w-14 md:h-14 rounded-full bg-brand-dark text-white font-bold text-lg md:text-xl flex items-center justify-center shadow-lg border-4 border-white z-30 transform group-hover:-translate-y-4 transition-transform duration-300"
       >
         {step.id}
       </div>
@@ -79,14 +79,14 @@ const Process: React.FC = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-white relative perspective-container overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-24">
+    <section className="py-16 md:py-32 bg-white relative perspective-container overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-16 md:mb-24">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-brand-dark mb-4"
+            className="text-3xl md:text-5xl font-bold text-brand-dark mb-4"
           >
              Clear. <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500">Fast. Accountable.</span>
           </motion.h2>
@@ -101,7 +101,7 @@ const Process: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="relative max-w-7xl mx-auto mb-20">
+        <div className="relative max-w-7xl mx-auto mb-16 md:mb-20">
           
           {/* Animated 3D Connecting Line System (Desktop Only) */}
           <div className="hidden lg:block absolute top-1/2 left-0 w-full -translate-y-1/2 -z-10 preserve-3d pointer-events-none">
@@ -142,7 +142,7 @@ const Process: React.FC = () => {
              ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 preserve-3d">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 preserve-3d">
             {steps.map((step, index) => (
               <motion.div
                 key={step.id}

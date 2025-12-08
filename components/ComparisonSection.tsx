@@ -8,7 +8,7 @@ import {
 
 const ComparisonSection: React.FC = () => {
   return (
-    <section className="py-24 relative overflow-hidden bg-white perspective-container">
+    <section className="py-16 md:py-24 relative overflow-hidden bg-white perspective-container">
       
       {/* --- FESTIVE BACKGROUND --- */}
       <div className="absolute inset-0 pointer-events-none">
@@ -66,7 +66,7 @@ const ComparisonSection: React.FC = () => {
         })}
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4">
             Why Clinics Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-green-600">The Complete System</span>
@@ -74,7 +74,7 @@ const ComparisonSection: React.FC = () => {
           <p className="text-gray-500 text-lg">Don't settle for just a voice bot.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto perspective-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto perspective-container">
           
           {/* --- LEFT COLUMN: OUR SYSTEM (PREMIUM 3D) --- */}
           <div className="relative group perspective-container">
@@ -84,7 +84,7 @@ const ComparisonSection: React.FC = () => {
              {/* Glowing Border Animation */}
              <div className="absolute inset-0 rounded-[2.5rem] border border-transparent bg-gradient-to-r from-red-400/20 via-gold-400/20 to-green-400/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-             <div className="relative p-8 md:p-12 z-10">
+             <div className="relative p-6 md:p-12 z-10">
                 {/* Header */}
                 <div className="flex items-center gap-4 mb-8">
                    <motion.div 
@@ -163,7 +163,7 @@ const ComparisonSection: React.FC = () => {
           <div className="relative h-full">
              <div className="absolute inset-0 bg-gray-50/80 rounded-[2.5rem] border border-gray-200" />
              
-             <div className="relative p-8 md:p-12 z-10 opacity-70 hover:opacity-100 transition-opacity duration-300">
+             <div className="relative p-6 md:p-12 z-10 opacity-70 hover:opacity-100 transition-opacity duration-300">
                 {/* Header */}
                 <div className="flex items-center gap-4 mb-8 grayscale">
                    <div className="w-16 h-16 rounded-2xl bg-gray-200 flex items-center justify-center text-gray-500">

@@ -574,7 +574,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         {/* Headline with 3D Reveal */}
         <div className="relative preserve-3d mb-8">
           <motion.h1 
-            className="text-4xl sm:text-6xl md:text-8xl font-bold text-brand-dark leading-tight tracking-tight mb-8 drop-shadow-lg preserve-3d"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-brand-dark leading-tight tracking-tight mb-8 drop-shadow-lg preserve-3d"
             initial={{ opacity: 0, rotateX: -20 }}
             animate={{ opacity: 1, rotateX: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -590,7 +590,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         </div>
 
         <motion.p 
-          className="text-lg md:text-2xl text-gray-500 max-w-2xl mx-auto mb-16 leading-relaxed font-medium px-4 md:px-0"
+          className="text-base md:text-2xl text-gray-500 max-w-2xl mx-auto mb-16 leading-relaxed font-medium px-4 md:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
@@ -604,7 +604,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             Replaces the "Phone Frame". Content is moved out for clickability.
         */}
         <motion.div
-           className="relative w-full max-w-[340px] md:w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform"
+           className="relative w-full max-w-[90vw] md:max-w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform"
            initial={{ rotateX: 10, opacity: 0 }}
            animate={{ 
                opacity: 1,
@@ -737,7 +737,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
 
         {/* BUTTONS CONTAINER - Moved outside 3D card for reliable clickability */}
         <motion.div 
-          className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8 relative z-50 w-full px-4"
+          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-8 relative z-50 w-full px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}

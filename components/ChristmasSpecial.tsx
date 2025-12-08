@@ -45,30 +45,30 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
   };
 
   return (
-    <section className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-red-50/40 to-white perspective-container border-b border-gray-100">
+    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white via-red-50/40 to-white perspective-container border-b border-gray-100">
       
       {/* --- FESTIVE BACKGROUND ANIMATIONS --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         
         {/* 1. Large Bokeh Ornaments (Glowing Blobs) */}
         <motion.div 
-           className="absolute top-0 left-0 w-[500px] h-[500px] bg-red-500/10 rounded-full blur-[80px]"
+           className="absolute top-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-red-500/10 rounded-full blur-[80px]"
            animate={{ x: [-50, 50, -50], y: [-50, 50, -50], scale: [1, 1.2, 1] }}
            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-           className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-green-500/10 rounded-full blur-[80px]"
+           className="absolute bottom-0 right-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-green-500/10 rounded-full blur-[80px]"
            animate={{ x: [50, -50, 50], y: [50, -50, 50], scale: [1.2, 1, 1.2] }}
            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-           className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-amber-400/10 rounded-full blur-[60px]"
+           className="absolute top-1/2 left-1/2 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-amber-400/10 rounded-full blur-[60px]"
            animate={{ opacity: [0.3, 0.6, 0.3] }}
            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
 
         {/* 2. Abstract Waving Garland (Top) */}
-        <svg className="absolute top-0 left-0 w-full h-24 text-green-100/50" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <svg className="absolute top-0 left-0 w-full h-16 md:h-24 text-green-100/50" viewBox="0 0 1440 320" preserveAspectRatio="none">
             <motion.path 
                 fill="currentColor" 
                 d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
@@ -201,7 +201,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
         })}
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         
         {/* Header */}
         <div className="text-center mb-12 md:mb-20">
@@ -209,7 +209,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-100/50 text-red-600 text-sm font-bold uppercase tracking-wider mb-6 border border-red-200 shadow-sm backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-100/50 text-red-600 text-xs md:text-sm font-bold uppercase tracking-wider mb-6 border border-red-200 shadow-sm backdrop-blur-sm"
           >
             <Gift size={16} /> Christmas Special Offer
           </motion.div>
@@ -218,7 +218,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 drop-shadow-sm"
+            className="text-3xl md:text-5xl font-bold text-brand-dark mb-4 drop-shadow-sm"
           >
             🎁 Free <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-green-600 to-red-600 animate-gradient-x">“Happy Christmas Trial”</span>
           </motion.h2>
@@ -235,12 +235,12 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
         </div>
 
         {/* Steps Container */}
-        <div className="relative max-w-6xl mx-auto mb-16">
+        <div className="relative max-w-6xl mx-auto mb-12 md:mb-16">
           
           {/* Connecting Line (Desktop) */}
           <div className="hidden md:block absolute top-[72px] left-0 w-full h-1 bg-gradient-to-r from-red-200 via-green-200 to-amber-200 rounded-full -z-10" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
             {steps.map((step, index) => (
               <motion.div
                 key={step.id}
@@ -279,7 +279,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             onClick={openBookingLink}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(239, 68, 68, 0.4)" }}
             whileTap={{ scale: 0.95 }}
-            className="group relative px-10 py-5 rounded-full font-bold text-white text-lg shadow-xl overflow-hidden flex items-center justify-center"
+            className="group relative w-full md:w-auto px-10 py-5 rounded-full font-bold text-white text-lg shadow-xl overflow-hidden flex items-center justify-center"
           >
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-emerald-600 transition-transform duration-500 group-hover:scale-110" />

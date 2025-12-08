@@ -196,7 +196,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
 
   // Video State
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Mouse Parallax for Details Section
@@ -212,24 +211,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
 
   const openBookingLink = () => {
     window.open('https://cal.com/denticall-ai/15min', '_blank');
-  };
-
-  const toggleVideo = async () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (!video.paused) {
-      video.pause();
-      setIsPlaying(false);
-    } else {
-      try {
-        await video.play();
-        setIsPlaying(true);
-      } catch (e) {
-        console.error("Video play failed:", e);
-        setIsPlaying(false);
-      }
-    }
   };
 
   return (
@@ -377,119 +358,94 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-green-400/5 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" />
         
         <div className="container mx-auto px-6 relative z-10 preserve-3d">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            
-            {/* Copy */}
-            <div className="flex-1 text-center lg:text-left preserve-3d">
-              <motion.div 
-                initial={{ opacity: 0, y: 20, rotateX: 20 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-100/80 backdrop-blur border border-red-200 text-red-600 text-xs font-bold uppercase tracking-wider mb-8 shadow-lg"
-                style={{ transform: "translateZ(20px)" }}
-              >
-                <Gift size={14} className="animate-bounce" /> Christmas Special Offer
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-5xl lg:text-7xl font-bold leading-tight mb-8 text-brand-dark drop-shadow-sm"
-                style={{ transform: "translateZ(40px)" }}
-              >
-                Never Miss a <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-red-500">Patient Again.</span>
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-xl text-gray-600 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0"
-                style={{ transform: "translateZ(20px)" }}
-              >
-                AI Communication System: Voice, Chat, WhatsApp & Phone — All in One Platform. 
-                <span className="block mt-2 font-bold text-brand-purple">Try it this Christmas for 100 Minutes Free!</span>
-              </motion.p>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 preserve-3d"
-                style={{ transform: "translateZ(30px)" }}
-              >
-                <button 
-                  onClick={openBookingLink}
-                  className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-purple to-accent-cyan text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-500 skew-x-12 -translate-x-full" />
-                  Claim 100-Minute Trial <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <p className="text-sm text-gray-500 font-medium bg-white/50 px-3 py-1 rounded-full backdrop-blur-sm">
-                  No credit card required
-                </p>
-              </motion.div>
-            </div>
-
-            {/* 3D Mockup Container */}
-            <motion.div 
-              className="flex-1 w-full max-w-xl perspective-container"
-              initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ delay: 0.4, type: "spring", stiffness: 50 }}
-            >
+          
+          {/* 
+             REPLACED VIDEO CONTAINER:
+             Full width video banner with overlay as requested.
+          */}
+          <motion.div 
+             initial={{ opacity: 0, scale: 0.95 }}
+             animate={{ opacity: 1, scale: 1 }}
+             transition={{ duration: 0.8 }}
+             style={{
+                position: "relative",
+                width: "100%",
+                height: "600px",
+                marginTop: "20px",
+                perspective: "1000px"
+             }}
+          >
               <TiltCard depth={0}>
                 <div 
-                  onClick={toggleVideo}
-                  className="relative rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white bg-gray-900 aspect-video group cursor-pointer preserve-3d transform hover:translate-z-10 transition-transform"
+                  className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white bg-black transform-style-3d cursor-pointer group"
+                  onClick={() => setIsPlaying(true)}
                 >
-                  {/* Inserted Video Source */}
-                  <video 
-                     ref={videoRef}
-                     src="/videos/Client Dashboard Video (1).mp4"
-                     className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                     loop
-                     muted={false} 
-                     playsInline
-                  >
-                     Your browser does not support the video tag.
-                  </video>
-                  
-                  {/* Play Button Overlay */}
-                  <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'bg-black/0 opacity-0 group-hover:opacity-100 group-hover:bg-black/20' : 'bg-black/30 opacity-100'}`}>
-                    <div 
-                      className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform"
-                      style={{ transform: "translateZ(40px)" }}
-                    >
-                       {isPlaying ? (
-                         <Pause size={36} className="text-white fill-white ml-0.5" />
-                       ) : (
-                         <Play size={36} className="text-white fill-white ml-1" />
-                       )}
-                    </div>
-                  </div>
+                    {/* 
+                        State: PLAYING 
+                        Show YouTube Iframe
+                    */}
+                    {isPlaying ? (
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0"
+                            title="Dashboard overview"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                            className="w-full h-full"
+                        />
+                    ) : (
+                        /* 
+                            State: PAUSED / INITIAL
+                            Show Thumbnail + Overlay
+                        */
+                        <>
+                            {/* YouTube Thumbnail */}
+                            <img 
+                                src="https://img.youtube.com/vi/_ObjxLnrirA/maxresdefault.jpg" 
+                                alt="Dashboard Preview" 
+                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                            />
+                            
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-center items-center text-center p-6 backdrop-blur-[1px]">
+                                
+                                <motion.div
+                                    whileHover={{ scale: 1.1 }}
+                                    className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-6"
+                                >
+                                    <Play size={36} className="text-white fill-white ml-1" />
+                                </motion.div>
 
-                  {/* 3D Floating Notification */}
-                  <div 
-                     className="absolute -bottom-10 -left-10 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center gap-4 max-w-[240px] animate-float pointer-events-none"
-                     style={{ transform: "translateZ(60px)" }}
-                  >
-                     <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 shadow-inner">
-                       <MessageCircle size={24} />
-                     </div>
-                     <div>
-                       <p className="text-xs text-gray-400 font-bold uppercase">WhatsApp Integration</p>
-                       <p className="text-base font-bold text-gray-800">New Booking Confirmed!</p>
-                     </div>
-                  </div>
-                  
-                  {/* Decorative Elements */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-red-500 to-orange-500 rounded-full blur-xl opacity-60" style={{ transform: "translateZ(-20px)" }} />
+                                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
+                                    Never Miss a Patient Again
+                                </h1>
+                                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mb-8 font-medium drop-shadow-md">
+                                    AI Communication System: Voice, Chat, WhatsApp & Phone<br />
+                                    — All in One Platform.
+                                </p>
+                                <p className="text-base md:text-lg text-yellow-300 font-bold mb-8 uppercase tracking-widest drop-shadow-sm">
+                                    Try it this Christmas for 100 Minutes Free!
+                                </p>
+                                
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        openBookingLink();
+                                    }}
+                                    className="px-10 py-4 bg-[#0070f3] text-white font-bold text-lg rounded-xl shadow-[0_10px_30px_rgba(0,112,243,0.4)] hover:bg-[#0060df] hover:scale-105 transition-all active:scale-95"
+                                >
+                                    Claim 100-Minute Trial → No credit card required
+                                </button>
+                            </div>
+                        </>
+                    )}
                 </div>
               </TiltCard>
-            </motion.div>
-          </div>
+          </motion.div>
+
         </div>
       </section>
 

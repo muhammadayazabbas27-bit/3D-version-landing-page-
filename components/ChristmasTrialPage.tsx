@@ -58,7 +58,7 @@ const TiltCard = ({ children, className = "", depth = 20 }: { children: React.Re
   );
 };
 
-// --- NEW 3D HOLOGRAM FEATURES ---
+// --- NEW 3D HOLOGRAM FEATURES (No Scroll Trigger) ---
 const HologramFeatures = () => {
   const features = [
     {
@@ -92,26 +92,26 @@ const HologramFeatures = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-white relative overflow-hidden">
       {/* Ambient Background Light */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-50/50 via-white to-white pointer-events-none" />
       
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#06b6d4 1px, transparent 1px), linear-gradient(90deg, #06b6d4 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16 md:mb-20">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-20">
            <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4">
              Powered by <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Holographic AI</span>
            </h2>
            <p className="text-gray-500">Next-generation capabilities for the modern clinic.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 perspective-container">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-container">
           {features.map((feature, i) => (
             <motion.div
               key={i}
-              className="relative group min-h-[350px] md:h-[400px] perspective-container"
+              className="relative group h-[400px] perspective-container"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -375,156 +375,184 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         </div>
       </section>
 
-      {/* --- 2. CHRISTMAS TRIAL DETAILS (PREMIUM 3D MIDNIGHT THEME) --- */}
+      {/* --- 2. CHRISTMAS TRIAL DETAILS (NEW "SANTA'S WORKSHOP" PREMIUM THEME) --- */}
       <section 
-        className="relative py-16 md:py-24 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#2a0a18] to-slate-950 perspective-container"
+        className="relative py-24 overflow-hidden bg-[radial-gradient(circle_at_top,_#7f1d1d_0%,_#450a0a_40%,_#000000_100%)] perspective-container"
         onMouseMove={handleMouseMove}
       >
         
-        {/* --- PREMIUM 3D ANIMATED BACKGROUND --- */}
+        {/* --- MAGICAL BACKGROUND ELEMENTS --- */}
         <div className="absolute inset-0 pointer-events-none">
             
-            {/* 1. Large Abstract 3D Ornaments (Parallax) */}
+            {/* 1. Aurora Borealis Lights (Green/Gold) */}
             <motion.div 
-               className="absolute top-[-10%] right-[-5%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] rounded-full bg-gradient-to-br from-red-600/20 to-purple-900/40 blur-[80px] mix-blend-screen"
-               animate={{ 
-                   x: mouseX * -40, 
-                   y: mouseY * -40,
-                   scale: [1, 1.1, 1]
-               }}
-               transition={{ scale: { duration: 10, repeat: Infinity, ease: "easeInOut" } }}
+               className="absolute top-[-20%] left-[-20%] w-[800px] h-[800px] bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-transparent rounded-full blur-[100px] mix-blend-screen"
+               animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             />
             <motion.div 
-               className="absolute bottom-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-gradient-to-tr from-emerald-600/10 to-teal-900/30 blur-[80px] mix-blend-screen"
-               animate={{ 
-                   x: mouseX * -60, 
-                   y: mouseY * -60,
-                   scale: [1.1, 1, 1.1]
-               }}
-               transition={{ scale: { duration: 12, repeat: Infinity, ease: "easeInOut" } }}
+               className="absolute bottom-[-20%] right-[-20%] w-[800px] h-[800px] bg-gradient-to-tl from-yellow-500/10 via-amber-500/5 to-transparent rounded-full blur-[100px] mix-blend-screen"
+               animate={{ rotate: -360, scale: [1.1, 1, 1.1] }}
+               transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
             />
-            
-            {/* 2. Golden Stardust (Sparkles) */}
-            {[...Array(40)].map((_, i) => (
+
+            {/* 2. Floating 3D Ornaments & Ribbons */}
+            {[...Array(6)].map((_, i) => (
+               <motion.div
+                  key={i}
+                  className="absolute w-20 h-20 rounded-full border border-white/10 backdrop-blur-sm bg-gradient-to-br from-white/10 to-transparent shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center preserve-3d"
+                  style={{
+                      left: `${Math.random() * 90}%`,
+                      top: `${Math.random() * 80}%`,
+                      transform: `translateZ(${Math.random() * 50}px)`
+                  }}
+                  animate={{ 
+                      y: [0, -30, 0],
+                      rotateY: [0, 360],
+                      rotateX: [0, 360]
+                  }}
+                  transition={{ 
+                      duration: 10 + Math.random() * 10, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: i * 1.5
+                  }}
+               >
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-red-600 to-red-400 opacity-30 blur-md" />
+                  <div className="absolute top-0 w-1 h-8 bg-white/20 -translate-y-full" />
+               </motion.div>
+            ))}
+
+            {/* 3. Golden Dust */}
+            {[...Array(50)].map((_, i) => (
                 <motion.div
-                    key={i}
-                    className="absolute rounded-full bg-yellow-200 shadow-[0_0_10px_#fcd34d]"
+                    key={`gold-${i}`}
+                    className="absolute bg-yellow-200 rounded-full shadow-[0_0_5px_#fcd34d]"
                     style={{
                         width: Math.random() * 3 + 1 + "px",
                         height: Math.random() * 3 + 1 + "px",
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
-                        opacity: Math.random() * 0.5 + 0.3
+                        opacity: Math.random() * 0.7 + 0.3
                     }}
-                    animate={{
-                        y: [0, -50, 0],
-                        opacity: [0.3, 1, 0.3],
-                        scale: [1, 1.5, 1]
-                    }}
-                    transition={{
-                        duration: 3 + Math.random() * 5,
-                        repeat: Infinity,
-                        delay: Math.random() * 2
-                    }}
+                    animate={{ y: [0, 100], opacity: [0, 1, 0] }}
+                    transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "linear", delay: Math.random() * 5 }}
                 />
             ))}
-
-            {/* 3. Subtle Glass Facets/Shards */}
-            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay" />
         </div>
 
-        <div className="container mx-auto px-4 md:px-6 text-center relative z-10 preserve-3d">
+        <div className="container mx-auto px-6 text-center relative z-10 preserve-3d">
+           
+           {/* Section Badge */}
            <motion.div 
              initial={{ y: 20, opacity: 0 }}
              whileInView={{ y: 0, opacity: 1 }}
              viewport={{ once: true }}
-             className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-yellow-600/20 to-yellow-500/10 border border-yellow-500/30 mb-8 backdrop-blur-md shadow-[0_0_25px_rgba(234,179,8,0.2)]"
+             className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/20 backdrop-blur-lg mb-8 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
            >
-             <Clock size={16} className="text-yellow-400" /> 
-             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-500 font-bold tracking-widest uppercase text-xs">Limited Time Offer</span>
+             <Gift size={18} className="text-yellow-400 fill-yellow-400" /> 
+             <span className="text-yellow-100 font-bold tracking-widest uppercase text-xs">Santa's Special Gift</span>
            </motion.div>
 
+           {/* Animated Headline */}
            <motion.h2 
              initial={{ scale: 0.9, opacity: 0 }}
              whileInView={{ scale: 1, opacity: 1 }}
              viewport={{ once: true }}
-             className="text-3xl md:text-6xl font-bold mb-16 text-white drop-shadow-xl"
+             className="text-4xl md:text-7xl font-bold mb-16 text-white drop-shadow-2xl leading-tight"
            >
-             Why Test DentiCall <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">This Christmas?</span>
+             Why Unwrap <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-200 to-red-400 animate-gradient-x">DentiCall</span> <br/> This Season?
            </motion.h2>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 max-w-6xl mx-auto mb-16 perspective-container relative">
-              {/* --- 3D CONNECTING LINE --- */}
-              <div className="hidden md:block absolute top-[6rem] left-[15%] right-[15%] h-[2px] bg-white/10 rounded-full -z-10 preserve-3d pointer-events-none" style={{ transform: "translateZ(-20px)" }}>
-                  <motion.div 
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 via-purple-400 to-yellow-400 opacity-80 rounded-full box-shadow-[0_0_15px_rgba(255,255,255,0.5)]" 
-                    initial={{ width: "0%" }}
-                    whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
-                  />
-                  {/* Glowing Nodes */}
-                  <div className="absolute top-1/2 left-0 w-4 h-4 bg-cyan-400 rounded-full -translate-y-1/2 -translate-x-1/2 shadow-[0_0_20px_#22d3ee]" />
-                  <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-purple-400 rounded-full -translate-y-1/2 -translate-x-1/2 shadow-[0_0_20px_#c084fc]" />
-                  <div className="absolute top-1/2 right-0 w-4 h-4 bg-yellow-400 rounded-full -translate-y-1/2 translate-x-1/2 shadow-[0_0_20px_#facc15]" />
-              </div>
+           {/* 3D Gift Cards Grid */}
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20 perspective-container relative">
+              
+              {/* Decorative Ribbon Line */}
+              <div className="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent -translate-y-1/2 -z-10" />
 
               {[
-                { icon: Clock, title: "100 Free Minutes", desc: "Test AI voice & chat handling risk-free.", color: "text-cyan-300", bg: "from-cyan-900/40 to-cyan-800/10", border: "group-hover:border-cyan-400/50" },
-                { icon: Smartphone, title: "Zero Friction", desc: "Connects with your existing phone & WhatsApp.", color: "text-purple-300", bg: "from-purple-900/40 to-purple-800/10", border: "group-hover:border-purple-400/50" },
-                { icon: Zap, title: "Real-Time Results", desc: "See patient responses instantly in your dashboard.", color: "text-yellow-300", bg: "from-yellow-900/40 to-yellow-800/10", border: "group-hover:border-yellow-400/50" }
+                { 
+                    icon: Clock, 
+                    title: "100 Free Minutes", 
+                    desc: "Test AI voice & chat handling risk-free.", 
+                    accent: "from-green-400 to-emerald-600",
+                    border: "group-hover:border-green-400/50"
+                },
+                { 
+                    icon: Smartphone, 
+                    title: "Zero Friction", 
+                    desc: "Connects with your existing phone & WhatsApp.", 
+                    accent: "from-yellow-300 to-amber-500",
+                    border: "group-hover:border-yellow-400/50"
+                },
+                { 
+                    icon: Zap, 
+                    title: "Real-Time Results", 
+                    desc: "See patient responses instantly in your dashboard.", 
+                    accent: "from-red-400 to-rose-600",
+                    border: "group-hover:border-red-400/50"
+                }
               ].map((item, i) => (
                 <TiltCard key={i} className="h-full">
-                  <div className={`h-full bg-gradient-to-b ${item.bg} backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-500 flex flex-col items-center group ${item.border} relative overflow-hidden`}>
+                  <div className={`h-full bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] shadow-2xl relative overflow-hidden group transition-all duration-500 hover:-translate-y-2 ${item.border}`}>
                      
-                     {/* Glass Sheen */}
-                     <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none opacity-50" />
+                     {/* "Frosted Glass" Shine */}
+                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                      
-                     <div className={`w-20 h-20 rounded-2xl bg-white/5 border border-white/10 ${item.color} flex items-center justify-center mb-8 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)] group-hover:scale-110 transition-transform duration-500 relative`} style={{ transform: "translateZ(30px)" }}>
+                     {/* Floating Ribbon Top */}
+                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-12 bg-red-600 shadow-md rounded-b-lg -translate-y-2 group-hover:translate-y-0 transition-transform duration-300" />
+
+                     <div className={`relative z-10 w-20 h-20 mx-auto rounded-full bg-gradient-to-br ${item.accent} flex items-center justify-center mb-8 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-500`}>
                        {/* @ts-ignore */}
-                       <item.icon size={36} className="drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-                       {/* Inner Glow */}
-                       <div className={`absolute inset-0 ${item.color.replace('text-', 'bg-')}/20 blur-xl rounded-full`} />
+                       <item.icon size={36} className="text-white drop-shadow-md" />
+                       <div className="absolute inset-0 bg-white/20 rounded-full blur-md" />
                      </div>
                      
-                     <h3 className="text-2xl font-bold mb-4 text-white tracking-wide" style={{ transform: "translateZ(20px)" }}>{item.title}</h3>
-                     <p className="text-gray-300 leading-relaxed text-base font-light" style={{ transform: "translateZ(10px)" }}>{item.desc}</p>
+                     <h3 className="text-2xl font-bold mb-4 text-white tracking-wide">{item.title}</h3>
+                     <p className="text-gray-200 leading-relaxed text-base font-light opacity-90">{item.desc}</p>
+                     
+                     {/* Bottom Glow */}
+                     <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${item.accent} opacity-50 group-hover:opacity-100 transition-opacity`} />
                   </div>
                 </TiltCard>
               ))}
            </div>
 
-           <button 
+           {/* Golden CTA Button */}
+           <motion.button 
              onClick={openBookingLink}
-             className="relative px-12 py-5 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-xl rounded-full shadow-[0_0_30px_rgba(220,38,38,0.4)] hover:shadow-[0_0_50px_rgba(220,38,38,0.6)] hover:scale-105 transition-all active:scale-95 border border-red-400/30 overflow-hidden group"
+             whileHover={{ scale: 1.05 }}
+             whileTap={{ scale: 0.95 }}
+             className="relative px-12 py-5 bg-gradient-to-b from-yellow-300 to-yellow-500 text-red-900 font-bold text-xl rounded-full shadow-[0_0_40px_rgba(250,204,21,0.4)] hover:shadow-[0_0_60px_rgba(250,204,21,0.6)] transition-all border-2 border-yellow-200 overflow-hidden group"
            >
              <span className="relative z-10 flex items-center gap-3">
-               Start Your Trial Today <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+               <Gift size={22} className="animate-bounce" /> Start Your Trial Today <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
              </span>
-             {/* Shine Effect */}
-             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 -translate-x-full group-hover:animate-[shine_1s_ease-in-out]" />
-           </button>
+             
+             {/* Shine Sweep */}
+             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 -translate-x-full group-hover:animate-[shine_1s_ease-in-out]" />
+           </motion.button>
            
-           <p className="mt-8 text-sm text-yellow-500/80 uppercase tracking-widest font-semibold drop-shadow-md">
-             Offer ends Dec 31st
+           <p className="mt-8 text-sm text-yellow-200/80 uppercase tracking-widest font-semibold drop-shadow-md flex items-center justify-center gap-2">
+             <Bell size={14} /> Offer ends Dec 31st <Bell size={14} />
            </p>
         </div>
       </section>
 
       {/* --- 3. ROI CALCULATOR & PAIN POINTS --- */}
-      <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+      <section className="py-24 bg-gray-50 relative overflow-hidden">
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#8b5cf6 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-16 items-center">
              
              {/* Stats / Pain Points */}
              <div className="flex-1">
-                <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
                   You could be losing <br/><span className="text-red-500">revenue every day.</span>
                 </h2>
-                <p className="text-lg md:text-xl text-gray-500 mb-10">
+                <p className="text-xl text-gray-500 mb-10">
                   Here is how AI plugs the leaks in your dental practice.
                 </p>
 
@@ -535,7 +563,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                      { label: "No-Show Rate", val: "20%", color: "bg-yellow-500", w: "20%" },
                    ].map((stat, i) => (
                      <div key={i}>
-                        <div className="flex justify-between mb-3 font-bold text-gray-700 text-base md:text-lg">
+                        <div className="flex justify-between mb-3 font-bold text-gray-700 text-lg">
                           <span>{stat.label}</span>
                           <span className="text-brand-dark">{stat.val}</span>
                         </div>
@@ -558,7 +586,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
              {/* Interactive Calculator - Glassmorphism */}
              <div className="flex-1 w-full max-w-md perspective-container">
                 <TiltCard depth={10}>
-                  <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-gray-100 relative overflow-hidden">
+                  <div className="bg-white p-8 rounded-[2rem] shadow-2xl border border-gray-100 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-brand-purple/10 rounded-bl-[100px]" />
                     
                     <div className="flex items-center gap-4 mb-8 relative z-10">
@@ -595,7 +623,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                       
                       <div className="pt-8 border-t border-gray-100 text-center">
                           <p className="text-sm text-gray-400 font-bold uppercase tracking-wider mb-2">Potential Monthly Loss</p>
-                          <div className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600">
+                          <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600">
                             ${lostRevenue.toLocaleString()}
                           </div>
                       </div>
@@ -619,10 +647,10 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       <HologramFeatures />
 
       {/* --- 5. PERSONAS (Who is this for?) --- */}
-      <section className="py-16 md:py-24 bg-brand-purple/5">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className="py-24 bg-brand-purple/5">
+        <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">Built for Every Practice Size</h2>
+            <h2 className="text-4xl font-bold text-brand-dark">Built for Every Practice Size</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto perspective-container">
              {[
@@ -647,13 +675,13 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       <ComparisonSection />
 
       {/* --- 6. PROCESS (3D ENHANCED) --- */}
-      <section className="py-16 md:py-32 bg-white relative overflow-hidden perspective-container">
-         <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <section className="py-32 bg-white relative overflow-hidden perspective-container">
+         <div className="container mx-auto px-6 relative z-10">
             <motion.h2 
                initial={{ opacity: 0, y: 30 }}
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
-               className="text-3xl md:text-5xl font-bold text-center mb-16 md:mb-24 text-brand-dark"
+               className="text-4xl md:text-5xl font-bold text-center mb-24 text-brand-dark"
             >
                Get Started in <span className="text-brand-purple">3 Steps</span>
             </motion.h2>
@@ -673,7 +701,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                  />
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 preserve-3d">
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 preserve-3d">
                   {[
                     { num: "1", title: "Sign Up for Trial", desc: "Claim your 100 free minutes.", icon: Gift, color: "from-red-500 to-red-600" },
                     { num: "2", title: "Quick Integration", desc: "Connect phone & WhatsApp.", icon: PlugZap, color: "from-green-500 to-emerald-600" },
@@ -713,7 +741,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
       </section>
 
       {/* --- 7. FINAL CTA --- */}
-      <section className="py-16 md:py-32 bg-gradient-to-br from-brand-purple to-violet-700 text-white text-center relative overflow-hidden perspective-container">
+      <section className="py-32 bg-gradient-to-br from-brand-purple to-violet-700 text-white text-center relative overflow-hidden perspective-container">
          
          {/* 3D Floating Particles */}
          <div className="absolute inset-0 preserve-3d">
@@ -734,12 +762,12 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             ))}
          </div>
 
-         <div className="container mx-auto px-4 md:px-6 relative z-10 preserve-3d">
+         <div className="container mx-auto px-6 relative z-10 preserve-3d">
             <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-6xl font-bold mb-8 tracking-tight"
+                className="text-4xl md:text-6xl font-bold mb-8 tracking-tight"
                 style={{ transform: "translateZ(30px)" }}
             >
                 Start Your Trial — <span className="text-yellow-300">Only 100 Minutes Available</span>
@@ -749,7 +777,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto leading-relaxed"
+                className="text-xl md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto leading-relaxed"
                 style={{ transform: "translateZ(20px)" }}
             >
               Join other clinics already testing AI and see results in days. No credit card required, no commitment.
@@ -764,15 +792,15 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             >
                 <button 
                     onClick={openBookingLink}
-                    className="px-12 py-6 bg-white text-brand-purple font-bold text-xl rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-gray-50 hover:scale-105 transition-all flex items-center justify-center gap-3 mx-auto w-full md:w-auto"
+                    className="px-12 py-6 bg-white text-brand-purple font-bold text-xl rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-gray-50 hover:scale-105 transition-all flex items-center justify-center gap-3 mx-auto"
                 >
                     Start Trial Now <ArrowRight />
                 </button>
             </motion.div>
 
-            <div className="mt-12 flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-base text-purple-200 font-medium" style={{ transform: "translateZ(10px)" }}>
-               <span className="flex items-center justify-center gap-2"><CheckCircle size={20} className="text-green-400" /> Instant Setup</span>
-               <span className="flex items-center justify-center gap-2"><CheckCircle size={20} className="text-green-400" /> Cancel Anytime</span>
+            <div className="mt-12 flex justify-center gap-8 text-base text-purple-200 font-medium" style={{ transform: "translateZ(10px)" }}>
+               <span className="flex items-center gap-2"><CheckCircle size={20} className="text-green-400" /> Instant Setup</span>
+               <span className="flex items-center gap-2"><CheckCircle size={20} className="text-green-400" /> Cancel Anytime</span>
             </div>
          </div>
       </section>

@@ -288,7 +288,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 ];
                 const asset = assets[i % assets.length];
                 const depth = Math.random() * 100 - 20;
-
                 return (
                     <motion.div
                         key={`orb-${i}`}
@@ -299,58 +298,15 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                             boxShadow: `0 8px 32px 0 rgba(31, 38, 135, 0.05)`,
                             transform: `translateZ(${depth}px)`
                         }}
-                        initial={{ 
-                            top: "120%", 
-                            left: `${Math.random() * 90}%`,
-                            rotateX: Math.random() * 360,
-                            rotateY: Math.random() * 360
-                        }}
-                        animate={{ 
-                            top: "-20%",
-                            rotateX: [0, 360],
-                            rotateY: [0, 360],
-                            y: [0, -20, 0]
-                        }}
-                        transition={{ 
-                            duration: 15 + Math.random() * 10, 
-                            repeat: Infinity, 
-                            ease: "linear",
-                            delay: i * 2
-                        }}
+                        initial={{ top: "120%", left: `${Math.random() * 90}%`, rotateX: Math.random() * 360, rotateY: Math.random() * 360 }}
+                        animate={{ top: "-20%", rotateX: [0, 360], rotateY: [0, 360], y: [0, -20, 0] }}
+                        transition={{ duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear", delay: i * 2 }}
                     >
-                        {/* Inner Icon */}
-                        <asset.Icon 
-                            size={24} 
-                            className={`${asset.color} drop-shadow-md`} 
-                            strokeWidth={1.5}
-                        />
-                        
-                        {/* Shine Glare */}
+                        <asset.Icon size={24} className={`${asset.color} drop-shadow-md`} strokeWidth={1.5} />
                         <div className="absolute top-2 left-2 w-1/3 h-1/3 bg-white/40 rounded-full blur-[2px]" />
                     </motion.div>
                 )
             })}
-            
-            {/* 4. Elegant 3D Ribbon/Wave SVG */}
-            <svg className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30" preserveAspectRatio="none">
-                <motion.path
-                    d="M0,500 Q200,300 400,500 T800,500 T1200,500 T1600,500"
-                    fill="none"
-                    stroke="url(#goldGradient)"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1, d: "M0,550 Q200,250 400,550 T800,550 T1200,550 T1600,550" }}
-                    transition={{ duration: 10, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-                />
-                <defs>
-                    <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="transparent" />
-                        <stop offset="50%" stopColor="#FCD34D" />
-                        <stop offset="100%" stopColor="transparent" />
-                    </linearGradient>
-                </defs>
-            </svg>
-
         </div>
 
         {/* Ambient Glows */}
@@ -362,18 +318,13 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
           {/* 
              VIDEO TRIGGER CONTAINER:
              Premium 3D Frame acting as a button.
+             Responsive Sizing: Max width constrained on desktop, full width aspect-ratio on mobile.
           */}
           <motion.div 
              initial={{ opacity: 0, scale: 0.95 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.8 }}
-             style={{
-                position: "relative",
-                width: "100%",
-                height: "600px",
-                marginTop: "20px",
-                perspective: "1000px"
-             }}
+             className="relative w-full max-w-4xl mx-auto aspect-video mt-10 perspective-1000"
           >
               <TiltCard depth={0}>
                 <div 
@@ -382,14 +333,14 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 >
                     {/* 
                        TOGGLE CONTENT:
-                       If Playing: Show Iframe
+                       If Playing: Show Iframe (Autoplay)
                        If Idle: Show Thumbnail + Overlay
                     */}
                     {isPlaying ? (
                         <iframe
                             width="100%"
                             height="100%"
-                            src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0"
+                            src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3&fs=1"
                             title="Dashboard overview"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -411,19 +362,19 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                                 
                                 <motion.div
                                     whileHover={{ scale: 1.1 }}
-                                    className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-6 group-hover:bg-white/30 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all"
+                                    className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-6 group-hover:bg-white/30 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all"
                                 >
-                                    <Play size={40} className="text-white fill-white ml-1" />
+                                    <Play size={36} className="text-white fill-white ml-1 md:w-10 md:h-10" />
                                 </motion.div>
 
-                                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
+                                <h1 className="text-2xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
                                     Never Miss a Patient Again
                                 </h1>
-                                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mb-8 font-medium drop-shadow-md">
+                                <p className="text-sm md:text-xl text-gray-200 max-w-2xl mb-6 md:mb-8 font-medium drop-shadow-md">
                                     AI Communication System: Voice, Chat, WhatsApp & Phone<br />
                                     — All in One Platform.
                                 </p>
-                                <p className="text-base md:text-lg text-yellow-300 font-bold mb-8 uppercase tracking-widest drop-shadow-sm">
+                                <p className="hidden md:block text-base md:text-lg text-yellow-300 font-bold mb-8 uppercase tracking-widest drop-shadow-sm">
                                     Try it this Christmas for 100 Minutes Free!
                                 </p>
                                 
@@ -432,9 +383,9 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                                         e.stopPropagation();
                                         openBookingLink();
                                     }}
-                                    className="px-10 py-4 bg-[#0070f3] text-white font-bold text-lg rounded-xl shadow-[0_10px_30px_rgba(0,112,243,0.4)] hover:bg-[#0060df] hover:scale-105 transition-all active:scale-95 border border-white/10"
+                                    className="px-6 py-3 md:px-10 md:py-4 bg-[#0070f3] text-white font-bold text-sm md:text-lg rounded-xl shadow-[0_10px_30px_rgba(0,112,243,0.4)] hover:bg-[#0060df] hover:scale-105 transition-all active:scale-95 border border-white/10"
                                 >
-                                    Claim 100-Minute Trial → No credit card required
+                                    Claim 100-Minute Trial →
                                 </button>
                             </div>
                         </>

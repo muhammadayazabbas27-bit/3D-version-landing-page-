@@ -4,7 +4,7 @@ import { motion, useMotionValue, useTransform, useSpring, useScroll, MotionValue
 import { 
   Play, Pause, CheckCircle, Clock, Phone, MessageCircle, MessageSquare, 
   Smartphone, ShieldCheck, Zap, ArrowRight, Gift, Calendar, 
-  Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database
+  Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database, X, Users2
 } from 'lucide-react';
 import Footer from './Footer';
 import ComparisonSection from './ComparisonSection';
@@ -58,7 +58,7 @@ const TiltCard = ({ children, className = "", depth = 20 }: { children: React.Re
   );
 };
 
-// --- NEW 3D HOLOGRAM FEATURES (No Scroll Trigger) ---
+// --- NEW 3D HOLOGRAM FEATURES ---
 const HologramFeatures = () => {
   const features = [
     {
@@ -196,7 +196,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
 
   // Video State
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isVideoExpanded, setIsVideoExpanded] = useState(false);
 
   // Mouse Parallax for Details Section
   const [mouseX, setMouseX] = useState(0);
@@ -237,163 +237,141 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         </div>
       </header>
 
-      {/* --- 1. HERO SECTION --- */}
-      <section className="pt-32 pb-20 relative overflow-hidden bg-gradient-to-b from-red-50/20 via-white to-white perspective-container">
+      {/* --- 1. HERO SECTION (REDESIGNED) --- */}
+      <section className="pt-28 pb-16 md:pt-40 md:pb-24 relative overflow-hidden bg-gradient-to-b from-red-50/10 via-white to-white perspective-container">
         
-        {/* --- PREMIUM 3D FESTIVE BACKGROUND --- */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden preserve-3d" aria-hidden="true">
-            
-            {/* 1. Animated Aurora/Light Waves */}
-            <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.05),transparent_50%)] animate-spin-slow" style={{ animationDuration: '60s' }} />
-            <div className="absolute top-[-50%] right-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.03),transparent_50%)] animate-spin-slow" style={{ animationDuration: '45s', animationDirection: 'reverse' }} />
-
-            {/* 2. Golden & Silver Dust Particles */}
-            {[...Array(30)].map((_, i) => (
-                <motion.div
-                    key={`dust-${i}`}
-                    className={`absolute rounded-full ${i % 2 === 0 ? 'bg-yellow-200' : 'bg-white'}`}
-                    initial={{ 
-                        top: Math.random() * 100 + "%", 
-                        left: Math.random() * 100 + "%", 
-                        scale: 0,
-                        opacity: 0 
-                    }}
-                    animate={{ 
-                        y: [0, -100, 0],
-                        x: [0, Math.random() * 50 - 25, 0],
-                        scale: [0, Math.random() * 1.5 + 0.5, 0],
-                        opacity: [0, 0.8, 0]
-                    }}
-                    transition={{ 
-                        duration: 5 + Math.random() * 10, 
-                        repeat: Infinity, 
-                        delay: Math.random() * 5,
-                        ease: "easeInOut" 
-                    }}
-                    style={{ 
-                        width: Math.random() * 4 + 1 + "px", 
-                        height: Math.random() * 4 + 1 + "px",
-                        filter: "blur(0.5px)"
-                    }}
+        {/* Subtle Premium Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-gradient-to-br from-brand-purple/5 to-transparent blur-3xl opacity-50" />
+            <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-gradient-to-tr from-accent-cyan/5 to-transparent blur-3xl opacity-50" />
+            {/* Very faint particles */}
+            {[...Array(15)].map((_, i) => (
+                <div key={i} className="absolute bg-brand-purple/10 rounded-full" 
+                     style={{ 
+                         width: Math.random() * 4 + 2, 
+                         height: Math.random() * 4 + 2, 
+                         top: Math.random() * 100 + '%', 
+                         left: Math.random() * 100 + '%' 
+                     }} 
                 />
             ))}
-
-            {/* 3. Premium 3D Floating Elements (Glass & Metallic) */}
-            {[...Array(8)].map((_, i) => {
-                const assets = [
-                    { Icon: Gift, color: "text-red-500", bg: "bg-red-500/10", border: "border-red-200/50" },
-                    { Icon: Snowflake, color: "text-cyan-300", bg: "bg-cyan-300/10", border: "border-cyan-200/50" },
-                    { Icon: Bell, color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-200/50" },
-                    { Icon: Star, color: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-200/50" }
-                ];
-                const asset = assets[i % assets.length];
-                const depth = Math.random() * 100 - 20;
-                return (
-                    <motion.div
-                        key={`orb-${i}`}
-                        className={`absolute flex items-center justify-center rounded-full backdrop-blur-sm border shadow-lg preserve-3d ${asset.bg} ${asset.border}`}
-                        style={{
-                            width: `${Math.random() * 60 + 40}px`,
-                            height: `${Math.random() * 60 + 40}px`,
-                            boxShadow: `0 8px 32px 0 rgba(31, 38, 135, 0.05)`,
-                            transform: `translateZ(${depth}px)`
-                        }}
-                        initial={{ top: "120%", left: `${Math.random() * 90}%`, rotateX: Math.random() * 360, rotateY: Math.random() * 360 }}
-                        animate={{ top: "-20%", rotateX: [0, 360], rotateY: [0, 360], y: [0, -20, 0] }}
-                        transition={{ duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear", delay: i * 2 }}
-                    >
-                        <asset.Icon size={24} className={`${asset.color} drop-shadow-md`} strokeWidth={1.5} />
-                        <div className="absolute top-2 left-2 w-1/3 h-1/3 bg-white/40 rounded-full blur-[2px]" />
-                    </motion.div>
-                )
-            })}
         </div>
 
-        {/* Ambient Glows */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-400/5 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-green-400/5 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" />
-        
-        <div className="container mx-auto px-6 relative z-10 preserve-3d">
-          
-          {/* 
-             VIDEO TRIGGER CONTAINER:
-             Premium 3D Frame acting as a button.
-             Responsive Sizing: Max width constrained on desktop, full width aspect-ratio on mobile.
-          */}
-          <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             animate={{ opacity: 1, scale: 1 }}
-             transition={{ duration: 0.8 }}
-             className="relative w-full max-w-4xl mx-auto aspect-video mt-10 perspective-1000"
-          >
-              <TiltCard depth={0}>
-                <div 
-                  className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white bg-black transform-style-3d cursor-pointer group"
-                  onClick={() => setIsPlaying(true)}
-                >
-                    {/* 
-                       TOGGLE CONTENT:
-                       If Playing: Show Iframe (Autoplay)
-                       If Idle: Show Thumbnail + Overlay
-                    */}
-                    {isPlaying ? (
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3&fs=1"
-                            title="Dashboard overview"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                            className="w-full h-full"
-                        />
-                    ) : (
-                        <>
-                            {/* YouTube Thumbnail */}
-                            <img 
-                                src="https://img.youtube.com/vi/_ObjxLnrirA/maxresdefault.jpg" 
-                                alt="Dashboard Preview" 
-                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 scale-100 group-hover:scale-105"
-                            />
-                            
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-center items-center text-center p-6 backdrop-blur-[1px] transition-all duration-500 group-hover:backdrop-blur-none group-hover:bg-black/40">
-                                
-                                <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-6 group-hover:bg-white/30 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all"
-                                >
-                                    <Play size={36} className="text-white fill-white ml-1 md:w-10 md:h-10" />
-                                </motion.div>
-
-                                <h1 className="text-2xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
-                                    Never Miss a Patient Again
-                                </h1>
-                                <p className="text-sm md:text-xl text-gray-200 max-w-2xl mb-6 md:mb-8 font-medium drop-shadow-md">
-                                    AI Communication System: Voice, Chat, WhatsApp & Phone<br />
-                                    — All in One Platform.
-                                </p>
-                                <p className="hidden md:block text-base md:text-lg text-yellow-300 font-bold mb-8 uppercase tracking-widest drop-shadow-sm">
-                                    Try it this Christmas for 100 Minutes Free!
-                                </p>
-                                
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        openBookingLink();
-                                    }}
-                                    className="px-6 py-3 md:px-10 md:py-4 bg-[#0070f3] text-white font-bold text-sm md:text-lg rounded-xl shadow-[0_10px_30px_rgba(0,112,243,0.4)] hover:bg-[#0060df] hover:scale-105 transition-all active:scale-95 border border-white/10"
-                                >
-                                    Claim 100-Minute Trial →
-                                </button>
-                            </div>
-                        </>
-                    )}
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            
+            {/* --- LEFT COLUMN: CONTENT (50-60%) --- */}
+            <div className="w-full lg:w-3/5 text-center lg:text-left">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-red-600 text-xs font-bold uppercase tracking-wider mb-6">
+                   <Gift size={14} /> Christmas Special
                 </div>
-              </TiltCard>
-          </motion.div>
 
+                <h1 className="text-4xl md:text-6xl font-bold text-brand-dark leading-tight mb-6 tracking-tight">
+                  Never Miss a <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-600">Patient Again.</span>
+                </h1>
+                
+                <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed font-medium max-w-2xl mx-auto lg:mx-0">
+                  AI Communication System: Voice, Chat, WhatsApp & Phone — <span className="text-brand-dark font-semibold">All in One Platform.</span>
+                </p>
+                
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
+                  <button 
+                    onClick={openBookingLink}
+                    className="w-full sm:w-auto px-8 py-4 bg-brand-dark text-white font-bold text-lg rounded-full shadow-lg shadow-brand-dark/20 hover:bg-black hover:scale-105 transition-all flex items-center justify-center gap-2"
+                  >
+                    Claim 100-Minute Trial <ArrowRight size={20} />
+                  </button>
+                  <p className="text-sm text-gray-400 font-medium">
+                    No credit card required
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-center lg:justify-start gap-3 text-sm text-gray-500 font-medium">
+                   <div className="flex -space-x-2">
+                      {[1,2,3,4].map(i => (
+                          <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                              <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
+                          </div>
+                      ))}
+                   </div>
+                   <span>Join forward-thinking clinics</span>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* --- RIGHT COLUMN: VIDEO INTERFACE (40-50%) --- */}
+            <div className="w-full lg:w-2/5">
+                <AnimatePresence>
+                    {isVideoExpanded && (
+                        <motion.div
+                            layoutId="hero-video-container"
+                            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+                            onClick={() => setIsVideoExpanded(false)}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            <motion.div 
+                                className="relative w-full max-w-6xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <button 
+                                    onClick={() => setIsVideoExpanded(false)}
+                                    className="absolute top-4 right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-white/20 transition-colors"
+                                >
+                                    <X size={24} />
+                                </button>
+                                <iframe 
+                                    width="100%" 
+                                    height="100%" 
+                                    src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0&showinfo=0" 
+                                    title="DentiCall Demo" 
+                                    frameBorder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowFullScreen 
+                                    className="w-full h-full"
+                                />
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {!isVideoExpanded && (
+                    <motion.div 
+                        layoutId="hero-video-container"
+                        className="relative w-full aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-2xl border border-gray-200 cursor-pointer group"
+                        onClick={() => setIsVideoExpanded(true)}
+                        whileHover={{ scale: 1.02, y: -5 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    >
+                        {/* Thumbnail Image */}
+                        <img 
+                            src="https://img.youtube.com/vi/_ObjxLnrirA/maxresdefault.jpg" 
+                            alt="Dashboard Preview" 
+                            className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity"
+                        />
+                        
+                        {/* Overlay & Play Button */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+                            <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <Play size={32} className="text-brand-purple fill-brand-purple ml-1" />
+                            </div>
+                        </div>
+                        
+                        {/* Status Bar Mockup */}
+                        <div className="absolute bottom-4 left-4 right-4 h-1.5 bg-white/30 rounded-full overflow-hidden">
+                            <div className="w-1/3 h-full bg-brand-purple rounded-full" />
+                        </div>
+                    </motion.div>
+                )}
+            </div>
+
+          </div>
         </div>
       </section>
 

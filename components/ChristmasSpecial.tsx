@@ -30,9 +30,18 @@ const steps = [
   }
 ];
 
-const ChristmasSpecial: React.FC = () => {
+interface ChristmasSpecialProps {
+  onTrialClick?: () => void;
+}
+
+const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => {
   const openBookingLink = () => {
-    window.open('https://cal.com/denticall-ai/15min', '_blank');
+    // Fallback if prop not provided
+    if (onTrialClick) {
+        onTrialClick();
+    } else {
+        window.open('https://cal.com/denticall-ai/15min', '_blank');
+    }
   };
 
   return (

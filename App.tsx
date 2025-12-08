@@ -1,7 +1,6 @@
-
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useSpring, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useMotionValue } from 'framer-motion';
 import { Activity } from 'lucide-react';
 import Hero from './components/Hero';
 import ChristmasSpecial from './components/ChristmasSpecial';
@@ -13,8 +12,13 @@ import Footer from './components/Footer';
 import Personas from './components/Personas';
 import PainPoints from './components/PainPoints';
 import FinalCTA from './components/FinalCTA';
+import ChristmasTrialPage from './components/ChristmasTrialPage';
+import ComparisonSection from './components/ComparisonSection';
 
 const App: React.FC = () => {
+  // State for simple routing
+  const [currentView, setCurrentView] = useState<'home' | 'trial'>('home');
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -48,6 +52,14 @@ const App: React.FC = () => {
   ];
 
   const scrollToSection = (id: string) => {
+    if (currentView !== 'home') {
+      setCurrentView('home');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return;
+    }
     setActiveTab(id);
     const element = document.getElementById(id);
     if (element) {
@@ -59,6 +71,22 @@ const App: React.FC = () => {
     window.open('https://cal.com/denticall-ai/15min', '_blank');
   };
 
+  const handleTrialClick = () => {
+    setCurrentView('trial');
+    window.scrollTo(0, 0);
+  };
+
+  const handleBackToHome = () => {
+    setCurrentView('home');
+    window.scrollTo(0, 0);
+  };
+
+  // If in Trial View, render the Christmas Trial Page
+  if (currentView === 'trial') {
+    return <ChristmasTrialPage onBack={handleBackToHome} />;
+  }
+
+  // Otherwise, render the main Landing Page
   return (
     <div className="font-sans antialiased text-brand-dark bg-white selection:bg-brand-purple selection:text-white overflow-x-hidden">
       {/* Scroll Progress Bar */}
@@ -128,9 +156,9 @@ const App: React.FC = () => {
           <Hero mouseX={mouseX} mouseY={mouseY} />
         </div>
 
-        {/* 1.5. Christmas Special Section */}
+        {/* 1.5. Christmas Special Section - Passes handler */}
         <div id="christmas-special">
-          <ChristmasSpecial />
+          <ChristmasSpecial onTrialClick={handleTrialClick} />
         </div>
         
         {/* 2. Core Problems Solved */}
@@ -148,6 +176,7 @@ const App: React.FC = () => {
            {/* Combining Features (Grid) and USP (Comparison) for "Unique Advantage" */}
            <Features />
            <USP />
+           <ComparisonSection />
         </div>
         
         {/* 5. Built for Everyone */}

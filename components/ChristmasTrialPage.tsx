@@ -243,8 +243,8 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0" 
-                title="Dashboard overview" 
+                src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&rel=0&modestbranding=1" 
+                title="Denticall Demo" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerPolicy="strict-origin-when-cross-origin" 
@@ -407,18 +407,28 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         
         {/* --- PREMIUM 3D ANIMATED BACKGROUND --- */}
         <div className="absolute inset-0 pointer-events-none">
-            {/* Same premium background logic as above */}
+            
+            {/* 1. Large Abstract 3D Ornaments (Parallax) */}
             <motion.div 
                className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-red-600/20 to-purple-900/40 blur-[80px] mix-blend-screen"
-               animate={{ x: mouseX * -40, y: mouseY * -40, scale: [1, 1.1, 1] }}
+               animate={{ 
+                   x: mouseX * -40, 
+                   y: mouseY * -40,
+                   scale: [1, 1.1, 1]
+               }}
                transition={{ scale: { duration: 10, repeat: Infinity, ease: "easeInOut" } }}
             />
             <motion.div 
                className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-emerald-600/10 to-teal-900/30 blur-[80px] mix-blend-screen"
-               animate={{ x: mouseX * -60, y: mouseY * -60, scale: [1.1, 1, 1.1] }}
+               animate={{ 
+                   x: mouseX * -60, 
+                   y: mouseY * -60,
+                   scale: [1.1, 1, 1.1]
+               }}
                transition={{ scale: { duration: 12, repeat: Infinity, ease: "easeInOut" } }}
             />
             
+            {/* 2. Golden Stardust (Sparkles) */}
             {[...Array(40)].map((_, i) => (
                 <motion.div
                     key={i}
@@ -492,6 +502,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
              <span className="relative z-10 flex items-center gap-3">
                Start Your Trial Today <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
              </span>
+             {/* Shine Effect */}
              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 -translate-x-full group-hover:animate-[shine_1s_ease-in-out]" />
            </button>
            

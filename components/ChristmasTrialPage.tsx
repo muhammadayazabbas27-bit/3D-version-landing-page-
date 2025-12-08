@@ -1,10 +1,10 @@
 // @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useTransform, useSpring, useScroll, MotionValue } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useSpring, useScroll, MotionValue, AnimatePresence } from 'framer-motion';
 import { 
   Play, Pause, CheckCircle, Clock, Phone, MessageCircle, MessageSquare, 
   Smartphone, ShieldCheck, Zap, ArrowRight, Gift, Calendar, 
-  Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database
+  Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database, X
 } from 'lucide-react';
 import Footer from './Footer';
 import ComparisonSection from './ComparisonSection';
@@ -196,7 +196,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
 
   // Video State
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isVideoExpanded, setIsVideoExpanded] = useState(false);
 
   // Mouse Parallax for Details Section
   const [mouseX, setMouseX] = useState(0);
@@ -216,6 +216,46 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
   return (
     <div className="font-sans antialiased text-brand-dark bg-white min-h-screen overflow-x-hidden perspective-container">
       
+      {/* --- FULLSCREEN VIDEO OVERLAY --- */}
+      <AnimatePresence>
+        {isVideoExpanded && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+            onClick={() => setIsVideoExpanded(false)}
+          >
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-black"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setIsVideoExpanded(false)}
+                className="absolute top-4 right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-white/20 transition-colors"
+              >
+                <X size={24} />
+              </button>
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0" 
+                title="Dashboard overview" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen 
+                className="w-full h-full"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* --- HEADER --- */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 h-16 flex items-center">
         <div className="container mx-auto px-4 flex justify-between items-center">
@@ -242,43 +282,21 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         
         {/* --- PREMIUM 3D FESTIVE BACKGROUND --- */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden preserve-3d" aria-hidden="true">
-            
-            {/* 1. Animated Aurora/Light Waves */}
+            {/* Animated Lights & Particles... (Same as before) */}
             <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.05),transparent_50%)] animate-spin-slow" style={{ animationDuration: '60s' }} />
             <div className="absolute top-[-50%] right-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.03),transparent_50%)] animate-spin-slow" style={{ animationDuration: '45s', animationDirection: 'reverse' }} />
 
-            {/* 2. Golden & Silver Dust Particles */}
             {[...Array(30)].map((_, i) => (
                 <motion.div
                     key={`dust-${i}`}
                     className={`absolute rounded-full ${i % 2 === 0 ? 'bg-yellow-200' : 'bg-white'}`}
-                    initial={{ 
-                        top: Math.random() * 100 + "%", 
-                        left: Math.random() * 100 + "%", 
-                        scale: 0,
-                        opacity: 0 
-                    }}
-                    animate={{ 
-                        y: [0, -100, 0],
-                        x: [0, Math.random() * 50 - 25, 0],
-                        scale: [0, Math.random() * 1.5 + 0.5, 0],
-                        opacity: [0, 0.8, 0]
-                    }}
-                    transition={{ 
-                        duration: 5 + Math.random() * 10, 
-                        repeat: Infinity, 
-                        delay: Math.random() * 5,
-                        ease: "easeInOut" 
-                    }}
-                    style={{ 
-                        width: Math.random() * 4 + 1 + "px", 
-                        height: Math.random() * 4 + 1 + "px",
-                        filter: "blur(0.5px)"
-                    }}
+                    initial={{ top: Math.random() * 100 + "%", left: Math.random() * 100 + "%", scale: 0, opacity: 0 }}
+                    animate={{ y: [0, -100, 0], x: [0, Math.random() * 50 - 25, 0], scale: [0, Math.random() * 1.5 + 0.5, 0], opacity: [0, 0.8, 0] }}
+                    transition={{ duration: 5 + Math.random() * 10, repeat: Infinity, delay: Math.random() * 5, ease: "easeInOut" }}
+                    style={{ width: Math.random() * 4 + 1 + "px", height: Math.random() * 4 + 1 + "px", filter: "blur(0.5px)" }}
                 />
             ))}
 
-            {/* 3. Premium 3D Floating Elements (Glass & Metallic) */}
             {[...Array(8)].map((_, i) => {
                 const assets = [
                     { Icon: Gift, color: "text-red-500", bg: "bg-red-500/10", border: "border-red-200/50" },
@@ -288,7 +306,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 ];
                 const asset = assets[i % assets.length];
                 const depth = Math.random() * 100 - 20;
-
                 return (
                     <motion.div
                         key={`orb-${i}`}
@@ -299,58 +316,15 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                             boxShadow: `0 8px 32px 0 rgba(31, 38, 135, 0.05)`,
                             transform: `translateZ(${depth}px)`
                         }}
-                        initial={{ 
-                            top: "120%", 
-                            left: `${Math.random() * 90}%`,
-                            rotateX: Math.random() * 360,
-                            rotateY: Math.random() * 360
-                        }}
-                        animate={{ 
-                            top: "-20%",
-                            rotateX: [0, 360],
-                            rotateY: [0, 360],
-                            y: [0, -20, 0]
-                        }}
-                        transition={{ 
-                            duration: 15 + Math.random() * 10, 
-                            repeat: Infinity, 
-                            ease: "linear",
-                            delay: i * 2
-                        }}
+                        initial={{ top: "120%", left: `${Math.random() * 90}%`, rotateX: Math.random() * 360, rotateY: Math.random() * 360 }}
+                        animate={{ top: "-20%", rotateX: [0, 360], rotateY: [0, 360], y: [0, -20, 0] }}
+                        transition={{ duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear", delay: i * 2 }}
                     >
-                        {/* Inner Icon */}
-                        <asset.Icon 
-                            size={24} 
-                            className={`${asset.color} drop-shadow-md`} 
-                            strokeWidth={1.5}
-                        />
-                        
-                        {/* Shine Glare */}
+                        <asset.Icon size={24} className={`${asset.color} drop-shadow-md`} strokeWidth={1.5} />
                         <div className="absolute top-2 left-2 w-1/3 h-1/3 bg-white/40 rounded-full blur-[2px]" />
                     </motion.div>
                 )
             })}
-            
-            {/* 4. Elegant 3D Ribbon/Wave SVG */}
-            <svg className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30" preserveAspectRatio="none">
-                <motion.path
-                    d="M0,500 Q200,300 400,500 T800,500 T1200,500 T1600,500"
-                    fill="none"
-                    stroke="url(#goldGradient)"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1, d: "M0,550 Q200,250 400,550 T800,550 T1200,550 T1600,550" }}
-                    transition={{ duration: 10, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-                />
-                <defs>
-                    <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="transparent" />
-                        <stop offset="50%" stopColor="#FCD34D" />
-                        <stop offset="100%" stopColor="transparent" />
-                    </linearGradient>
-                </defs>
-            </svg>
-
         </div>
 
         {/* Ambient Glows */}
@@ -360,8 +334,8 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         <div className="container mx-auto px-6 relative z-10 preserve-3d">
           
           {/* 
-             REPLACED VIDEO CONTAINER:
-             Full width video banner with overlay as requested.
+             VIDEO TRIGGER CONTAINER:
+             Premium 3D Frame acting as a button.
           */}
           <motion.div 
              initial={{ opacity: 0, scale: 0.95 }}
@@ -378,70 +352,46 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
               <TiltCard depth={0}>
                 <div 
                   className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white bg-black transform-style-3d cursor-pointer group"
-                  onClick={() => setIsPlaying(true)}
+                  onClick={() => setIsVideoExpanded(true)}
                 >
-                    {/* 
-                        State: PLAYING 
-                        Show YouTube Iframe
-                    */}
-                    {isPlaying ? (
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0"
-                            title="Dashboard overview"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                            className="w-full h-full"
-                        />
-                    ) : (
-                        /* 
-                            State: PAUSED / INITIAL
-                            Show Thumbnail + Overlay
-                        */
-                        <>
-                            {/* YouTube Thumbnail */}
-                            <img 
-                                src="https://img.youtube.com/vi/_ObjxLnrirA/maxresdefault.jpg" 
-                                alt="Dashboard Preview" 
-                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                            />
-                            
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-center items-center text-center p-6 backdrop-blur-[1px]">
-                                
-                                <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-6"
-                                >
-                                    <Play size={36} className="text-white fill-white ml-1" />
-                                </motion.div>
+                    {/* YouTube Thumbnail */}
+                    <img 
+                        src="https://img.youtube.com/vi/_ObjxLnrirA/maxresdefault.jpg" 
+                        alt="Dashboard Preview" 
+                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 scale-100 group-hover:scale-105"
+                    />
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-center items-center text-center p-6 backdrop-blur-[1px] transition-all duration-500 group-hover:backdrop-blur-none group-hover:bg-black/40">
+                        
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/60 shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-6 group-hover:bg-white/30 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all"
+                        >
+                            <Play size={40} className="text-white fill-white ml-1" />
+                        </motion.div>
 
-                                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
-                                    Never Miss a Patient Again
-                                </h1>
-                                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mb-8 font-medium drop-shadow-md">
-                                    AI Communication System: Voice, Chat, WhatsApp & Phone<br />
-                                    — All in One Platform.
-                                </p>
-                                <p className="text-base md:text-lg text-yellow-300 font-bold mb-8 uppercase tracking-widest drop-shadow-sm">
-                                    Try it this Christmas for 100 Minutes Free!
-                                </p>
-                                
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        openBookingLink();
-                                    }}
-                                    className="px-10 py-4 bg-[#0070f3] text-white font-bold text-lg rounded-xl shadow-[0_10px_30px_rgba(0,112,243,0.4)] hover:bg-[#0060df] hover:scale-105 transition-all active:scale-95"
-                                >
-                                    Claim 100-Minute Trial → No credit card required
-                                </button>
-                            </div>
-                        </>
-                    )}
+                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
+                            Never Miss a Patient Again
+                        </h1>
+                        <p className="text-lg md:text-xl text-gray-200 max-w-2xl mb-8 font-medium drop-shadow-md">
+                            AI Communication System: Voice, Chat, WhatsApp & Phone<br />
+                            — All in One Platform.
+                        </p>
+                        <p className="text-base md:text-lg text-yellow-300 font-bold mb-8 uppercase tracking-widest drop-shadow-sm">
+                            Try it this Christmas for 100 Minutes Free!
+                        </p>
+                        
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                openBookingLink();
+                            }}
+                            className="px-10 py-4 bg-[#0070f3] text-white font-bold text-lg rounded-xl shadow-[0_10px_30px_rgba(0,112,243,0.4)] hover:bg-[#0060df] hover:scale-105 transition-all active:scale-95 border border-white/10"
+                        >
+                            Claim 100-Minute Trial → No credit card required
+                        </button>
+                    </div>
                 </div>
               </TiltCard>
           </motion.div>
@@ -457,53 +407,28 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         
         {/* --- PREMIUM 3D ANIMATED BACKGROUND --- */}
         <div className="absolute inset-0 pointer-events-none">
-            
-            {/* 1. Large Abstract 3D Ornaments (Parallax) */}
+            {/* Same premium background logic as above */}
             <motion.div 
                className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-red-600/20 to-purple-900/40 blur-[80px] mix-blend-screen"
-               animate={{ 
-                   x: mouseX * -40, 
-                   y: mouseY * -40,
-                   scale: [1, 1.1, 1]
-               }}
+               animate={{ x: mouseX * -40, y: mouseY * -40, scale: [1, 1.1, 1] }}
                transition={{ scale: { duration: 10, repeat: Infinity, ease: "easeInOut" } }}
             />
             <motion.div 
                className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-emerald-600/10 to-teal-900/30 blur-[80px] mix-blend-screen"
-               animate={{ 
-                   x: mouseX * -60, 
-                   y: mouseY * -60,
-                   scale: [1.1, 1, 1.1]
-               }}
+               animate={{ x: mouseX * -60, y: mouseY * -60, scale: [1.1, 1, 1.1] }}
                transition={{ scale: { duration: 12, repeat: Infinity, ease: "easeInOut" } }}
             />
             
-            {/* 2. Golden Stardust (Sparkles) */}
             {[...Array(40)].map((_, i) => (
                 <motion.div
                     key={i}
                     className="absolute rounded-full bg-yellow-200 shadow-[0_0_10px_#fcd34d]"
-                    style={{
-                        width: Math.random() * 3 + 1 + "px",
-                        height: Math.random() * 3 + 1 + "px",
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        opacity: Math.random() * 0.5 + 0.3
-                    }}
-                    animate={{
-                        y: [0, -50, 0],
-                        opacity: [0.3, 1, 0.3],
-                        scale: [1, 1.5, 1]
-                    }}
-                    transition={{
-                        duration: 3 + Math.random() * 5,
-                        repeat: Infinity,
-                        delay: Math.random() * 2
-                    }}
+                    style={{ width: Math.random() * 3 + 1 + "px", height: Math.random() * 3 + 1 + "px", left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, opacity: Math.random() * 0.5 + 0.3 }}
+                    animate={{ y: [0, -50, 0], opacity: [0.3, 1, 0.3], scale: [1, 1.5, 1] }}
+                    transition={{ duration: 3 + Math.random() * 5, repeat: Infinity, delay: Math.random() * 2 }}
                 />
             ))}
-
-            {/* 3. Subtle Glass Facets/Shards */}
+            
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay" />
         </div>
 
@@ -537,10 +462,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
                   />
-                  {/* Glowing Nodes */}
-                  <div className="absolute top-1/2 left-0 w-4 h-4 bg-cyan-400 rounded-full -translate-y-1/2 -translate-x-1/2 shadow-[0_0_20px_#22d3ee]" />
-                  <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-purple-400 rounded-full -translate-y-1/2 -translate-x-1/2 shadow-[0_0_20px_#c084fc]" />
-                  <div className="absolute top-1/2 right-0 w-4 h-4 bg-yellow-400 rounded-full -translate-y-1/2 translate-x-1/2 shadow-[0_0_20px_#facc15]" />
               </div>
 
               {[
@@ -550,17 +471,13 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
               ].map((item, i) => (
                 <TiltCard key={i} className="h-full">
                   <div className={`h-full bg-gradient-to-b ${item.bg} backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-500 flex flex-col items-center group ${item.border} relative overflow-hidden`}>
-                     
                      {/* Glass Sheen */}
                      <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none opacity-50" />
-                     
                      <div className={`w-20 h-20 rounded-2xl bg-white/5 border border-white/10 ${item.color} flex items-center justify-center mb-8 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)] group-hover:scale-110 transition-transform duration-500 relative`} style={{ transform: "translateZ(30px)" }}>
                        {/* @ts-ignore */}
                        <item.icon size={36} className="drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-                       {/* Inner Glow */}
                        <div className={`absolute inset-0 ${item.color.replace('text-', 'bg-')}/20 blur-xl rounded-full`} />
                      </div>
-                     
                      <h3 className="text-2xl font-bold mb-4 text-white tracking-wide" style={{ transform: "translateZ(20px)" }}>{item.title}</h3>
                      <p className="text-gray-300 leading-relaxed text-base font-light" style={{ transform: "translateZ(10px)" }}>{item.desc}</p>
                   </div>
@@ -575,7 +492,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
              <span className="relative z-10 flex items-center gap-3">
                Start Your Trial Today <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
              </span>
-             {/* Shine Effect */}
              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 -translate-x-full group-hover:animate-[shine_1s_ease-in-out]" />
            </button>
            

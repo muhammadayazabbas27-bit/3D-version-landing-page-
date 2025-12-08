@@ -227,7 +227,6 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         setIsPlaying(true);
       } catch (e) {
         console.error("Video play failed:", e);
-        // Ensure state reflects failed play
         setIsPlaying(false);
       }
     }
@@ -445,16 +444,16 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                   onClick={toggleVideo}
                   className="relative rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white bg-gray-900 aspect-video group cursor-pointer preserve-3d transform hover:translate-z-10 transition-transform"
                 >
-                  {/* Simulated Video Placeholder */}
+                  {/* Inserted Video Source */}
                   <video 
                      ref={videoRef}
+                     src="/videos/Client Dashboard Video (1).mp4"
                      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
                      loop
                      muted={false} 
                      playsInline
-                     poster="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
                   >
-                     <source src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-monitor-close-up-1728-large.mp4" type="video/mp4" />
+                     Your browser does not support the video tag.
                   </video>
                   
                   {/* Play Button Overlay */}

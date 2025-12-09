@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue, useMotionValue, useSpring } from 'framer-motion';
 import { GoogleGenAI, LiveServerMessage, Modality, FunctionDeclaration, Type } from "@google/genai";
-import { Play, Mic, MicOff, Calendar, MessageCircle, CheckCircle, Smartphone, Wifi, Activity, Sparkles, Radio } from 'lucide-react';
-import Orb from './Orb';
+import { Play, Mic, MicOff, Calendar, MessageCircle, CheckCircle, Smartphone, Wifi, Activity, Sparkles, Radio, AlertCircle } from 'lucide-react';
+import ReceptionistAvatar from './ReceptionistAvatar';
 
 // --- Audio Helper Functions (No changes) ---
 function encode(bytes: Uint8Array) {
@@ -404,9 +404,23 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
       outputNode.connect(outputAnalyser);
       outputAnalyser.connect(outputCtx.destination);
 
-      // 3. Get Microphone Stream
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      streamRef.current = stream;
+      // 3. Get Microphone Stream (Robust Handling)
+      let stream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        streamRef.current = stream;
+      } catch (err: any) {
+        console.error("Microphone Access Error:", err);
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+           setErrorMsg("Microphone access denied. Please enable permissions in your browser settings.");
+        } else if (err.name === 'NotFoundError') {
+           setErrorMsg("No microphone found. Please connect a microphone.");
+        } else {
+           setErrorMsg("Could not access microphone.");
+        }
+        setStatus('idle');
+        return; // Stop execution
+      }
 
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const currentDate = new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
@@ -643,17 +657,17 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                   </div>
               </div>
 
-              {/* Visual Content Layer - Orb & Status */}
+              {/* Visual Content Layer - Receptionist Avatar & Status */}
               <div 
                  className="absolute inset-0 flex flex-col items-center justify-center preserve-3d"
                  style={{ transform: "translateZ(30px)" }}
               >
-                 {/* The AI Orb & Visualizer */}
+                 {/* The AI Avatar */}
                  <div className="relative mb-0 preserve-3d flex flex-col items-center">
-                    <Orb size="md" active={isActive} volume={volume} />
+                    <ReceptionistAvatar active={isActive} volume={volume} />
                     
                     {/* Sound Wave Visualizer & Status Text */}
-                    <div className="absolute top-[82%] left-0 right-0 flex flex-col items-center justify-center gap-2 transform translate-z-10">
+                    <div className="absolute top-[90%] left-0 right-0 flex flex-col items-center justify-center gap-2 transform translate-z-10">
                         <SoundWave active={isActive} volume={volume} />
                         
                         <AnimatePresence>
@@ -678,9 +692,10 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className="absolute bottom-10 text-xs text-red-500 bg-red-50 px-3 py-1 rounded-full border border-red-200"
+                        className="absolute bottom-10 w-[80%] text-xs text-red-600 bg-red-50 px-4 py-2 rounded-xl border border-red-200 shadow-lg flex items-center justify-center gap-2"
                         >
-                        {errorMsg}
+                           <AlertCircle size={14} className="shrink-0" />
+                           <span className="leading-tight">{errorMsg}</span>
                         </motion.div>
                     )}
                  </AnimatePresence>

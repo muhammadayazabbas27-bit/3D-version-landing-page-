@@ -610,7 +610,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
           transition={{ delay: 0.4, duration: 0.8 }}
           style={{ transform: "translateZ(10px)" }}
         >
-          DentiCall answers every call, books patients automatically, and keeps your schedule full.
+         Voice, Chat, Follow-up, Reminders, WhatsApp, Social Bot & Phone — All in One Place.
         </motion.p>
 
         {/* 
@@ -757,7 +757,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          {/* Test AI Voice Button */}
+          {/* Test Our Booking System */}
           <motion.button
              onClick={handleToggle}
              whileHover={{ scale: 1.05 }}
@@ -788,7 +788,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                    ) : isActive ? (
                        <><MicOff size={20} /> End Session</>
                    ) : (
-                       <><Play size={20} fill="currentColor" /> Test AI Voice</>
+                       <><Play size={20} fill="currentColor" /> Test our Booking System</>
                    )}
                </span>
           </motion.button>

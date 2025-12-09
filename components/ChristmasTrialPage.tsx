@@ -140,7 +140,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                   Never Miss a <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-600">Patient Again.</span>
                 </h1>
                 <p className="text-base md:text-xl text-gray-500 mb-8 md:mb-10 leading-relaxed font-medium max-w-2xl mx-auto lg:mx-0">
-                  AI Communication System: Voice, Chat, WhatsApp & Phone — <span className="text-brand-dark font-semibold">All in One Platform.</span>
+                  AI Communication System: Voice, Chat, Follow-up, Reminders, WhatsApp, Social Bot & Phone — <span className="text-brand-dark font-semibold">All in One Place.</span>
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
                   <button onClick={openBookingLink} className="w-full sm:w-auto px-8 py-4 bg-brand-dark text-white font-bold text-lg rounded-full shadow-lg shadow-brand-dark/20 hover:bg-black hover:scale-105 transition-all flex items-center justify-center gap-2">
@@ -283,50 +283,50 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
         </div>
       </section>
 
-      {/* --- SECTION 3: SPECIAL CHRISTMAS OFFER (THEME COLORS REDESIGN) --- */}
-      <section className="py-24 bg-brand-dark text-white relative overflow-hidden" onMouseMove={handleMouseMove}>
-         {/* Background Effect - Reverted to Brand Dark/Purple */}
-         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#1e1b4b_0%,_#0B1120_60%,_#000000_100%)]" />
+      {/* --- SECTION 3: SPECIAL CHRISTMAS OFFER (WHITE & 3D FLOATING) --- */}
+      <section className="py-24 bg-white relative overflow-hidden" onMouseMove={handleMouseMove}>
+         {/* Background Patterns - Subtle Grid */}
+         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#8b5cf6 1px, transparent 1px), linear-gradient(90deg, #8b5cf6 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
          
-         {/* --- NEW 3D FLOATING CHRISTMAS OBJECTS --- */}
-         <div className="absolute inset-0 pointer-events-none">
+         {/* --- NEW 3D FLOATING CHRISTMAS OBJECTS (Auto-Animated) --- */}
+         <div className="absolute inset-0 pointer-events-none z-0">
              {[...Array(15)].map((_, i) => {
                 const assets = [
-                  { type: 'icon', Icon: Gift, color: 'text-red-500', glow: 'rgba(239,68,68,0.5)' },
-                  { type: 'icon', Icon: Snowflake, color: 'text-cyan-300', glow: 'rgba(34,211,238,0.5)' },
-                  { type: 'emoji', content: '🎅', glow: 'rgba(255,255,255,0.3)' },
-                  { type: 'icon', Icon: Bell, color: 'text-yellow-400', glow: 'rgba(250,204,21,0.5)' },
-                  { type: 'emoji', content: '🎄', glow: 'rgba(34,197,94,0.3)' },
-                  { type: 'icon', Icon: Star, color: 'text-amber-300', glow: 'rgba(252,211,77,0.5)' }
+                  { type: 'icon', Icon: Gift, color: 'text-red-500', glow: 'rgba(239,68,68,0.2)' },
+                  { type: 'icon', Icon: Snowflake, color: 'text-cyan-400', glow: 'rgba(34,211,238,0.2)' },
+                  { type: 'emoji', content: '🎅', glow: 'rgba(200,200,200,0.2)' },
+                  { type: 'icon', Icon: Bell, color: 'text-yellow-500', glow: 'rgba(234,179,8,0.2)' },
+                  { type: 'emoji', content: '🎄', glow: 'rgba(34,197,94,0.2)' },
+                  { type: 'icon', Icon: Star, color: 'text-amber-400', glow: 'rgba(251,191,36,0.2)' }
                 ];
                 const asset = assets[i % assets.length];
                 
                 return (
                    <motion.div 
                       key={`float-3d-${i}`} 
-                      className={`absolute flex items-center justify-center z-0 ${asset.type === 'icon' ? asset.color : ''}`}
+                      className={`absolute flex items-center justify-center ${asset.type === 'icon' ? asset.color : ''}`}
                       style={{ 
                          left: `${Math.random()*90}%`, 
                          top: `${Math.random()*90}%`,
-                         filter: `drop-shadow(0 0 10px ${asset.glow})`
+                         filter: `drop-shadow(0 10px 20px ${asset.glow})`
                       }}
                       animate={{ 
-                         y: [0, -30, 0], 
-                         rotate: [0, 10, -10, 0],
-                         scale: [0.8, 1, 0.8],
-                         opacity: [0.2, 0.6, 0.2] 
+                         y: [0, -40, 0], 
+                         rotateX: [0, 15, 0],
+                         rotateY: [0, 360],
+                         scale: [0.9, 1.1, 0.9],
                       }}
                       transition={{ 
-                         duration: 8 + Math.random()*5, 
+                         duration: 10 + Math.random()*10, 
                          repeat: Infinity, 
-                         ease: "easeInOut",
-                         delay: i * 0.5 
+                         ease: "linear",
+                         delay: i * 0.8 
                       }}
                    >
                       {asset.type === 'icon' ? (
-                        <asset.Icon size={Math.random() * 20 + 20} strokeWidth={1.5} />
+                        <asset.Icon size={Math.random() * 30 + 30} strokeWidth={1.5} />
                       ) : (
-                        <span style={{ fontSize: `${Math.random() * 20 + 20}px` }}>{asset.content}</span>
+                        <span style={{ fontSize: `${Math.random() * 30 + 30}px` }}>{asset.content}</span>
                       )}
                    </motion.div>
                 );
@@ -335,79 +335,83 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
 
          <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-               <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/30 backdrop-blur-md mb-6 shadow-lg shadow-brand-purple/20">
-                  <Gift size={18} className="text-brand-purple" />
-                  <span className="text-brand-purple font-bold uppercase text-xs tracking-widest">Limited Time Offer</span>
+               <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-purple/5 border border-brand-purple/20 text-brand-purple mb-6 shadow-sm">
+                  <Gift size={18} className="text-brand-purple fill-brand-purple/20" />
+                  <span className="font-bold uppercase text-xs tracking-widest">Limited Time Offer</span>
                </div>
-               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">🎁 Santa’s Special Gift: <br/> A "Test Drive" of Your AI Helper</h2>
-               <p className="text-slate-400 text-lg max-w-3xl mx-auto font-medium">
+               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-brand-dark drop-shadow-sm">🎁 Santa’s Special Gift: <br/> A "Test Drive" of Your AI Helper</h2>
+               <p className="text-gray-500 text-lg max-w-3xl mx-auto font-medium">
                   This is NOT the full system. Think of it like a free "test drive" for a new car. 
                   For Christmas, we are letting you try the basic version of our AI for FREE. You get 100 minutes to see how it works.
                </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
-               {/* What You Get - Brand Green/Cyan */}
-               <div className="bg-white/5 backdrop-blur-xl border border-green-500/20 rounded-[2rem] p-8 shadow-2xl relative overflow-hidden group hover:border-green-500/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent pointer-events-none" />
-                  <h3 className="text-2xl font-bold text-green-400 mb-8 flex items-center gap-3 relative z-10">
-                     <div className="p-2 bg-green-500/10 rounded-lg"><CheckCircle size={28} /></div> 
-                     In Your Free Test Drive
-                  </h3>
-                  <ul className="space-y-4 relative z-10">
-                     {[
-                        "An AI that can answer phone calls (Voice) and book only",
-                        "A dashboard with dentiCall branding",
-                        "See agent activities, call logs and usage",
-                        "Custom setup",
-                        "Help setting it up with your clinic's phone number",
-                        "Only Booking software integration",
-                        "Human transfer"
-                     ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-300 font-medium">
-                           <CheckCircle2 size={18} className="text-green-400 shrink-0 mt-1" />
-                           <span>{item}</span>
-                        </li>
-                     ))}
-                  </ul>
-               </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16 perspective-container">
+               
+               {/* What You Get - Frosty Emerald Theme */}
+               <TiltCard>
+                   <div className="bg-white/90 backdrop-blur-xl border border-emerald-100 rounded-[2rem] p-8 shadow-xl relative overflow-hidden group h-full">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-[100px] -z-10" />
+                      <h3 className="text-2xl font-bold text-emerald-600 mb-8 flex items-center gap-3">
+                         <div className="p-2 bg-emerald-100 rounded-lg"><CheckCircle size={28} /></div> 
+                         In Your Free Test Drive
+                      </h3>
+                      <ul className="space-y-4">
+                         {[
+                            "An AI that can answer phone calls (Voice) and book only",
+                            "A dashboard with dentiCall branding",
+                            "See agent activities, call logs and usage",
+                            "Custom setup",
+                            "Help setting it up with your clinic's phone number",
+                            "Only Booking software integration",
+                            "Human transfer"
+                         ].map((item, i) => (
+                            <li key={i} className="flex items-start gap-3 text-gray-600 font-medium">
+                               <CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" />
+                               <span>{item}</span>
+                            </li>
+                         ))}
+                      </ul>
+                   </div>
+               </TiltCard>
 
-               {/* What You Don't Get - Brand Red/Dark */}
-               <div className="bg-white/5 backdrop-blur-xl border border-red-500/20 rounded-[2rem] p-8 shadow-2xl relative overflow-hidden opacity-90 group hover:opacity-100 hover:border-red-500/40 transition-all">
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent pointer-events-none" />
-                  <h3 className="text-2xl font-bold text-red-400 mb-8 flex items-center gap-3 relative z-10">
-                     <div className="p-2 bg-red-500/10 rounded-lg"><XCircle size={28} /></div>
-                     NOT Included <span className="text-sm font-normal text-slate-500 ml-auto border border-white/10 px-2 py-1 rounded">Full System Only</span>
+               {/* What You Don't Get - Slate/Red Theme */}
+               <TiltCard>
+                   <div className="bg-gray-50/80 backdrop-blur-xl border border-gray-200 rounded-[2rem] p-8 shadow-inner relative overflow-hidden h-full">
+                      <h3 className="text-2xl font-bold text-gray-500 mb-8 flex items-center gap-3">
+                         <div className="p-2 bg-gray-200 rounded-lg"><XCircle size={28} className="text-red-400" /></div>
+                         NOT Included <span className="text-xs font-normal text-gray-400 ml-auto border border-gray-300 px-2 py-1 rounded bg-white">Full System Only</span>
                   </h3>
-                  <ul className="space-y-4 relative z-10">
-                     {[
-                        "No WhatsApp or Facebook messages",
-                        "No automatic appointment reminders & follow-ups",
-                        "No website widget",
-                        "No Emergency handling",
-                        "Not all integrations available",
-                        "No reschedule & cancellation",
-                        "No custom branded Dashboard",
-                        "No Insurance verification"
-                     ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-400">
-                           <X size={18} className="text-red-400 shrink-0 mt-1" />
-                           <span>{item}</span>
-                        </li>
-                     ))}
-                  </ul>
-               </div>
+                      <ul className="space-y-4">
+                         {[
+                            "No WhatsApp or Facebook messages",
+                            "No automatic appointment reminders & follow-ups",
+                            "No website widget",
+                            "No Emergency handling",
+                            "Not all integrations available",
+                            "No reschedule & cancellation",
+                            "No custom branded Dashboard",
+                            "No Insurance verification"
+                         ].map((item, i) => (
+                            <li key={i} className="flex items-start gap-3 text-gray-400">
+                               <X size={18} className="text-red-300 shrink-0 mt-1" />
+                               <span>{item}</span>
+                            </li>
+                         ))}
+                      </ul>
+                   </div>
+               </TiltCard>
             </div>
 
             <div className="text-center">
                <button 
                   onClick={openBookingLink}
-                  className="px-12 py-6 bg-gradient-to-r from-brand-purple to-accent-cyan text-white font-bold text-xl rounded-full shadow-[0_0_40px_rgba(139,92,246,0.3)] hover:shadow-[0_0_60px_rgba(34,211,238,0.4)] hover:scale-105 transition-all border border-white/20"
+                  className="px-12 py-5 bg-gradient-to-r from-red-500 to-red-700 text-white font-bold text-xl rounded-full shadow-[0_10px_40px_rgba(220,38,38,0.3)] hover:shadow-[0_15px_50px_rgba(220,38,38,0.5)] hover:scale-105 transition-all border border-red-400/20"
                >
                   Start Your Free 100-Minute Test Drive →
                </button>
                <p className="mt-6 text-sm text-slate-500 font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                  <Bell size={14} className="fill-current" /> Offer ends Dec 31st <Bell size={14} className="fill-current" />
+                  <Bell size={14} className="text-red-400 fill-red-400" /> Offer ends Dec 31st <Bell size={14} className="text-red-400 fill-red-400" />
                </p>
             </div>
          </div>

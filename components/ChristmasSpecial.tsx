@@ -1,34 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, LayoutDashboard, Bot, Gift, Sparkles, Snowflake, Star, Bell } from 'lucide-react';
-
-const steps = [
-  {
-    id: 1,
-    title: "Trial Onboarding Call",
-    icon: Phone,
-    emoji: "🎅",
-    desc: "15-minute call to discuss your business, requirements, and integrations. We’ll gather all your details to create your custom prototype.",
-    color: "bg-red-500"
-  },
-  {
-    id: 2,
-    title: "Prototype in 24 Hours",
-    icon: LayoutDashboard,
-    emoji: "🎄",
-    desc: "We build your prototype AI system and dashboard in 24 hours. You review it and request any changes.",
-    color: "bg-emerald-500"
-  },
-  {
-    id: 3,
-    title: "Access Your AI Agent",
-    icon: Bot,
-    emoji: "🎁",
-    desc: "Get 100 minutes of AI system usage with your agent and see it in action.",
-    color: "bg-amber-500"
-  }
-];
+import { Gift, Sparkles, Snowflake, Star, Bell, ArrowRight } from 'lucide-react';
 
 interface ChristmasSpecialProps {
   onTrialClick?: () => void;
@@ -204,7 +177,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-12 md:mb-20">
+        <div className="text-center mb-12">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -228,58 +201,29 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8"
           >
             Get a taste of how our AI can boost your dental clinic’s appointments this festive season.
           </motion.p>
+
+          <motion.div
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+             className="text-lg font-bold text-brand-purple cursor-pointer flex items-center justify-center gap-2"
+             onClick={openBookingLink}
+          >
+              Click below to unlock your 100 free minutes <ArrowRight size={18} className="animate-bounce-slow" />
+          </motion.div>
         </div>
 
-        {/* Steps Container */}
-        <div className="relative max-w-6xl mx-auto mb-12 md:mb-16">
-          
-          {/* Connecting Line (Desktop) */}
-          <div className="hidden md:block absolute top-[72px] left-0 w-full h-1 bg-gradient-to-r from-red-200 via-green-200 to-amber-200 rounded-full -z-10" />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -10 }}
-                className="relative bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100 group hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col items-center h-full"
-              >
-                {/* Step Number Badge */}
-                <div className="absolute -top-4 -right-4 w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold shadow-lg border-4 border-white text-lg">
-                  {step.id}
-                </div>
-
-                {/* Icon */}
-                <div className={`w-20 h-20 mx-auto rounded-2xl ${step.color} bg-opacity-10 flex items-center justify-center mb-6 relative group-hover:scale-110 transition-transform duration-300`}>
-                  <div className={`absolute -top-3 -right-3 text-3xl animate-bounce-slow drop-shadow-md`}>
-                    {step.emoji}
-                  </div>
-                  <step.icon size={32} className={`text-${step.color.replace('bg-', '')}`} style={{ color: step.id === 2 ? '#10B981' : step.id === 3 ? '#F59E0B' : '#EF4444' }} />
-                </div>
-
-                <h3 className="text-xl font-bold text-center text-brand-dark mb-3">{step.title}</h3>
-                <p className="text-gray-500 text-center leading-relaxed text-sm">
-                  {step.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* CTA Button */}
+        {/* CTA Button - Centered and Prominent */}
         <div className="flex justify-center">
           <motion.button
             onClick={openBookingLink}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(239, 68, 68, 0.4)" }}
             whileTap={{ scale: 0.95 }}
-            className="group relative w-full md:w-auto px-10 py-5 rounded-full font-bold text-white text-lg shadow-xl overflow-hidden flex items-center justify-center"
+            className="group relative w-full md:w-auto px-12 py-6 rounded-full font-bold text-white text-xl shadow-xl overflow-hidden flex items-center justify-center"
           >
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-emerald-600 transition-transform duration-500 group-hover:scale-110" />
@@ -290,8 +234,8 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
                <Sparkles className="absolute bottom-2 right-4 text-yellow-300 animate-pulse text-yellow-300 fill-yellow-300" size={16} />
             </div>
 
-            <span className="relative z-10 flex items-center gap-2">
-              Get Your Trial <Sparkles size={18} className="text-yellow-200" />
+            <span className="relative z-10 flex items-center gap-3">
+              See the Trial Here <Sparkles size={18} className="text-yellow-200" />
             </span>
           </motion.button>
         </div>

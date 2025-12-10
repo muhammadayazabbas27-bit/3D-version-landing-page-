@@ -47,7 +47,7 @@ const Stats: React.FC = () => {
            {[
              { val: "20-30", suffix: "%", label: "Missed Calls", desc: "Average dental clinic have a month", color: "from-blue-500 to-cyan-400", barHeight: "60%" },
              { val: "30", suffix: "%", label: "No-Show Rate", desc: "Average dental clinic see in a single month", color: "from-purple-500 to-pink-400", barHeight: "40%" },
-             { val: "$100K", label: "Lost Revenue Annually ", desc: "Due to Admin Inefficiencies", color: "from-emerald-500 to-teal-400", barHeight: "100%" }
+             { val: "$100K", label: "Lost Revenue Annually ", desc: "Due to Admin Inefficiencies", color: "from-emerald-500 to-teal-400", barHeight: "70%" }
            ].map((stat, i) => (
              <motion.div
                key={i}

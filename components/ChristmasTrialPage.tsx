@@ -4,7 +4,7 @@ import { motion, useMotionValue, useTransform, useSpring, useScroll, MotionValue
 import { 
   Play, Pause, CheckCircle, Clock, Phone, MessageCircle, MessageSquare, 
   Smartphone, ShieldCheck, Zap, ArrowRight, Gift, Calendar, 
-  Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database, X, Users2, AlertTriangle, PhoneOff, UserX, XCircle, CheckCircle2, Globe, Mic, TrendingDown, Activity, DollarSign
+  Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database, X, Users2, AlertTriangle, PhoneOff, UserX, XCircle, CheckCircle2, Globe, Mic, TrendingDown, Activity, DollarSign, CalendarCheck, TrendingUp
 } from 'lucide-react';
 import Footer from './Footer';
 
@@ -92,6 +92,49 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
   const openBookingLink = () => {
     window.open('https://cal.com/denticall-ai/15min', '_blank');
   };
+
+  const fullSystemModules = [
+    {
+      icon: PhoneOff,
+      title: "Stop Losing $200k+ (Missed Calls)",
+      body: "The Full System answers calls, WhatsApps, and messages 24/7. It captures every lead the trial might miss.",
+      stat: "Clients recover $200k/year avg.",
+      color: "text-red-500",
+      bg: "bg-red-50"
+    },
+    {
+      icon: CalendarCheck,
+      title: "Boost Bookings by 30%",
+      body: "Complete integration means real-time booking, rescheduling, and cancellations directly in your software.",
+      stat: "Fully automated schedule filling.",
+      color: "text-blue-500",
+      bg: "bg-blue-50"
+    },
+    {
+      icon: UserX,
+      title: "Eliminate No-Shows",
+      body: "Automated multi-channel reminders (SMS, Email, Voice) ensure patients show up. (Not included in trial).",
+      stat: "Cut no-shows by 40%.",
+      color: "text-orange-500",
+      bg: "bg-orange-50"
+    },
+    {
+      icon: TrendingUp,
+      title: "Increase Treatment Acceptance",
+      body: "Smart follow-ups educate patients on procedures, driving higher-value bookings automatically.",
+      stat: "25% more 'Yes' to treatment.",
+      color: "text-green-500",
+      bg: "bg-green-50"
+    },
+    {
+      icon: Clock,
+      title: "Save 16+ Staff Hours/Week",
+      body: "Full CRM integration automates admin tasks, freeing your team completely to focus on care.",
+      stat: "Your team gets 2 days back.",
+      color: "text-brand-purple",
+      bg: "bg-purple-50"
+    }
+  ];
 
   return (
     <div className="font-sans antialiased text-brand-dark bg-white min-h-screen overflow-x-hidden perspective-container">
@@ -580,6 +623,103 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                </button>
             </div>
          </div>
+      </section>
+
+      {/* --- NEW SECTION: FULL SYSTEM PROOF --- */}
+      <section className="py-20 md:py-32 bg-white relative overflow-hidden perspective-container">
+        {/* Background Decor */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none" />
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          
+          {/* Header */}
+          <div className="text-center max-w-4xl mx-auto mb-16 md:mb-24">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-bold text-brand-dark mb-6 leading-tight tracking-tight"
+            >
+              Get <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-600">30% More Revenue</span> with the Full System
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-lg md:text-xl text-gray-500 leading-relaxed font-medium"
+            >
+              The trial gives you a glimpse, but the Full System transforms your business. Here is how we deliver 30% growth:
+            </motion.p>
+          </div>
+
+          {/* Modules Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {fullSystemModules.map((mod, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className={`p-8 rounded-[2rem] border border-gray-100 bg-white shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col ${i === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+              >
+                <div className={`w-14 h-14 rounded-2xl ${mod.bg} ${mod.color} flex items-center justify-center mb-6 shadow-sm`}>
+                  <mod.icon size={28} />
+                </div>
+                
+                <h3 className="text-xl md:text-2xl font-bold text-brand-dark mb-4 leading-tight">
+                  {mod.title}
+                </h3>
+                
+                <p className="text-gray-500 mb-6 flex-grow leading-relaxed">
+                  {mod.body}
+                </p>
+                
+                <div className={`mt-auto pt-6 border-t border-gray-50 text-sm font-bold ${mod.color} flex items-start gap-2`}>
+                  <div className="mt-1 shrink-0"><CheckCircle2 size={16} /></div>
+                  <span>{mod.stat}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* The Verdict / Bottom-Line Summary */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto rounded-[2.5rem] bg-brand-dark text-white p-8 md:p-16 relative overflow-hidden shadow-2xl text-center"
+          >
+            {/* Background Glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-purple/20 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
+            
+            <div className="relative z-10">
+                <div className="inline-block px-4 py-1 rounded-full bg-white/10 border border-white/20 text-sm font-bold uppercase tracking-wider mb-6">
+                  The Bottom Line
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                  The Verdict: <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">30% Practice Growth</span>, Guaranteed.
+                </h2>
+                
+                <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
+                  Why wait? Skip the test drive and start generating revenue immediately with the fully integrated system.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button 
+                    onClick={openBookingLink}
+                    className="w-full sm:w-auto px-8 py-4 bg-white text-brand-dark font-bold text-lg rounded-full hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center gap-2"
+                  >
+                      Skip trial lets do Full ride <ArrowRight size={20} />
+                  </button>
+                </div>
+            </div>
+          </motion.div>
+
+        </div>
       </section>
 
       {/* --- SECTION 6: WHO IS THIS FOR? --- */}

@@ -14,6 +14,7 @@ import PainPoints from './components/PainPoints';
 import FinalCTA from './components/FinalCTA';
 import ChristmasTrialPage from './components/ChristmasTrialPage';
 import ComparisonSection from './components/ComparisonSection';
+import GeneralProof from './components/GeneralProof';
 
 const App: React.FC = () => {
   // State for simple routing
@@ -169,6 +170,11 @@ const App: React.FC = () => {
         {/* 3. Real Data from Industry */}
         <div id="stats">
           <Stats />
+        </div>
+
+        {/* 3.5 General Proof Section */}
+        <div id="general-proof">
+          <GeneralProof onTrialClick={handleTrialClick} />
         </div>
         
         {/* 4. Unique Advantage */}

@@ -3,7 +3,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, XCircle, Phone, MessageCircle, Bot, Calendar, 
-  Database, ShieldCheck, Zap, AlertTriangle, Mic, Plug, CalendarX 
+  Database, ShieldCheck, Zap, AlertTriangle, Mic, Plug, CalendarX,
+  PhoneForwarded, LayoutDashboard, Lock, FileCheck, Rocket, Globe,
+  UserX, ShieldAlert, FileX, Clock, Bell, PhoneOff
 } from 'lucide-react';
 
 const ComparisonSection: React.FC = () => {
@@ -95,17 +97,16 @@ const ComparisonSection: React.FC = () => {
                       <Bot size={32} />
                    </motion.div>
                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-brand-dark">Our AI System</h3>
-                      <span className="text-sm font-bold text-green-600 bg-green-100 px-3 py-1 rounded-full uppercase tracking-wider">All-in-One</span>
+                      <h3 className="text-2xl md:text-3xl font-bold text-brand-dark">DentiCall AI</h3>
+                      <span className="text-sm font-bold text-green-600 bg-green-100 px-3 py-1 rounded-full uppercase tracking-wider">Complete System</span>
                    </div>
                 </div>
 
                 {/* Features List */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                    {[
                      { 
-                       text: "Voice + Chat AI", 
-                       sub: "Full conversation handling",
+                       text: "Voice AI + Chat AI", 
                        icon: (
                          <div className="relative w-10 h-10 flex items-center justify-center">
                             <Phone size={20} className="text-brand-purple absolute left-0 top-0" />
@@ -114,44 +115,63 @@ const ComparisonSection: React.FC = () => {
                        ) 
                      },
                      { 
-                       text: "Multi-Channel System", 
-                       sub: "WhatsApp, Phone, Messenger",
-                       icon: <Zap size={24} className="text-yellow-500 fill-yellow-500" />
+                       text: "Phone, WhatsApp, Messenger, Instagram & Website", 
+                       icon: <Globe size={24} className="text-blue-500" />
                      },
                      { 
-                       text: "Seamless Integration", 
-                       sub: "Works with your software",
-                       icon: <Database size={24} className="text-blue-500" />
+                       text: "Connects with your clinic's software", 
+                       icon: <Database size={24} className="text-indigo-500" />
                      },
                      { 
-                       text: "Smart Follow-Ups", 
-                       sub: "Personalized patient recall",
+                       text: "Sends automatic reminders & follow-ups", 
+                       icon: <Bell size={24} className="text-yellow-500 fill-yellow-500" />
+                     },
+                     { 
+                       text: "Books, reschedules & cancels appointments 24/7", 
                        icon: <Calendar size={24} className="text-green-500" />
                      },
-                     { 
-                       text: "Full Automation", 
-                       sub: "Booking, rescheduling, FAQs",
-                       icon: <ShieldCheck size={24} className="text-purple-500" />
+                     {
+                       text: "Human transfer",
+                       icon: <PhoneForwarded size={24} className="text-purple-500" />
+                     },
+                     {
+                       text: "Emergency handling",
+                       icon: <AlertTriangle size={24} className="text-red-500" />
+                     },
+                     {
+                       text: "Custom Branded Dashboard",
+                       icon: <LayoutDashboard size={24} className="text-cyan-500" />
+                     },
+                     {
+                       text: "100% customer data protection",
+                       icon: <ShieldCheck size={24} className="text-emerald-500" />
+                     },
+                     {
+                       text: "Insurance verification",
+                       icon: <FileCheck size={24} className="text-blue-400" />
+                     },
+                     {
+                       text: "Setup takes only 7-14 days",
+                       icon: <Rocket size={24} className="text-orange-500" />
                      }
                    ].map((item, i) => (
                      <motion.div 
                        key={i}
-                       className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 border border-white/80 shadow-sm backdrop-blur-sm hover:shadow-md hover:bg-white/80 transition-all cursor-default group/item"
-                       whileHover={{ x: 10, scale: 1.02 }}
+                       className="flex items-center gap-4 p-3 rounded-2xl bg-white/60 border border-white/80 shadow-sm backdrop-blur-sm hover:shadow-md hover:bg-white/80 transition-all cursor-default group/item"
+                       whileHover={{ x: 5 }}
                      >
                         {/* 3D Icon Container */}
-                        <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-inner group-hover/item:scale-110 transition-transform duration-300">
+                        <div className="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center shadow-inner group-hover/item:scale-110 transition-transform duration-300">
                            {item.icon}
                         </div>
                         
                         <div className="flex-1">
-                           <h4 className="font-bold text-brand-dark text-lg">{item.text}</h4>
-                           <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">{item.sub}</p>
+                           <h4 className="font-bold text-brand-dark text-sm md:text-base leading-tight">{item.text}</h4>
                         </div>
 
                         {/* Animated Checkmark */}
-                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 shadow-sm group-hover/item:bg-green-500 group-hover/item:text-white transition-colors">
-                           <CheckCircle2 size={18} />
+                        <div className="w-6 h-6 shrink-0 rounded-full bg-green-100 flex items-center justify-center text-green-600 shadow-sm group-hover/item:bg-green-500 group-hover/item:text-white transition-colors">
+                           <CheckCircle2 size={14} />
                         </div>
                      </motion.div>
                    ))}
@@ -170,34 +190,39 @@ const ComparisonSection: React.FC = () => {
                       <Mic size={32} />
                    </div>
                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-gray-600">Competitors</h3>
-                      <span className="text-sm font-bold text-gray-500 bg-gray-200 px-3 py-1 rounded-full uppercase tracking-wider">Basic Bot</span>
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-600">Basic Voice Agents</h3>
+                      <span className="text-sm font-bold text-gray-500 bg-gray-200 px-3 py-1 rounded-full uppercase tracking-wider">Competitors</span>
                    </div>
                 </div>
 
                 {/* Features List */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                    {[
-                     { text: "Only Voice Agent", icon: <Mic size={24} className="text-gray-400" /> },
-                     { text: "No Chat Support", icon: <MessageCircle size={24} className="text-gray-300" /> },
-                     { text: "No Multi-Channel", icon: <AlertTriangle size={24} className="text-red-300" /> },
-                     { text: "Limited Integration", icon: <Plug size={24} className="text-gray-400" /> },
-                     { text: "Manual Follow-Ups", icon: <CalendarX size={24} className="text-gray-400" /> }
+                     { text: "Only Voice (No chat)", icon: <Mic size={24} className="text-gray-400" /> },
+                     { text: "No WhatsApp/Messenger", icon: <MessageCircle size={24} className="text-gray-300" /> },
+                     { text: "No automatic reminders and follow-ups", icon: <CalendarX size={24} className="text-gray-300" /> },
+                     { text: "Only book appointments (no reschedule/cancel)", icon: <Calendar size={24} className="text-gray-400" /> },
+                     { text: "No human transfer", icon: <UserX size={24} className="text-gray-400" /> },
+                     { text: "No Emergency handling", icon: <AlertTriangle size={24} className="text-red-300" /> },
+                     { text: "No dashboard", icon: <LayoutDashboard size={24} className="text-gray-300" /> },
+                     { text: "Zero protection", icon: <ShieldAlert size={24} className="text-red-300" /> },
+                     { text: "Setup takes 4 weeks", icon: <Clock size={24} className="text-gray-400" /> },
+                     { text: "No Insurance verification", icon: <FileX size={24} className="text-gray-400" /> }
                    ].map((item, i) => (
                      <div 
                        key={i}
-                       className="flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-gray-200 transition-colors"
+                       className="flex items-center gap-4 p-3 rounded-2xl border border-transparent hover:border-gray-200 transition-colors"
                      >
-                        <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
+                        <div className="w-10 h-10 shrink-0 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
                            {item.icon}
                         </div>
                         
                         <div className="flex-1">
-                           <h4 className="font-medium text-gray-500 text-lg">{item.text}</h4>
+                           <h4 className="font-medium text-gray-500 text-sm md:text-base leading-tight">{item.text}</h4>
                         </div>
 
-                        <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-300">
-                           <XCircle size={18} />
+                        <div className="w-6 h-6 shrink-0 rounded-full bg-red-50 flex items-center justify-center text-red-300">
+                           <XCircle size={14} />
                         </div>
                      </div>
                    ))}

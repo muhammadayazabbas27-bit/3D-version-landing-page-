@@ -93,7 +93,7 @@ const GeneralProof: React.FC<GeneralProofProps> = ({ onTrialClick }) => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -5 }}
-              className={`p-8 rounded-[2rem] border border-gray-100 bg-white shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col ${i === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+              className={`p-8 rounded-[2rem] border border-gray-100 bg-white shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col will-change-transform ${i === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
             >
               <div className={`w-14 h-14 rounded-2xl ${mod.bg} ${mod.color} flex items-center justify-center mb-6 shadow-sm`}>
                 <mod.icon size={28} />

@@ -21,21 +21,21 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
     <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white via-red-50/40 to-white perspective-container border-b border-gray-100">
       
       {/* --- FESTIVE BACKGROUND ANIMATIONS --- */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden gpu-accelerated" aria-hidden="true">
         
         {/* 1. Large Bokeh Ornaments (Glowing Blobs) */}
         <motion.div 
-           className="absolute top-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-red-500/10 rounded-full blur-[80px]"
+           className="absolute top-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-red-500/10 rounded-full blur-[80px] will-change-transform"
            animate={{ x: [-50, 50, -50], y: [-50, 50, -50], scale: [1, 1.2, 1] }}
            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-           className="absolute bottom-0 right-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-green-500/10 rounded-full blur-[80px]"
+           className="absolute bottom-0 right-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-green-500/10 rounded-full blur-[80px] will-change-transform"
            animate={{ x: [50, -50, 50], y: [50, -50, 50], scale: [1.2, 1, 1.2] }}
            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-           className="absolute top-1/2 left-1/2 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-amber-400/10 rounded-full blur-[60px]"
+           className="absolute top-1/2 left-1/2 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-amber-400/10 rounded-full blur-[60px] will-change-transform"
            animate={{ opacity: [0.3, 0.6, 0.3] }}
            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -54,16 +54,18 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             />
         </svg>
 
-        {/* 3. Falling Snow */}
+        {/* 3. Falling Snow - Optimized to use Transform Y */}
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={`snow-${i}`}
-            initial={{ y: -20, x: Math.random() * 100 + "%", opacity: 0 }}
+            initial={{ y: -50, x: 0, opacity: 0 }}
             animate={{ 
               y: "100vh", 
-              x: `${Math.random() * 100}%`,
               opacity: [0, 0.8, 0],
               rotate: 360 
+            }}
+            style={{ 
+                left: `${Math.random() * 100}%` 
             }}
             transition={{ 
               duration: 8 + Math.random() * 10, 
@@ -71,7 +73,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
               delay: Math.random() * 5,
               ease: "linear"
             }}
-            className="absolute text-slate-300"
+            className="absolute top-0 text-slate-300 gpu-accelerated"
           >
             <Snowflake size={Math.random() * 12 + 8} />
           </motion.div>
@@ -81,7 +83,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
         {[...Array(15)].map((_, i) => (
             <motion.div
                 key={`twinkle-${i}`}
-                className="absolute bg-white rounded-full"
+                className="absolute bg-white rounded-full gpu-accelerated"
                 style={{
                     top: Math.random() * 100 + "%",
                     left: Math.random() * 100 + "%",
@@ -93,7 +95,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             />
         ))}
 
-        {/* 5. 3D GLOWING FLOATING ICONS & EMOJIS (UPDATED) */}
+        {/* 5. 3D GLOWING FLOATING ICONS & EMOJIS (OPTIMIZED) */}
         {[...Array(12)].map((_, i) => {
            const assets = [
              { type: 'icon', Icon: Gift, color: 'text-red-500', glow: 'rgba(239,68,68,0.6)' },
@@ -109,27 +111,28 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
            return (
              <motion.div
                key={`float-item-${i}`}
-               className={`absolute z-0 flex items-center justify-center ${asset.type === 'icon' ? asset.color : ''}`}
+               className={`absolute z-0 flex items-center justify-center ${asset.type === 'icon' ? asset.color : ''} gpu-accelerated`}
                style={{
-                  filter: `drop-shadow(0 0 10px ${asset.glow})`
+                  filter: `drop-shadow(0 0 5px ${asset.glow})`, // Reduced blur radius for performance
+                  left: `${Math.random() * 95}%`,
+                  top: "100%" // Start below content
                }}
                initial={{ 
-                 top: "110%", 
-                 left: `${Math.random() * 95}%`,
+                 y: 0,
                  opacity: 0,
                  scale: 0.5,
                  rotateX: 0,
                  rotateY: 0
                }}
                animate={{ 
-                 top: "-20%",
+                 y: "-150vh", // Move up using transform instead of top
                  opacity: [0, 1, 0],
                  scale: [0.8, 1.2, 0.8],
                  rotateX: [0, 180, 360],
                  rotateY: [0, 360, 0]
                }}
                transition={{ 
-                 duration: 12 + Math.random() * 8,
+                 duration: 15 + Math.random() * 8, // Slower for smoothness
                  repeat: Infinity,
                  ease: "linear",
                  delay: i * 1.5
@@ -151,24 +154,28 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
            return (
              <motion.div
                 key={`particle-${i}`}
-                className={`absolute rounded-full ${color} blur-[1px]`}
+                className={`absolute rounded-full ${color} blur-[1px] gpu-accelerated`}
                 initial={{ 
-                    top: Math.random() * 100 + "%",
-                    left: Math.random() * 100 + "%",
+                    y: 0,
                     scale: 0,
                     opacity: 0
                 }}
                 animate={{ 
-                    y: [0, -40, 0],
+                    y: "-80vh",
                     scale: [0, 1, 0],
                     opacity: [0, 0.7, 0]
                 }}
+                style={{ 
+                    left: `${Math.random() * 100}%`,
+                    top: "100%",
+                    width: Math.random() * 8 + 4, 
+                    height: Math.random() * 8 + 4 
+                }}
                 transition={{ 
-                    duration: 4 + Math.random() * 4,
+                    duration: 6 + Math.random() * 4,
                     repeat: Infinity,
                     delay: Math.random() * 5
                 }}
-                style={{ width: Math.random() * 8 + 4, height: Math.random() * 8 + 4 }}
              />
            )
         })}
@@ -223,7 +230,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             onClick={openBookingLink}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(239, 68, 68, 0.4)" }}
             whileTap={{ scale: 0.95 }}
-            className="group relative w-full md:w-auto px-12 py-6 rounded-full font-bold text-white text-xl shadow-xl overflow-hidden flex items-center justify-center"
+            className="group relative w-full md:w-auto px-12 py-6 rounded-full font-bold text-white text-xl shadow-xl overflow-hidden flex items-center justify-center gpu-accelerated"
           >
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-emerald-600 transition-transform duration-500 group-hover:scale-110" />

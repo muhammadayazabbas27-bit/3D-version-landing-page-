@@ -48,7 +48,7 @@ const TiltCard = ({ children, className = "", depth = 20 }: { children: React.Re
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className={`relative perspective-container ${className}`}
+      className={`relative perspective-container will-change-transform ${className}`}
     >
       <div style={{ transform: `translateZ(${depth}px)` }} className="h-full">
         {children}
@@ -347,14 +347,20 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 return (
                    <motion.div 
                       key={`float-3d-${i}`} 
-                      className={`absolute flex items-center justify-center ${asset.type === 'icon' ? asset.color : ''}`}
+                      className={`absolute flex items-center justify-center ${asset.type === 'icon' ? asset.color : ''} gpu-accelerated`}
                       style={{ 
                          left: `${Math.random()*90}%`, 
-                         top: `${Math.random()*90}%`,
-                         filter: `drop-shadow(0 10px 20px ${asset.glow})`
+                         top: "100%",
+                         filter: `drop-shadow(0 0 5px ${asset.glow})`
+                      }}
+                      initial={{ 
+                         y: 0,
+                         rotateX: 0,
+                         rotateY: 0,
+                         scale: 0.9
                       }}
                       animate={{ 
-                         y: [0, -40, 0], 
+                         y: "-120vh",
                          rotateX: [0, 15, 0],
                          rotateY: [0, 360],
                          scale: [0.9, 1.1, 0.9],
@@ -559,7 +565,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
 
                {[
                   { step: "1", title: "Talk to Us (30-Min)", desc: "We hop on a call with you. You tell us about your clinic and your agent style. We will custom set up your AI trial system just for you. It will be ready in 24 hours.", icon: Phone },
-                  { step: "2", title: "Try It Yourself", desc: "We give you a login. You can talk to your own AI, see how it works, and test it with 100 free minutes. If you like it, great! If not, no problem.", icon: Rocket }
+                  { step: "2", title: "Try It Yourself", desc: "We give you a login. You can talk to your own AI, see how it works, and test it. If you like it, great! If not, no problem.We will make changes & then we can give it to you.", icon: Rocket }
                ].map((item, i) => (
                   <div key={i} className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center group hover:border-brand-purple/30 transition-colors">
                      <div className="w-16 h-16 rounded-2xl bg-brand-purple text-white flex items-center justify-center font-bold text-2xl mb-6 shadow-lg transform group-hover:scale-110 transition-transform">

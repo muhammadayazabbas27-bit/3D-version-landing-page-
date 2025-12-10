@@ -60,7 +60,7 @@ const Stats: React.FC = () => {
                  rotateX: 5,
                  boxShadow: "0 30px 60px -10px rgba(0, 0, 0, 0.2)"
                }}
-               className="relative p-6 md:p-10 rounded-[2rem] bg-white border border-gray-100 shadow-2xl preserve-3d group min-h-[250px] md:min-h-[300px] flex flex-col justify-between overflow-hidden"
+               className="relative p-6 md:p-10 rounded-[2rem] bg-white border border-gray-100 shadow-2xl preserve-3d group min-h-[250px] md:min-h-[300px] flex flex-col justify-between overflow-hidden will-change-transform"
              >
                 {/* 3D Background Light */}
                 <div 

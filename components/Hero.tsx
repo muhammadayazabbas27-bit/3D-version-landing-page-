@@ -110,7 +110,7 @@ const BackgroundParticles = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none preserve-3d z-[1]">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none preserve-3d z-[1] gpu-accelerated">
       {particles.map((p) => (
         <motion.div
           key={p.id}
@@ -618,7 +618,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             Replaces the "Phone Frame". Content is moved out for clickability.
         */}
         <motion.div
-           className="relative w-full max-w-[90vw] md:max-w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform"
+           className="relative w-full max-w-[90vw] md:max-w-[360px] h-[450px] mx-auto perspective-container mb-12 will-change-transform gpu-accelerated"
            initial={{ rotateX: 10, opacity: 0 }}
            animate={{ 
                opacity: 1,
@@ -708,7 +708,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                     rotateZ: [12, 15, 12],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-20 -right-4 md:-right-12 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-purple border border-gray-100 will-change-transform hidden md:flex"
+                className="absolute top-20 -right-4 md:-right-12 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-purple border border-gray-100 will-change-transform hidden md:flex gpu-accelerated"
                 style={{ 
                     transform: "translateZ(60px)",
                     x: parallaxX, // Parallax movement
@@ -724,7 +724,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                     rotateZ: [-6, -3, -6],
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-40 -left-4 md:-left-10 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-accent-cyan border border-gray-100 will-change-transform hidden md:flex"
+                className="absolute bottom-40 -left-4 md:-left-10 w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-accent-cyan border border-gray-100 will-change-transform hidden md:flex gpu-accelerated"
                 style={{ 
                     transform: "translateZ(50px)",
                     x: parallaxXReverse, // Move in opposite direction
@@ -740,7 +740,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
                     opacity: [0.5, 1, 0.5]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute top-10 -left-5 w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-md opacity-60"
+                className="absolute top-10 -left-5 w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-md opacity-60 gpu-accelerated"
                 style={{ 
                     transform: "translateZ(-20px)",
                     x: parallaxX

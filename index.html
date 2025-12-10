@@ -108,6 +108,12 @@
       .will-change-transform {
         will-change: transform;
       }
+
+      .gpu-accelerated {
+        transform: translateZ(0);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+      }
     </style>
   <script type="importmap">
 {

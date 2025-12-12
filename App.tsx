@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useMotionValue } from 'framer-motion';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Activity } from 'lucide-react';
 import Hero from './components/Hero';
 import ChristmasSpecial from './components/ChristmasSpecial';
@@ -16,10 +17,8 @@ import ChristmasTrialPage from './components/ChristmasTrialPage';
 import ComparisonSection from './components/ComparisonSection';
 import GeneralProof from './components/GeneralProof';
 
-const App: React.FC = () => {
-  // State for simple routing
-  const [currentView, setCurrentView] = useState<'home' | 'trial'>('home');
-
+const Home: React.FC = () => {
+  const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -53,14 +52,6 @@ const App: React.FC = () => {
   ];
 
   const scrollToSection = (id: string) => {
-    if (currentView !== 'home') {
-      setCurrentView('home');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-      return;
-    }
     setActiveTab(id);
     const element = document.getElementById(id);
     if (element) {
@@ -73,21 +64,10 @@ const App: React.FC = () => {
   };
 
   const handleTrialClick = () => {
-    setCurrentView('trial');
+    navigate('/christmas-trial');
     window.scrollTo(0, 0);
   };
 
-  const handleBackToHome = () => {
-    setCurrentView('home');
-    window.scrollTo(0, 0);
-  };
-
-  // If in Trial View, render the Christmas Trial Page
-  if (currentView === 'trial') {
-    return <ChristmasTrialPage onBack={handleBackToHome} />;
-  }
-
-  // Otherwise, render the main Landing Page
   return (
     <div className="font-sans antialiased text-brand-dark bg-white selection:bg-brand-purple selection:text-white overflow-x-hidden">
       {/* Scroll Progress Bar */}
@@ -204,6 +184,16 @@ const App: React.FC = () => {
       {/* 8. Footer */}
       <Footer />
     </div>
+  );
+}
+
+const App: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/christmas-trial" element={<ChristmasTrialPage onBack={() => navigate('/')} />} />
+    </Routes>
   );
 };
 

@@ -14,7 +14,7 @@ const leaders = [
     ]
   },
   {
-    name: "Co-Founder", 
+    name: "Waleed Abbas", 
     role: "Co-Founder & CTO",
     image: "https://i.ibb.co/dsf1Zf1j/IMG-3984.jpg",
     bio: "Engineering the intelligence behind the voice.",

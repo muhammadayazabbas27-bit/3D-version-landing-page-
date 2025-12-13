@@ -5,7 +5,7 @@ import { CheckCircle2, Zap, ShieldCheck, Globe2, MessageSquare, Phone, Calendar,
 const usps = [
   { text: "24/7 Call Handling", icon: Phone },
   { text: "Multilingual Voice System", icon: Globe2 },
-  { text: "Works on Phone + WhatsApp", icon: MessageSquare },
+  { text: "Works like Social Bot + WhatsApp Agent", icon: MessageSquare },
   { text: "Automatic Booking Engine", icon: Calendar },
   { text: "Smart Follow-ups & Reminders", icon: Zap },
   { text: "Enterprise-Level Security", icon: ShieldCheck },

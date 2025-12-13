@@ -6,21 +6,21 @@ const personas = [
   { 
     icon: User, 
     title: "Solo Dentists", 
-    desc: "Automate reception without hiring extra staff.", 
+    desc: "Reduce overhead while never missing a patient call.", 
     height: "20px",
     tier: 1
   },
   { 
     icon: TrendingUp, 
     title: "Growing Clinics", 
-    desc: "Handle high call volumes efficiently.", 
+    desc: "Handle increasing call volume without adding front-desk pressure.", 
     height: "50px",
     tier: 2
   },
   { 
     icon: Globe, 
     title: "Multi-Location", 
-    desc: "Centralized control for all branches.", 
+    desc: "Centralize communication and reporting across all locations.", 
     height: "80px",
     tier: 3
   },

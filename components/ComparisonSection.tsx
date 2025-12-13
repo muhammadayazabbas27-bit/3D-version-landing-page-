@@ -73,7 +73,7 @@ const ComparisonSection: React.FC = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4">
             Why Clinics Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-green-600">The Complete System</span>
           </h2>
-          <p className="text-gray-500 text-lg">Don't settle for just a voice bot.</p>
+          <p className="text-gray-500 text-lg">One system built for long-term dental growth, not short-term automation.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto perspective-container">

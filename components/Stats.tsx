@@ -39,7 +39,7 @@ const Stats: React.FC = () => {
              transition={{ duration: 0.8 }}
              className="text-3xl md:text-5xl font-bold text-brand-dark"
            >
-             Real data from <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500">industry</span>
+             Six Figures Lost Every Year From <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500">Missed Calls</span>
            </motion.h2>
          </div>
 

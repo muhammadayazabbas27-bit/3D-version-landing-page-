@@ -7,25 +7,25 @@ const steps = [
   { 
     id: 1, 
     title: "Discovery", 
-    description: "10–15 min call to understand your goals.", 
+    description: "We listen first. A quick call to learn about your patients, your team, and what keeps you up at night.", 
     icon: PhoneCall,
   },
   { 
     id: 2, 
     title: "Prototype", 
-    description: "Test your custom AI voice agent & call logs.", 
+    description: "Interact with your AI prototype. Ensure it books appointments, handles FAQs, and transfers calls exactly how you want.", 
     icon: Cpu,
   },
   { 
     id: 3, 
     title: "Integrate", 
-    description: "Connect CRM, calendar, IVR, & refine prompts.", 
+    description: "Integrate your existing softwares. We do the technical setup. You just provide access. No IT skills needed from your side.", 
     icon: PlugZap,
   },
   { 
     id: 4, 
-    title: "Go Live", 
-    description: "Full operation with continuous monitoring.", 
+    title: "Launch & Monitor", 
+    description: " We go live together. Our team actively monitors calls and optimizes performance. You get a dedicated support contact.", 
     icon: Activity,
   },
 ];
@@ -89,7 +89,7 @@ const Process: React.FC = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold text-brand-dark mb-4"
           >
-             Clear. <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500">Fast. Accountable.</span>
+             We handle setup and testing - <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500">your clinic keeps running normally.</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 10 }}

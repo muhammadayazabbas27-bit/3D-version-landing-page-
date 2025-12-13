@@ -73,9 +73,9 @@ const PainPoints: React.FC = () => {
             className="text-center mb-12 md:mb-16"
           >
              <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4 md:mb-6 tracking-tight">
-                Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan">Problems</span> Solved
+                Patients Don’t Wait on Hold <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan">- They Call Another Clinic</span>
              </h2>
-             <p className="text-gray-500 max-w-2xl mx-auto text-lg">Identifying the silent revenue killers in your practice.</p>
+             <p className="text-gray-500 max-w-2xl mx-auto text-lg">Every unanswered call is a potential patient who books with another clinic instead.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">

@@ -582,7 +582,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
            style={{ transform: "translateZ(20px)" }}
         >
           <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-green-500 animate-pulse' : 'bg-brand-purple'}`} />
-          System Online
+          DentiCall System
         </motion.div>
 
         {/* Headline with 3D Reveal */}
@@ -593,12 +593,12 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             animate={{ opacity: 1, rotateX: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Your Clinic’s 24/7 <br/>
+            Missed Calls Are Costing Your <br/>
             <span 
               className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500 drop-shadow-sm inline-block transform transition-transform duration-500" 
               style={{ transform: "translateZ(40px)" }}
             >
-              AI communication System
+              Dental Clinic Thousands Every Month
             </span>
           </motion.h1>
         </div>
@@ -610,7 +610,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
           transition={{ delay: 0.4, duration: 0.8 }}
           style={{ transform: "translateZ(10px)" }}
         >
-         Voice, Chat, Follow-up, Reminders, WhatsApp, Social Bot & Phone — All in One Place.
+         Ai system that captures every call, books patients instantly, and reduces no-shows — without replacing your front desk.
         </motion.p>
 
         {/* 

@@ -191,7 +191,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-100/50 text-red-600 text-xs md:text-sm font-bold uppercase tracking-wider mb-6 border border-red-200 shadow-sm backdrop-blur-sm"
           >
-            <Gift size={16} /> Christmas Special Offer
+            <Gift size={16} /> DentiCall Gift For You
           </motion.div>
           
           <motion.h2 
@@ -200,7 +200,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold text-brand-dark mb-4 drop-shadow-sm"
           >
-            🎁 Free <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-green-600 to-red-600 animate-gradient-x">“Happy Christmas Trial”</span>
+            🎁 7 days <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-green-600 to-red-600 animate-gradient-x">“Christmas Trial — Risk-Free for Dental Clinics”</span>
           </motion.h2>
           
           <motion.p 
@@ -210,7 +210,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             transition={{ delay: 0.1 }}
             className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8"
           >
-            Get a taste of how our AI can boost your dental clinic’s appointments this festive season.
+            Perfect for the holiday period when staff availability is tight and call volume spikes.
           </motion.p>
 
           <motion.div
@@ -220,7 +220,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
              className="text-lg font-bold text-brand-purple cursor-pointer flex items-center justify-center gap-2"
              onClick={openBookingLink}
           >
-              Click below to unlock your 100 free minutes <ArrowRight size={18} className="animate-bounce-slow" />
+              Click below to unlock your 7 days free trial <ArrowRight size={18} className="animate-bounce-slow" />
           </motion.div>
         </div>
 
@@ -242,7 +242,7 @@ const ChristmasSpecial: React.FC<ChristmasSpecialProps> = ({ onTrialClick }) => 
             </div>
 
             <span className="relative z-10 flex items-center gap-3">
-              See the Trial Here <Sparkles size={18} className="text-yellow-200" />
+              Activate Christmas Free Trial <Sparkles size={18} className="text-yellow-200" />
             </span>
           </motion.button>
         </div>

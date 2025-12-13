@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PhoneOff, UserX, Heart, CalendarX, AlertCircle } from 'lucide-react';
 
 const pains = [
-  { icon: PhoneOff, title: "Missed Calls", desc: "Clinics miss 20–30% of inbound calls every month, losing potential patients.", stat: "50%" },
+  { icon: PhoneOff, title: "Missed Calls", desc: "Your receptionist can't answer a call while checking in a patient. That caller rarely calls back.", stat: "Phones Ring While Patients Sit in the Chair" },
   { icon: UserX, title: "High No-Show Rate", desc: "Average 30% no-show rate eats into revenue and wastes chair time.", stat: "30%" },
   { icon: Heart, title: "Trust Gap", desc: "Lack of pre-appointment follow-up reduces patient confidence and loyalty.", stat: "Low" },
   { icon: CalendarX, title: "Scheduling Gaps", desc: "Empty slots mean lost revenue that can never be recovered.", stat: "Lost" },

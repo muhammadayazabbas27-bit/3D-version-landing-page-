@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, useScroll, MotionValue, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   Play, Pause, CheckCircle, Clock, Phone, MessageCircle, MessageSquare, 
   Smartphone, ShieldCheck, Zap, ArrowRight, Gift, Calendar, 
@@ -66,6 +67,7 @@ const HologramFeatures = () => {
 };
 
 const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
+  const navigate = useNavigate();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
 
@@ -93,6 +95,17 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
 
   const openBookingLink = () => {
     window.open('https://cal.com/denticall-ai/15min', '_blank');
+  };
+
+  const handleFullSystemClick = () => {
+    navigate('/');
+    // Use a small timeout to allow navigation to complete before scrolling
+    setTimeout(() => {
+      const element = document.getElementById('how-it-works');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const fullSystemModules = [
@@ -633,7 +646,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
 
             <div className="text-center">
                <button 
-                  onClick={openBookingLink}
+                  onClick={handleFullSystemClick}
                   className="px-10 py-4 bg-white border-2 border-brand-purple text-brand-purple font-bold text-lg rounded-full hover:bg-brand-purple hover:text-white transition-all shadow-md"
                >
                   Learn More About The Full System →
@@ -727,7 +740,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <button 
-                    onClick={openBookingLink}
+                    onClick={() => window.open('https://cal.com/denticall-ai/30min', '_blank')}
                     className="w-full sm:w-auto px-8 py-4 bg-white text-brand-dark font-bold text-lg rounded-full hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center gap-2"
                   >
                       Skip trial lets do Full ride <ArrowRight size={20} />

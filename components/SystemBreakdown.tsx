@@ -1,10 +1,56 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+// @ts-nocheck
+import React, { useState, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { 
   PhoneCall, MessageCircle, CalendarCheck, Bell, ShieldCheck, 
   LayoutDashboard, PlugZap, TrendingUp, Clock, Heart, ArrowRight,
-  Database, Lock, Globe, Smartphone, Mail, CheckCircle2
+  Database, Lock, Globe, Smartphone, Mail, CheckCircle2, DollarSign
 } from 'lucide-react';
+
+// --- 3D TILT CARD COMPONENT (Copied from ChristmasTrialPage) ---
+const TiltCard = ({ children, className = "", depth = 20 }: { children: React.ReactNode, className?: string, depth?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
+  const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
+
+  const rotateX = useTransform(mouseY, [-300, 300], [10, -10]);
+  const rotateY = useTransform(mouseX, [-300, 300], [-10, 10]);
+
+  function onMouseMove({ clientX, clientY }: React.MouseEvent) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const xPos = clientX - rect.left - rect.width / 2;
+    const yPos = clientY - rect.top - rect.height / 2;
+    x.set(xPos);
+    y.set(yPos);
+  }
+
+  function onMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className={`relative perspective-container will-change-transform ${className}`}
+    >
+      <div style={{ transform: `translateZ(${depth}px)` }} className="h-full">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
 
 const WorkflowNode = ({ icon: Icon, title, points, color, delay, isLast }: any) => {
   return (
@@ -78,169 +124,265 @@ const SystemBreakdown: React.FC = () => {
     window.open('https://cal.com/denticall-ai/30min', '_blank');
   };
 
+  // ROI Calculator State
+  const [missedCallsInput, setMissedCallsInput] = useState(15);
+  const [patientValueInput, setPatientValueInput] = useState(500);
+  
+  // Calculate Annual Loss
+  const monthlyLoss = missedCallsInput * patientValueInput;
+  const annualLoss = monthlyLoss * 12;
+
   return (
-    <section className="py-24 bg-white relative overflow-hidden perspective-container">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-gradient-to-bl from-purple-50 to-transparent rounded-bl-full opacity-50 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[30%] h-[30%] bg-gradient-to-tr from-blue-50 to-transparent rounded-tr-full opacity-50 pointer-events-none" />
+    <>
+      <section className="py-24 bg-white relative overflow-hidden perspective-container">
+        {/* Background Decor */}
+        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-gradient-to-bl from-purple-50 to-transparent rounded-bl-full opacity-50 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[30%] h-[30%] bg-gradient-to-tr from-blue-50 to-transparent rounded-tr-full opacity-50 pointer-events-none" />
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        
-        {/* --- HEADER --- */}
-        <div className="max-w-4xl mx-auto text-center mb-20">
-           <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/5 border border-brand-purple/20 text-brand-purple text-xs font-bold uppercase tracking-wider mb-6"
-           >
-             <PlugZap size={14} /> System Architecture
-           </motion.div>
-           
-           <motion.h2 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ delay: 0.1 }}
-             className="text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight"
-           >
-             Turn Every Patient Interaction <br/>
-             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-600">Into Revenue</span>
-           </motion.h2>
-           
-           <motion.p 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ delay: 0.2 }}
-             className="text-lg md:text-xl text-gray-500 leading-relaxed"
-           >
-             We don't just manage communication—we capture, convert, and care for every patient.
-           </motion.p>
-        </div>
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          
+          {/* --- HEADER --- */}
+          <div className="max-w-4xl mx-auto text-center mb-20">
+             <motion.div 
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/5 border border-brand-purple/20 text-brand-purple text-xs font-bold uppercase tracking-wider mb-6"
+             >
+               <PlugZap size={14} /> System Architecture
+             </motion.div>
+             
+             <motion.h2 
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ delay: 0.1 }}
+               className="text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight"
+             >
+               Turn Every Patient Interaction <br/>
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-600">Into Revenue</span>
+             </motion.h2>
+             
+             <motion.p 
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ delay: 0.2 }}
+               className="text-lg md:text-xl text-gray-500 leading-relaxed"
+             >
+               We don't just manage communication—we capture, convert, and care for every patient.
+             </motion.p>
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-           
-           {/* --- LEFT: THE ENGINE (WORKFLOW) --- */}
-           <div>
-              <div className="mb-10">
-                <h3 className="text-2xl font-bold text-brand-dark mb-2">The Patient Conversion Engine</h3>
-                <p className="text-gray-500">Automated workflow that runs while you sleep.</p>
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+             
+             {/* --- LEFT: THE ENGINE (WORKFLOW) --- */}
+             <div>
+                <div className="mb-10">
+                  <h3 className="text-2xl font-bold text-brand-dark mb-2">The Patient Conversion Engine</h3>
+                  <p className="text-gray-500">Automated workflow that runs while you sleep.</p>
+                </div>
 
-              <div className="relative pl-4">
-                 <WorkflowNode 
-                    icon={PhoneCall}
-                    title="1. Capture Every Opportunity"
-                    color="from-blue-400 to-blue-600"
-                    delay={0.1}
-                    points={[
-                      { head: "24/7 Response:", desc: "Answers every call instantly. Never miss a patient to a busy signal or after-hours." },
-                      { head: "Omni-Channel Hub:", desc: "Engages on Phone, WhatsApp, Messenger, Instagram & Email simultaneously." }
-                    ]}
-                 />
-                 <WorkflowNode 
-                    icon={CalendarCheck}
-                    title="2. Convert to Appointment"
-                    color="from-purple-400 to-purple-600"
-                    delay={0.3}
-                    points={[
-                      { head: "Intelligent Qualification:", desc: "Qualifies callers and answers FAQs intelligently." },
-                      { head: "Real-Time Booking:", desc: "Schedules appointments directly into your existing calendar software." }
-                    ]}
-                 />
-                 <WorkflowNode 
-                    icon={Heart}
-                    title="3. Retain & Build Loyalty"
-                    color="from-pink-400 to-pink-600"
-                    delay={0.5}
-                    isLast={true}
-                    points={[
-                      { head: "Zero No-Shows:", desc: "Automated SMS/Voice reminders ensure commitment." },
-                      { head: "Patient Care:", desc: "Personalized pre- and post-appointment follow-ups boost satisfaction." }
-                    ]}
-                 />
-              </div>
-           </div>
-
-           {/* --- RIGHT: CONTROL & OUTCOME --- */}
-           <div className="space-y-8 sticky top-24">
-              
-              {/* Control Grid */}
-              <div className="bg-gray-50 rounded-[2.5rem] p-8 md:p-10 border border-gray-100">
-                 <h3 className="text-2xl font-bold text-brand-dark mb-8">Complete Control at Your Fingertips</h3>
-                 
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FeatureCard 
-                      icon={LayoutDashboard}
-                      title="Command Center"
-                      desc="Track live conversations, call recordings, and performance metrics in one branded dashboard."
-                      delay={0.2}
-                    />
-                    <FeatureCard 
-                      icon={Database}
-                      title="Seamless Integration"
-                      desc="Connects with Dentrix, OpenDental, and more for accurate history and context."
+                <div className="relative pl-4">
+                   <WorkflowNode 
+                      icon={PhoneCall}
+                      title="1. Capture Every Opportunity"
+                      color="from-blue-400 to-blue-600"
+                      delay={0.1}
+                      points={[
+                        { head: "24/7 Response:", desc: "Answers every call instantly. Never miss a patient to a busy signal or after-hours." },
+                        { head: "Omni-Channel Hub:", desc: "Engages on Phone, WhatsApp, Messenger, Instagram & Email simultaneously." }
+                      ]}
+                   />
+                   <WorkflowNode 
+                      icon={CalendarCheck}
+                      title="2. Convert to Appointment"
+                      color="from-purple-400 to-purple-600"
                       delay={0.3}
-                    />
-                    <FeatureCard 
-                      icon={ShieldCheck}
-                      title="Enterprise Security"
-                      desc="HIPAA compliant infrastructure ensuring max patient data privacy."
-                      delay={0.4}
-                    />
-                    <FeatureCard 
-                      icon={Globe}
-                      title="Multi-Platform"
-                      desc="Unified inbox for Voice, SMS, Email, and Social Media."
+                      points={[
+                        { head: "Intelligent Qualification:", desc: "Qualifies callers and answers FAQs intelligently." },
+                        { head: "Real-Time Booking:", desc: "Schedules appointments directly into your existing calendar software." }
+                      ]}
+                   />
+                   <WorkflowNode 
+                      icon={Heart}
+                      title="3. Retain & Build Loyalty"
+                      color="from-pink-400 to-pink-600"
                       delay={0.5}
-                    />
-                 </div>
-              </div>
+                      isLast={true}
+                      points={[
+                        { head: "Zero No-Shows:", desc: "Automated SMS/Voice reminders ensure commitment." },
+                        { head: "Patient Care:", desc: "Personalized pre- and post-appointment follow-ups boost satisfaction." }
+                      ]}
+                   />
+                </div>
+             </div>
 
-              {/* ROI Promise Card */}
-              <motion.div 
-                 initial={{ opacity: 0, scale: 0.95 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 viewport={{ once: true }}
-                 className="bg-brand-dark text-white rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden shadow-2xl group"
-              >
-                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-purple/20 rounded-full blur-[80px] group-hover:bg-brand-purple/30 transition-colors" />
-                 
-                 <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-6">
-                       <div className="p-2 bg-white/10 rounded-lg"><TrendingUp size={24} className="text-green-400" /></div>
-                       <h3 className="text-xl font-bold">The Ultimate Outcome</h3>
-                    </div>
-                    
-                    <ul className="space-y-4 mb-8">
-                       <li className="flex items-start gap-3">
-                          <CheckCircle2 size={20} className="text-green-400 shrink-0 mt-1" />
-                          <span className="text-gray-200"><strong className="text-white">Guaranteed Growth:</strong> Reclaim 20-30% of lost revenue.</span>
-                       </li>
-                       <li className="flex items-start gap-3">
-                          <Clock size={20} className="text-blue-400 shrink-0 mt-1" />
-                          <span className="text-gray-200"><strong className="text-white">Reclaim Time:</strong> Free staff from phone tag to focus on care.</span>
-                       </li>
-                       <li className="flex items-start gap-3">
-                          <Heart size={20} className="text-pink-400 shrink-0 mt-1" />
-                          <span className="text-gray-200"><strong className="text-white">Elevate Experience:</strong> Modern, responsive care patients love.</span>
-                       </li>
-                    </ul>
+             {/* --- RIGHT: CONTROL & OUTCOME --- */}
+             <div className="space-y-8 sticky top-24">
+                
+                {/* Control Grid */}
+                <div className="bg-gray-50 rounded-[2.5rem] p-8 md:p-10 border border-gray-100">
+                   <h3 className="text-2xl font-bold text-brand-dark mb-8">Complete Control at Your Fingertips</h3>
+                   
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <FeatureCard 
+                        icon={LayoutDashboard}
+                        title="Command Center"
+                        desc="Track live conversations, call recordings, and performance metrics in one branded dashboard."
+                        delay={0.2}
+                      />
+                      <FeatureCard 
+                        icon={Database}
+                        title="Seamless Integration"
+                        desc="Connects with Dentrix, OpenDental, and more for accurate history and context."
+                        delay={0.3}
+                      />
+                      <FeatureCard 
+                        icon={ShieldCheck}
+                        title="Enterprise Security"
+                        desc="HIPAA compliant infrastructure ensuring max patient data privacy."
+                        delay={0.4}
+                      />
+                      <FeatureCard 
+                        icon={Globe}
+                        title="Multi-Platform"
+                        desc="Unified inbox for Voice, SMS, Email, and Social Media."
+                        delay={0.5}
+                      />
+                   </div>
+                </div>
 
-                    <button 
-                       onClick={openBookingLink}
-                       className="w-full py-4 bg-white text-brand-dark font-bold rounded-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
-                    >
-                       Grow Your Practice Now <ArrowRight size={18} />
-                    </button>
-                 </div>
-              </motion.div>
+                {/* ROI Promise Card */}
+                <motion.div 
+                   initial={{ opacity: 0, scale: 0.95 }}
+                   whileInView={{ opacity: 1, scale: 1 }}
+                   viewport={{ once: true }}
+                   className="bg-brand-dark text-white rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden shadow-2xl group"
+                >
+                   <div className="absolute top-0 right-0 w-64 h-64 bg-brand-purple/20 rounded-full blur-[80px] group-hover:bg-brand-purple/30 transition-colors" />
+                   
+                   <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-6">
+                         <div className="p-2 bg-white/10 rounded-lg"><TrendingUp size={24} className="text-green-400" /></div>
+                         <h3 className="text-xl font-bold">The Ultimate Outcome</h3>
+                      </div>
+                      
+                      <ul className="space-y-4 mb-8">
+                         <li className="flex items-start gap-3">
+                            <CheckCircle2 size={20} className="text-green-400 shrink-0 mt-1" />
+                            <span className="text-gray-200"><strong className="text-white">Guaranteed Growth:</strong> Reclaim 20-30% of lost revenue.</span>
+                         </li>
+                         <li className="flex items-start gap-3">
+                            <Clock size={20} className="text-blue-400 shrink-0 mt-1" />
+                            <span className="text-gray-200"><strong className="text-white">Reclaim Time:</strong> Free staff from phone tag to focus on care.</span>
+                         </li>
+                         <li className="flex items-start gap-3">
+                            <Heart size={20} className="text-pink-400 shrink-0 mt-1" />
+                            <span className="text-gray-200"><strong className="text-white">Elevate Experience:</strong> Modern, responsive care patients love.</span>
+                         </li>
+                      </ul>
 
-           </div>
+                      <button 
+                         onClick={openBookingLink}
+                         className="w-full py-4 bg-white text-brand-dark font-bold rounded-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                      >
+                         Grow Your Practice Now <ArrowRight size={18} />
+                      </button>
+                   </div>
+                </motion.div>
+
+             </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* --- ADDED ROI CALCULATOR --- */}
+      <section className="py-24 bg-brand-gray/30 relative overflow-hidden">
+         <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+               <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4">Calculate Your Hidden Revenue Potential</h2>
+               <p className="text-gray-500">See exactly how much revenue you could reclaim.</p>
+            </div>
+
+            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                {/* Left: Context */}
+                <div className="space-y-6">
+                   <h3 className="text-2xl font-bold text-brand-dark">Every missed call is a missed opportunity.</h3>
+                   <p className="text-gray-600 leading-relaxed">
+                      Small leaks sink big ships. Even missing just 10 calls a month can add up to massive losses over a year when you factor in lifetime patient value.
+                   </p>
+                   <ul className="space-y-3">
+                      {[
+                        "Average new patient value is often underestimated.",
+                        "Missed calls rarely call back.",
+                        "A single booking covers the cost of AI."
+                      ].map((item, i) => (
+                         <li key={i} className="flex items-center gap-3 text-brand-dark font-medium">
+                            <CheckCircle2 size={18} className="text-green-500 shrink-0" />
+                            {item}
+                         </li>
+                      ))}
+                   </ul>
+                </div>
+
+                {/* Right: Calculator Card */}
+                <TiltCard>
+                   <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-2xl border border-gray-100 relative overflow-hidden">
+                       <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-bl-full" />
+                       
+                       <div className="relative z-10 space-y-8">
+                          {/* Input 1 */}
+                          <div>
+                             <div className="flex justify-between mb-2">
+                                <label className="text-sm font-bold text-gray-500 uppercase tracking-wide">Missed Calls / Month</label>
+                                <span className="text-brand-purple font-bold bg-brand-purple/10 px-2 py-1 rounded">{missedCallsInput}</span>
+                             </div>
+                             <input 
+                               type="range" min="1" max="50" step="1" 
+                               value={missedCallsInput} 
+                               onChange={(e) => setMissedCallsInput(parseInt(e.target.value))}
+                               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-purple"
+                             />
+                          </div>
+
+                          {/* Input 2 */}
+                          <div>
+                             <div className="flex justify-between mb-2">
+                                <label className="text-sm font-bold text-gray-500 uppercase tracking-wide">Avg. Patient Value</label>
+                                <span className="text-green-600 font-bold bg-green-100 px-2 py-1 rounded">${patientValueInput}</span>
+                             </div>
+                             <input 
+                               type="range" min="100" max="2000" step="50" 
+                               value={patientValueInput} 
+                               onChange={(e) => setPatientValueInput(parseInt(e.target.value))}
+                               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-500"
+                             />
+                          </div>
+
+                          {/* Result */}
+                          <div className="pt-8 border-t border-gray-100 text-center">
+                              <p className="text-gray-400 font-medium mb-1">Annual Lost Revenue</p>
+                              <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600 animate-pulse">
+                                ${annualLoss.toLocaleString()}
+                              </div>
+                          </div>
+
+                          <button 
+                             onClick={openBookingLink}
+                             className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl shadow-lg hover:scale-[1.02] transition-transform flex items-center justify-center gap-2"
+                          >
+                             <DollarSign size={18} /> Reclaim This Revenue
+                          </button>
+                       </div>
+                   </div>
+                </TiltCard>
+
+            </div>
+         </div>
+      </section>
+    </>
   );
 };
 

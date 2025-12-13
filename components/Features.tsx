@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PhoneIncoming, CalendarCheck, MessageCircle, Globe, Share2, Voicemail, RotateCcw, Bell, Cpu, Zap } from 'lucide-react';

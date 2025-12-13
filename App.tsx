@@ -16,6 +16,7 @@ import FinalCTA from './components/FinalCTA';
 import ChristmasTrialPage from './components/ChristmasTrialPage';
 import ComparisonSection from './components/ComparisonSection';
 import GeneralProof from './components/GeneralProof';
+import MindsBehind from './components/MindsBehind';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -178,6 +179,11 @@ const Home: React.FC = () => {
         {/* 7. Final CTA */}
         <div id="final-cta">
           <FinalCTA />
+        </div>
+
+        {/* 7.5 Minds Behind (Team) */}
+        <div id="team">
+          <MindsBehind />
         </div>
       </main>
 

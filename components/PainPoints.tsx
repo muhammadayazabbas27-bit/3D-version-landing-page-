@@ -41,7 +41,7 @@ const FlipCard = ({ item, index }: { item: typeof pains[0], index: number }) => 
           className="absolute inset-0 backface-hidden bg-brand-dark rounded-3xl shadow-xl p-8 flex flex-col items-center justify-center text-center rotate-y-180 border border-brand-purple/20"
           style={{ transform: "rotateY(180deg)" }}
         >
-           <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-400 mb-4">
+           <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-400 mb-4">
              {item.stat}
            </div>
            <p className="text-gray-300 leading-relaxed font-medium">
@@ -73,7 +73,7 @@ const PainPoints: React.FC = () => {
             className="text-center mb-12 md:mb-16"
           >
              <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mb-4 md:mb-6 tracking-tight">
-                Patients Don’t Wait on Hold <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan">- They Call Another Clinic</span>
+                Patients Don't Wait on Hold <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-accent-cyan">- They Call Another Clinic</span>
              </h2>
              <p className="text-gray-500 max-w-2xl mx-auto text-lg">Every unanswered call is a potential patient who books with another clinic instead.</p>
           </motion.div>

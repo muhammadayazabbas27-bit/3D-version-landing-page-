@@ -588,7 +588,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
         {/* Headline with 3D Reveal */}
         <div className="relative preserve-3d mb-8">
           <motion.h1 
-            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-brand-dark leading-tight tracking-tight mb-8 drop-shadow-lg preserve-3d"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-dark leading-tight tracking-tight mb-8 drop-shadow-lg preserve-3d"
             initial={{ opacity: 0, rotateX: -20 }}
             animate={{ opacity: 1, rotateX: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -596,7 +596,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             Missed Calls Are Costing Your <br/>
             <span 
               className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500 drop-shadow-sm inline-block transform transition-transform duration-500" 
-              style={{ transform: "translateZ(30px)" }}
+              style={{ transform: "translateZ(40px)" }}
             >
               Dental Clinic Thousands Every Month
             </span>
@@ -750,14 +750,14 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
            </div>
         </motion.div>
 
-        {/* BUTTONS CONTAINER - Moved outside 3D card for reliable clickability */}
+        {/* BUTTONS CONTAINER */}
         <motion.div 
           className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-8 relative z-50 w-full px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          {/* Test Our Booking System */}
+          {/* Test Our Booking System Button */}
           <motion.button
              onClick={handleToggle}
              whileHover={{ scale: 1.05 }}
@@ -796,12 +796,11 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
           {/* Request Demo Button */}
           <button
             onClick={openBookingLink}
-            className="w-full md:w-auto px-8 py-4 bg-white border border-gray-300 text-brand-dark font-bold text-lg rounded-full shadow-lg hover:bg-gray-50 transition-all hover:shadow-xl transform hover:-translate-y-1 active:scale-95 cursor-pointer relative z-50 whitespace-nowrap"
+            className="w-full md:w-auto px-8 py-4 bg-white border border-gray-300 text-brand-dark font-bold text-lg rounded-full shadow-lg hover:bg-gray-50 transition-all hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2"
           >
-            Start Trial Now
+            Book a Demo <Calendar size={20} className="text-brand-purple ml-1" />
           </button>
         </motion.div>
-
       </div>
     </section>
   );

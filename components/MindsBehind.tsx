@@ -1,19 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Linkedin, Twitter, Globe } from 'lucide-react';
+import { Linkedin, Twitter, Globe, Instagram } from 'lucide-react';
 
 const leaders = [
   {
     name: "Muhammad Ayaz",
     role: "Founder & CEO",
     image: "https://i.ibb.co/bMgHfJ1D/Gemini-Generated-Image-t08kzkt08kzkt08k.png",
-    bio: "Visionary driving the AI revolution in dental care."
+    bio: "Visionary driving the AI revolution in dental care.",
+    socials: [
+      { Icon: Linkedin, url: "https://www.linkedin.com/in/muhammad-ayaz-b529701b5/", color: "hover:text-[#0077b5]" },
+      { Icon: Instagram, url: "https://www.instagram.com/ayaz.ai.nerd/", color: "hover:text-[#E1306C]" }
+    ]
   },
   {
     name: "Co-Founder", 
     role: "Co-Founder & CTO",
     image: "https://i.ibb.co/dsf1Zf1j/IMG-3984.jpg",
-    bio: "Engineering the intelligence behind the voice."
+    bio: "Engineering the intelligence behind the voice.",
+    socials: [
+      { Icon: Linkedin, url: "#", color: "hover:text-brand-purple" },
+      { Icon: Twitter, url: "#", color: "hover:text-accent-cyan" },
+      { Icon: Globe, url: "#", color: "hover:text-gray-900" }
+    ]
   }
 ];
 
@@ -74,11 +83,20 @@ const MindsBehind: React.FC = () => {
                         {leader.role}
                       </div>
                       
-                      {/* Social Links (Visual Only) */}
+                      {/* Social Links */}
                       <div className="flex justify-center gap-4 opacity-60 group-hover:opacity-100 transition-opacity pt-2 border-t border-gray-50">
-                         <Linkedin size={20} className="hover:text-brand-purple cursor-pointer transition-colors" />
-                         <Twitter size={20} className="hover:text-accent-cyan cursor-pointer transition-colors" />
-                         <Globe size={20} className="hover:text-gray-900 cursor-pointer transition-colors" />
+                         {leader.socials.map((social, idx) => (
+                           <a 
+                             key={idx}
+                             href={social.url}
+                             target={social.url !== '#' ? "_blank" : undefined}
+                             rel={social.url !== '#' ? "noopener noreferrer" : undefined}
+                             className={`cursor-pointer transition-colors ${social.color}`}
+                             onClick={(e) => social.url === '#' && e.preventDefault()}
+                           >
+                             <social.Icon size={20} />
+                           </a>
+                         ))}
                       </div>
                    </div>
                 </div>

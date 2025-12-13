@@ -214,7 +214,7 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                                     width="100%" 
                                     height="100%" 
                                     src="https://www.youtube.com/embed/1rxQAdpLN8U" 
-                                    title="DentiCall Demo" 
+                                    title="What you will Get ?" 
                                     frameBorder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                     allowFullScreen 

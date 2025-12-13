@@ -4,9 +4,9 @@ import { PhoneOff, UserX, Heart, CalendarX, AlertCircle } from 'lucide-react';
 
 const pains = [
   { icon: PhoneOff, title: "Missed Calls", desc: "Your receptionist can't answer a call while checking in a patient. That caller rarely calls back.", stat: "Phones Ring While Patients Sit in the Chair" },
-  { icon: UserX, title: "High No-Show Rate", desc: "Average 30% no-show rate eats into revenue and wastes chair time.", stat: "30%" },
-  { icon: Heart, title: "Trust Gap", desc: "Lack of pre-appointment follow-up reduces patient confidence and loyalty.", stat: "Low" },
-  { icon: CalendarX, title: "Scheduling Gaps", desc: "Empty slots mean lost revenue that can never be recovered.", stat: "Lost" },
+  { icon: UserX, title: "High No-Show Rate", desc: "Manual reminders fail, patients forget, and your valuable chair time goes to waste.", stat: "Empty Chairs Despite a Full Booked Schedule" },
+  { icon: Heart, title: "Lost Patient Trust", desc: "No pre-appointment info or post-visit check-ins mean patients don't feel valued and may not return.", stat: "Poor Follow-Up Makes Patients Feel Forgotten" },
+  { icon: CalendarX, title: "Scheduling Chaos", desc: "Empty slots can't be filled quickly, leading to lost income that can never be recovered.", stat: " Last-Minute Cancellations Create Revenue Gaps" },
 ];
 
 const FlipCard = ({ item, index }: { item: typeof pains[0], index: number }) => {

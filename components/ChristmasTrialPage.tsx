@@ -210,14 +210,23 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
                         <motion.div layoutId="hero-video-container" className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-10" onClick={() => setIsVideoExpanded(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                             <motion.div className="relative w-full max-w-6xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
                                 <button onClick={() => setIsVideoExpanded(false)} className="absolute top-4 right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-white/20 transition-colors"><X size={24} /></button>
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_ObjxLnrirA?autoplay=1&modestbranding=1&rel=0&showinfo=0" title="DentiCall Demo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen className="w-full h-full" />
+                                <iframe 
+                                    width="100%" 
+                                    height="100%" 
+                                    src="https://www.youtube.com/embed/1rxQAdpLN8U" 
+                                    title="DentiCall Demo" 
+                                    frameBorder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowFullScreen 
+                                    className="w-full h-full" 
+                                />
                             </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>
                 {!isVideoExpanded && (
                     <motion.div layoutId="hero-video-container" className="relative w-full aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-2xl border border-gray-200 cursor-pointer group" onClick={() => setIsVideoExpanded(true)} whileHover={{ scale: 1.02, y: -5 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                        <img src="https://img.youtube.com/vi/_ObjxLnrirA/maxresdefault.jpg" alt="Dashboard Preview" className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity" />
+                        <img src="https://img.youtube.com/vi/1rxQAdpLN8U/maxresdefault.jpg" alt="Dashboard Preview" className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity" />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
                             <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                                 <Play size={32} className="text-brand-purple fill-brand-purple ml-1" />

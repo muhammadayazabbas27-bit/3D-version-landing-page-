@@ -6,13 +6,13 @@ const leaders = [
   {
     name: "Muhammad Ayaz",
     role: "Founder & CEO",
-    image: "/founder.png", // Ensure founder.png is in your public folder
+    image: "https://i.ibb.co/bMgHfJ1D/Gemini-Generated-Image-t08kzkt08kzkt08k.png",
     bio: "Visionary driving the AI revolution in dental care."
   },
   {
     name: "Co-Founder", 
     role: "Co-Founder & CTO",
-    image: "/cto.png", // Ensure cto.png is in your public folder
+    image: "https://i.ibb.co/dsf1Zf1j/IMG-3984.jpg",
     bio: "Engineering the intelligence behind the voice."
   }
 ];

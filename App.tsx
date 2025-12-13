@@ -18,6 +18,7 @@ import ComparisonSection from './components/ComparisonSection';
 import GeneralProof from './components/GeneralProof';
 import MindsBehind from './components/MindsBehind';
 import SystemBreakdown from './components/SystemBreakdown';
+import Testimonials from './components/Testimonials';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -180,6 +181,11 @@ const Home: React.FC = () => {
         {/* 6. Go Live in 4 Steps */}
         <div id="process">
           <Process />
+        </div>
+
+        {/* 6.5 Testimonials Section */}
+        <div id="testimonials">
+          <Testimonials />
         </div>
 
         {/* 7. Final CTA */}

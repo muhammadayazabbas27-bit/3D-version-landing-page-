@@ -596,7 +596,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
             Missed Calls Are Costing Your <br/>
             <span 
               className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-violet-500 drop-shadow-sm inline-block transform transition-transform duration-500" 
-              style={{ transform: "translateZ(40px)" }}
+              style={{ transform: "translateZ(30px)" }}
             >
               Dental Clinic Thousands Every Month
             </span>

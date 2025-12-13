@@ -7,6 +7,8 @@ import {
   Calculator, User, Users, Building, Star, ChevronLeft, Snowflake, Bell, Rocket, PlugZap, Bot, Cpu, ScanFace, Network, LayoutGrid, Scan, Split, Database, X, Users2, AlertTriangle, PhoneOff, UserX, XCircle, CheckCircle2, Globe, Mic, TrendingDown, Activity, DollarSign, CalendarCheck, TrendingUp
 } from 'lucide-react';
 import Footer from './Footer';
+import MindsBehind from './MindsBehind';
+import Testimonials from './Testimonials';
 
 interface ChristmasTrialPageProps {
   onBack: () => void;
@@ -829,6 +831,9 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
          </div>
       </section>
 
+      {/* --- ADDED TESTIMONIALS SECTION --- */}
+      <Testimonials />
+
       {/* --- 7. FINAL CTA (Unchanged) --- */}
       <section className="py-32 bg-white text-center relative overflow-hidden">
          <div className="container mx-auto px-6 relative z-10">
@@ -855,6 +860,9 @@ const ChristmasTrialPage: React.FC<ChristmasTrialPageProps> = ({ onBack }) => {
             </div>
          </div>
       </section>
+
+      {/* --- ADDED MINDS BEHIND SECTION --- */}
+      <MindsBehind />
 
       {/* Re-use Main Footer */}
       <Footer />

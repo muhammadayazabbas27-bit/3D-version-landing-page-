@@ -17,6 +17,7 @@ import ChristmasTrialPage from './components/ChristmasTrialPage';
 import ComparisonSection from './components/ComparisonSection';
 import GeneralProof from './components/GeneralProof';
 import MindsBehind from './components/MindsBehind';
+import SystemBreakdown from './components/SystemBreakdown';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -146,6 +147,11 @@ const Home: React.FC = () => {
         {/* 2. Core Problems Solved */}
         <div id="pain-points">
           <PainPoints />
+        </div>
+
+        {/* 2.5 New System Breakdown Section */}
+        <div id="how-it-works">
+          <SystemBreakdown />
         </div>
         
         {/* 3. Real Data from Industry */}

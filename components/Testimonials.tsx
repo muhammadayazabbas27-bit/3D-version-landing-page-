@@ -1,27 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star, UserCheck } from 'lucide-react';
+import { Quote, Star, UserCheck, CheckCircle2 } from 'lucide-react';
 
 const testimonials = [
   {
     title: "On Recovering $200k+ in Lost Revenue & No-Shows",
     quote: "Implementing this AI system was a financial turning point. We're now recovering over $200,000 annually from calls we used to miss completely. The automated reminders have also slashed our no-show rate, ensuring that the revenue we capture actually makes it to the schedule. It's a double win for our bottom line.",
-    role: "Dental Practice Owner"
+    role: "Dental Practice Owner",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=264&auto=format&fit=crop"
   },
   {
     title: "On Saving 16+ Hours & Increasing Revenue",
     quote: "The biggest win is how it gave my team over 16 hours back each week by automating calls and reminders. That saved time translates directly into better patient care and focus on growth. Plus, with no-shows down significantly and more leads captured, we've seen a clear, steady increase in overall monthly revenue.",
-    role: "Clinic Manager"
+    role: "Clinic Manager",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea86b48e?q=80&w=264&auto=format&fit=crop"
   },
   {
     title: "On Boosting Patient Satisfaction & Revenue",
     quote: "Our patient satisfaction scores have improved because no call goes unanswered and everyone receives perfect reminders, cutting down on missed appointments. This reliable, professional communication builds trust. Happy patients are more likely to commit to treatment, which has directly increased our case acceptance and revenue per patient.",
-    role: "Orthodontist"
+    role: "Orthodontist",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=264&auto=format&fit=crop"
   },
   {
     title: "On a 67% Jump in Bookings & Reducing No-Shows",
     quote: "After optimizing the AI's conversation flow, our new patient bookings skyrocketed by 67%. The system doesn't just book them; it keeps them committed. The integrated confirmation system has dramatically reduced last-minute cancellations and no-shows, so those booked appointments actually turn into fulfilled revenue.",
-    role: "Operations Director"
+    role: "Operations Director",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=264&auto=format&fit=crop"
   }
 ];
 
@@ -65,13 +69,13 @@ const Testimonials: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -5 }}
-              className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-gray-100 relative group"
+              className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-gray-100 relative group flex flex-col h-full"
             >
               <div className="absolute top-8 right-8 text-brand-purple/10 group-hover:text-brand-purple/20 transition-colors">
                 <Quote size={48} className="fill-current" />
               </div>
               
-              <div className="relative z-10">
+              <div className="relative z-10 flex-grow">
                 <h3 className="text-xl font-bold text-brand-dark mb-4 pr-12 leading-tight">
                   {t.title}
                 </h3>
@@ -79,16 +83,24 @@ const Testimonials: React.FC = () => {
                 <p className="text-gray-500 leading-relaxed mb-8 italic">
                   "{t.quote}"
                 </p>
+              </div>
 
-                <div className="flex items-center gap-4 pt-6 border-t border-gray-50">
-                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-purple to-violet-500 flex items-center justify-center text-white shadow-md">
-                      <UserCheck size={20} />
+              <div className="flex items-center gap-4 pt-6 border-t border-gray-50 mt-auto">
+                   <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md bg-gray-100">
+                      <img 
+                        src={t.image} 
+                        alt={t.role}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
                    </div>
                    <div>
-                      <div className="font-bold text-brand-dark">Verified Client</div>
+                      <div className="flex items-center gap-1 mb-0.5">
+                        <span className="font-bold text-brand-dark">Verified Client</span>
+                        <CheckCircle2 size={14} className="text-blue-500 fill-blue-500/10" />
+                      </div>
                       <div className="text-xs text-brand-purple font-bold uppercase tracking-wide">{t.role}</div>
                    </div>
-                </div>
               </div>
             </motion.div>
           ))}

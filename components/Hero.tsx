@@ -228,7 +228,7 @@ const Hero: React.FC<HeroProps> = ({ mouseX, mouseY }) => {
   const parallaxXReverse = useTransform(mouseXSpring, [-1, 1], [15, -15]);
 
   const openBookingLink = () => {
-    window.open('https://cal.com/denticall-ai/15min', '_blank');
+    window.open('https://cal.com/denticall-ai/30min', '_blank');
   };
 
   // --- Ambient Audio Logic ---

@@ -5,7 +5,7 @@ import { Facebook, Twitter, Linkedin, Instagram, Activity, Mail, MapPin, ArrowRi
 
 const Footer: React.FC = () => {
   const openBookingLink = () => {
-    window.open('https://cal.com/denticall-ai/15min', '_blank');
+    window.open('https://cal.com/denticall-ai/30min', '_blank');
   };
 
   return (

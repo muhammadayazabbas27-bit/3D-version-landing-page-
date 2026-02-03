@@ -4,7 +4,6 @@ import { motion, useScroll, useSpring, useMotionValue } from 'framer-motion';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Activity } from 'lucide-react';
 import Hero from './components/Hero';
-import ChristmasSpecial from './components/ChristmasSpecial';
 import USP from './components/USP';
 import Stats from './components/Stats';
 import Process from './components/Process';
@@ -13,7 +12,6 @@ import Footer from './components/Footer';
 import Personas from './components/Personas';
 import PainPoints from './components/PainPoints';
 import FinalCTA from './components/FinalCTA';
-import ChristmasTrialPage from './components/ChristmasTrialPage';
 import ComparisonSection from './components/ComparisonSection';
 import GeneralProof from './components/GeneralProof';
 import MindsBehind from './components/MindsBehind';
@@ -21,7 +19,6 @@ import SystemBreakdown from './components/SystemBreakdown';
 import Testimonials from './components/Testimonials';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -63,12 +60,7 @@ const Home: React.FC = () => {
   };
 
   const openBookingLink = () => {
-    window.open('https://cal.com/denticall-ai/15min', '_blank');
-  };
-
-  const handleTrialClick = () => {
-    navigate('/christmas-trial');
-    window.scrollTo(0, 0);
+    window.open('https://cal.com/denticall-ai/30min', '_blank');
   };
 
   return (
@@ -129,7 +121,7 @@ const Home: React.FC = () => {
             onClick={openBookingLink}
             className="pointer-events-auto flex items-center gap-2 px-6 py-3 rounded-full bg-brand-dark text-white text-sm font-semibold hover:bg-black transition-all shadow-xl shadow-brand-dark/20"
           >
-            Get a Free Trial
+            Book a Call
           </motion.button>
         </motion.div>
       </header>
@@ -138,11 +130,6 @@ const Home: React.FC = () => {
         {/* 1. Hero Section */}
         <div id="hero">
           <Hero mouseX={mouseX} mouseY={mouseY} />
-        </div>
-
-        {/* 1.5. Christmas Special Section - Passes handler */}
-        <div id="christmas-special">
-          <ChristmasSpecial onTrialClick={handleTrialClick} />
         </div>
         
         {/* 2. Core Problems Solved */}
@@ -162,7 +149,7 @@ const Home: React.FC = () => {
 
         {/* 3.5 General Proof Section */}
         <div id="general-proof">
-          <GeneralProof onTrialClick={handleTrialClick} />
+          <GeneralProof />
         </div>
         
         {/* 4. Unique Advantage */}
@@ -206,11 +193,9 @@ const Home: React.FC = () => {
 }
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/christmas-trial" element={<ChristmasTrialPage onBack={() => navigate('/')} />} />
     </Routes>
   );
 };

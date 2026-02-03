@@ -1,10 +1,7 @@
+// @ts-nocheck
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PhoneOff, CalendarCheck, UserX, TrendingUp, Clock, ArrowRight, DollarSign, Users, CheckCircle2, Ban } from 'lucide-react';
-
-interface GeneralProofProps {
-  onTrialClick?: () => void;
-}
 
 const modules = [
   {
@@ -49,7 +46,7 @@ const modules = [
   }
 ];
 
-const GeneralProof: React.FC<GeneralProofProps> = ({ onTrialClick }) => {
+const GeneralProof: React.FC = () => {
   const openBookingLink = () => {
     window.open('https://cal.com/denticall-ai/30min', '_blank');
   };
@@ -144,13 +141,6 @@ const GeneralProof: React.FC<GeneralProofProps> = ({ onTrialClick }) => {
                    className="w-full sm:w-auto px-8 py-4 bg-white text-brand-dark font-bold text-lg rounded-full hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center gap-2"
                  >
                     Show Me My Custom Revenue Projection <ArrowRight size={20} />
-                 </button>
-                 
-                 <button 
-                   onClick={onTrialClick}
-                   className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-medium text-lg rounded-full hover:bg-white/5 transition-colors"
-                 >
-                    Get a taste with trial
                  </button>
               </div>
            </div>

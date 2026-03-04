@@ -4,8 +4,6 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
-  // Using the provided key directly to ensure it works on Vercel
-  const apiKey = "AIzaSyC67u3NWIQoiQN81En4I3JGSUNhkl8ajus"; 
   
   return {
     plugins: [react()],
@@ -16,7 +14,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       // Vital: Map the key to process.env.API_KEY as per Google GenAI SDK guidelines
-      'process.env.API_KEY': JSON.stringify(apiKey)
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || process.env.API_KEY)
     },
     build: {
       outDir: 'dist',

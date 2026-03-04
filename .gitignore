@@ -86,6 +86,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
+migrated_prompt_history/
 
 # Gatsby files
 .cache/

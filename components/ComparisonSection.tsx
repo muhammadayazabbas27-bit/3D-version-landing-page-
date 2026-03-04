@@ -147,10 +147,6 @@ const ComparisonSection: React.FC = () => {
                        icon: <ShieldCheck size={24} className="text-emerald-500" />
                      },
                      {
-                       text: "Insurance verification",
-                       icon: <FileCheck size={24} className="text-blue-400" />
-                     },
-                     {
                        text: "Setup takes only 7-14 days",
                        icon: <Rocket size={24} className="text-orange-500" />
                      }
@@ -206,8 +202,7 @@ const ComparisonSection: React.FC = () => {
                      { text: "No Emergency handling", icon: <AlertTriangle size={24} className="text-red-300" /> },
                      { text: "No dashboard", icon: <LayoutDashboard size={24} className="text-gray-300" /> },
                      { text: "Zero protection", icon: <ShieldAlert size={24} className="text-red-300" /> },
-                     { text: "Setup takes 4 weeks", icon: <Clock size={24} className="text-gray-400" /> },
-                     { text: "No Insurance verification", icon: <FileX size={24} className="text-gray-400" /> }
+                     { text: "Setup takes 4 weeks", icon: <Clock size={24} className="text-gray-400" /> }
                    ].map((item, i) => (
                      <div 
                        key={i}
